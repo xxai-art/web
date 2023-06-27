@@ -29,6 +29,7 @@ stateSet = (uid, cid, rid, action)=>
 < favSync = (row)=> # id 是操作的时间戳
   [id, uid, cid, rid, action] = row
   await W[FAV].put({id, uid, cid, rid, action})
+
   row[4] = 0
   row.shift()
   begin = row # [uid,cid,rid,0]
@@ -39,6 +40,7 @@ stateSet = (uid, cid, rid, action)=>
   ).openCursor(
     IDBKeyRange.bound(begin,end),'prev'
   )
+
   if c
     {uid,cid,rid,action} = c.value
     return stateSet(uid,cid,rid,action)
