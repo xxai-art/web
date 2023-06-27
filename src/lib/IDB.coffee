@@ -11,7 +11,9 @@ ON.add (leader)=>
 export SAMPLER_NAME = 'samplerName'
 export FAV = 'fav'
 export FAV_STATE = 'favState'
-export FAV_COUNT = 'favCount'
+export FAV_YM = 'favYm'
+export FAV_Y = 'favY'
+export SUM = 'sum'
 
 KEY_PATH = keyPath:'id'
 
@@ -29,8 +31,16 @@ KEY_PATH = keyPath:'id'
 
     db.createObjectStore(FAV_STATE, KEY_PATH)
     db.createObjectStore(
-      FAV_COUNT
-      keyPath: ['uid','year','month']
+      FAV_YM
+      keyPath: ['uid','y','m']
+    )
+    db.createObjectStore(
+      FAV_Y
+      keyPath: ['uid','y']
+    )
+    db.createObjectStore(
+      SUM
+      keyPath: ['uid','table']
     )
     return
 )
