@@ -17,7 +17,6 @@ CTIME = 'ctime'
 + _R, _W, _DB, INTERVAL, PRE, UID
 
 _iter = (direction,table,range,index)->
-  console.log {_R}
   c = _R[table]
   if index
     c = c.index(index)
