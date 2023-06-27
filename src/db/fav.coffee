@@ -28,15 +28,16 @@
   return
 
 < favSync = (id, uid, cid, rid, action)=> # id 是操作的时间戳
+  return
 
-    # begin = [uid,cid,rid,0]
-    # end = begin.slice()
-    # ++end[2]
-    # c = await R[FAV].index(
-    #   FAV_INDEX_UID_CID_RID_ID
-    # ).openCursor(
-    #   IDBKeyRange.bound(begin,end),'prev'
-    # )
-    # while c
-    #   {action} = c.value
-    #   break
+  # begin = [uid,cid,rid,0]
+  # end = begin.slice()
+  # ++end[2]
+  # c = await R[FAV].index(
+  #   FAV_INDEX_UID_CID_RID_ID
+  # ).openCursor(
+  #   IDBKeyRange.bound(begin,end),'prev'
+  # )
+  # while c
+  #   {action} = c.value
+  #   break
