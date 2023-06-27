@@ -20,10 +20,12 @@ KEY_PATH = keyPath:'id'
   1 # version
   upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
     db.createObjectStore(SAMPLER_NAME, KEY_PATH)
+
     store = db.createObjectStore(FAV, KEY_PATH)
-    store = db.createObjectStore(FAV_STATE, KEY_PATH)
     store.createIndex(FAV_INDEX_UID_CID_RID_ID,['uid','cid','rid','id'])
     store.createIndex('uidId',['uid','id'])
+
+    db.createObjectStore(FAV_STATE, KEY_PATH)
     return
 )
 

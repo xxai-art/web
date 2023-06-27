@@ -192,14 +192,13 @@ main
 
 <script lang="coffee">
 > svelte > onMount
-  wac.tax/wtax/On.js
   wac.tax/_/SDK.js
-  wac.tax/user/User.js
   ./lib/goto.coffee
   ./lib/CID.coffee > CID_IMG
   ./lib/sampler.coffee
   ./conf.js > META IMG_HASH
-  ./db/fav.coffee > favPut
+  ./db/fav.coffee > favPut favGet
+  ./lib/keymap.coffee
   wac.tax/_/req.js
   @w5/urlb64/b64e
   @w5/uintb64/b64Uint.js
@@ -229,38 +228,30 @@ load = ->
 D = 'd'
 
 _refresh = =>
+  _turn await favGet(CID_IMG, ID)
+  return
+
+_turn = (state)=>
   {classList} = aFav
-  if await favGet(CID_IMG, ID)
+  if state
     classList.add D
   else
     classList.remove D
   return
 
 fav = =>
-  if not aFav
-    return
-  favPut(CID_IMG,ID,turn)
-  {classList} = aFav
-  classList.toggle D
-  turn = +(classList.contains D)
+  turn = +(not aFav.classList.contains D)
+  if favPut(CID_IMG,ID,turn)
+    _turn turn
   return
 
-
 onMount =>
-  key_map = new Map [
-    [88,=>goto ''] # x
-    [83,fav] # s
+  unbind_key = keymap(
+    88,=>goto '' # x
+    83,fav # s
     # -> 39 ; <- 37
-  ]
-
-  unbind_key = On(
-    document.body
-    keyup: (e)=>
-      focused = document.activeElement
-      if not ['TEXTAREA', 'AREA'].includes focused.tagName
-        key_map.get(e.keyCode)?()
-      return
   )
+
   [
     cid
     adult

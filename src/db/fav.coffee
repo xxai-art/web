@@ -1,5 +1,6 @@
 > @w5/time/ms.js
   ../lib/IDB.coffee > R W FAV FAV_INDEX_UID_CID_RID_ID
+  wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
 
 < favPut = logined (uid, cid, rid, action)=>
@@ -13,6 +14,7 @@
 
 < favGet = (cid, rid)=>
   action = 0
+  uid = Uid()
   if uid
     begin = [uid,cid,rid,0]
     end = begin.slice()
