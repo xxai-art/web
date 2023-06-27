@@ -29,19 +29,19 @@
 < favSync = (id, uid, cid, rid, action)=> # id 是操作的时间戳
   return
 
-  # uid = Uid()
-  #
-  # if uid
-  #   begin = [uid,cid,rid,0]
-  #   end = begin.slice()
-  #   ++end[2]
-  #   c = await R[FAV].index(
-  #     FAV_INDEX_UID_CID_RID_ID
-  #   ).openCursor(
-  #     IDBKeyRange.bound(begin,end),'prev'
-  #   )
-  #   value = c?.value
-  #   console.log {value}
-  # while c
-  #   console.log c.value
-  #   c = await c.continue()
+# uid = Uid()
+#
+# if uid
+#   begin = [uid,cid,rid,0]
+#   end = begin.slice()
+#   ++end[2]
+#   c = await R[FAV].index(
+#     FAV_INDEX_UID_CID_RID_ID
+#   ).openCursor(
+#     IDBKeyRange.bound(begin,end),'prev'
+#   )
+#   value = c?.value
+#   console.log {value}
+# while c
+#   console.log c.value
+#   c = await c.continue()
