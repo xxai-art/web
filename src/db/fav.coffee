@@ -4,14 +4,13 @@
   wac.tax/user/logined.js
   @w5/vbyte/vbyteE
 
-< favPut = logined (uid, cid, rid, action)=>
+stateSet = (uid, cid, rid, action)=>
   key = vbyteE [uid, cid, rid]
   state = W[FAV_STATE]
-  if action
-    state.put(id:key)
-  else
-    state.delete(key)
+  if action then state.put(id:key) else state.delete(key)
 
+< favPut = logined (uid, cid, rid, action)=>
+  stateSet(uid, cid, rid, action)
   W[FAV].put {
     id:ms()
     action
@@ -26,22 +25,24 @@
     return await W[FAV_STATE].get vbyteE [uid, cid, rid]
   return
 
-< favSync = (id, uid, cid, rid, action)=> # id 是操作的时间戳
-  return
-
-# uid = Uid()
-#
-# if uid
-#   begin = [uid,cid,rid,0]
-#   end = begin.slice()
-#   ++end[2]
-#   c = await R[FAV].index(
-#     FAV_INDEX_UID_CID_RID_ID
-#   ).openCursor(
-#     IDBKeyRange.bound(begin,end),'prev'
-#   )
-#   value = c?.value
-#   console.log {value}
+# favSync [时间戳, uid, cid, rid, action]
+< favSync = (row)=> # id 是操作的时间戳
+  [id, uid, cid, rid, action] = row
+  await W[FAV].put({id, uid, cid, rid, action})
+  row[4] = 0
+  row.shift()
+  begin = row # [uid,cid,rid,0]
+  end = begin.slice()
+  ++end[2]
+  c = await R[FAV].index(
+    FAV_INDEX_UID_CID_RID_ID
+  ).openCursor(
+    IDBKeyRange.bound(begin,end),'prev'
+  )
+  if c
+    {uid,cid,rid,action} = c.value
+    return stateSet(uid,cid,rid,action)
 # while c
 #   console.log c.value
 #   c = await c.continue()
+  return
