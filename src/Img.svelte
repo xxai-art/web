@@ -240,9 +240,10 @@ _turn = (state)=>
   return
 
 fav = =>
-  turn = +(not aFav.classList.contains D)
-  if favPut(CID_IMG,ID,turn)
-    _turn turn
+  if aFav # 没加载之前可能会被快捷键触发
+    turn = +(not aFav.classList.contains D)
+    if favPut(CID_IMG,ID,turn)
+      _turn turn
   return
 
 onMount =>
