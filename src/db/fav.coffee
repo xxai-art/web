@@ -13,10 +13,10 @@ stateSet = (uid, cid, rid, action)=>
   stateSet(uid, cid, rid, action)
   W[FAV].put {
     id:ms()
-    action
-    rid
-    cid
     uid
+    cid
+    rid
+    action
   }
 
 < favGet = (cid, rid)=>
