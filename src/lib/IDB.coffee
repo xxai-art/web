@@ -98,6 +98,7 @@ ON.add (leader)=>
               li.unshift o
               if -- diff == 0
                 break
+            # {uid: 1, cid: 2, rid: 215060, ctime: 1687861084018, action: 1}
             console.log li
             # c = await R[table].index(UID_CTIME).openCursor(),PREV)
             # while c
