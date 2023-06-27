@@ -27,7 +27,7 @@
       return true
   return
 
-
+< favSync = (id, uid, cid, rid, action)=> # id 是操作的时间戳
 
     # begin = [uid,cid,rid,0]
     # end = begin.slice()
