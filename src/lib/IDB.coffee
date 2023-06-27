@@ -95,6 +95,7 @@ ON.add (leader)=>
             li = []
             console.log {diff}
             for await o from prevIter(table,...range)
+              delete o.uid
               li.unshift o
               if -- diff == 0
                 break
