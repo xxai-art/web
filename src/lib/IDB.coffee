@@ -11,7 +11,6 @@ ON.add (leader)=>
 export SAMPLER_NAME = 'samplerName'
 export FAV = 'fav'
 export FAV_STATE = 'favState'
-export FAV_INDEX_UID_CID_RID_ID = 'uidCidRidId'
 
 KEY_PATH = keyPath:'id'
 
@@ -21,10 +20,11 @@ KEY_PATH = keyPath:'id'
   upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
     db.createObjectStore(SAMPLER_NAME, KEY_PATH)
 
-    store = db.createObjectStore(FAV, KEY_PATH)
-    store.createIndex(FAV_INDEX_UID_CID_RID_ID,['uid','cid','rid','id'])
-    store.createIndex('uidId',['uid','id'])
-
+    store = db.createObjectStore(
+      FAV
+      keyPath: ['uid','cid','rid','ctime']
+    )
+    store.createIndex('uidCtime',['uid','ctime'])
     db.createObjectStore(FAV_STATE, KEY_PATH)
     return
 )
@@ -32,5 +32,4 @@ KEY_PATH = keyPath:'id'
 export default DB
 export R = R
 export W = W
-
 
