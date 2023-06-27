@@ -37,6 +37,8 @@ stateSet = (store, uid, cid, rid, action)=>
   begin = row # [uid,cid,rid,0]
   end = begin.slice()
   ++end[2]
+  #   const myIndex = objectStore.index("lName");
+
   c = await R[FAV].openCursor(
     IDBKeyRange.bound(begin,end),'prev'
   )

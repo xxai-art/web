@@ -11,6 +11,7 @@ ON.add (leader)=>
 export SAMPLER_NAME = 'samplerName'
 export FAV = 'fav'
 export FAV_STATE = 'favState'
+export FAV_COUNT = 'favCount'
 
 KEY_PATH = keyPath:'id'
 
@@ -25,7 +26,12 @@ KEY_PATH = keyPath:'id'
       keyPath: ['uid','cid','rid','ctime']
     )
     store.createIndex('uidCtime',['uid','ctime'])
+
     db.createObjectStore(FAV_STATE, KEY_PATH)
+    db.createObjectStore(
+      FAV_COUNT
+      keyPath: ['uid','year','month']
+    )
     return
 )
 
