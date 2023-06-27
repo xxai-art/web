@@ -19,6 +19,9 @@ dependencies:
   '@w5/uintb64':
     specifier: ^0.0.6
     version: 0.0.6
+  '@w5/vbyte':
+    specifier: ^0.0.1
+    version: 0.0.1
 
 devDependencies:
   '@prettier/plugin-pug':
