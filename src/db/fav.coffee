@@ -1,4 +1,4 @@
-> ../lib/IDB.coffee > R W FAV FAV_STATE FAV_YM FAV_Y SUM
+> ./DB.coffee > R W FAV FAV_STATE FAV_YM FAV_Y SUM
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
   @w5/vbyte/vbyteE
@@ -14,26 +14,26 @@ yearMonthMs = (timestamp)=>
     Math.floor(d)
   ]
 
-stateSet = (store, uid, cid, rid, action)=>
-  key = vbyteE [uid, cid, rid]
+stateSet = (store, cid, rid, action)=>
+  key = vbyteE [cid, rid]
   if action then store.put(id:key) else store.delete(key)
 
-_countIncr = (store, uid, map)=>
-  o = await store.get [uid, ...Object.values(map)]
+_countIncr = (store, map)=>
+  o = await store.get [...Object.values(map)]
   if o
     o.n += 1
   else
-    o = {uid,n:1,...map}
+    o = {n:1,...map}
   store.put o
   return
 
-countIncr = (table, uid, y, m)=>
+countIncr = (table, y, m)=>
   store_li = W FAV_YM, FAV_Y, SUM
   Promise.all [
     {y, m}
     {y}
     {table}
-  ].map (m,p)=> _countIncr(store_li[p],uid,m)
+  ].map (m,p)=> _countIncr(store_li[p],m)
 
 
 < favPut = logined (uid, cid, rid, action)=>
@@ -48,21 +48,22 @@ countIncr = (table, uid, y, m)=>
 
   Promise.all [
     fav.put {
-      uid
       cid
       rid
       ctime
       action
     }
-    countIncr(FAV, uid, year, month)
-    stateSet(state, uid, cid, rid, action)
+    countIncr(FAV,  year, month)
+    stateSet(state, cid, rid, action)
   ]
 
 
 < favGet = (cid, rid)=>
   uid = Uid()
   if uid
-    return await R[FAV_STATE].get vbyteE [uid, cid, rid]
+    return await R[FAV_STATE].get vbyteE [
+      cid, rid
+    ]
   return
 
 # # favSync [时间戳, uid, cid, rid, action]

@@ -1,6 +1,8 @@
 > wac.tax/_/IDB.js
   wac.tax/_/leader.js > ON
   wac.tax/_/channel.js > toAll hook
+  ../lib/keyPath.coffee
+  wac.tax/user/User.js > onMe
 
 export FAV = 'fav'
 export FAV_STATE = 'favState'
@@ -9,40 +11,14 @@ export FAV_Y = 'favY'
 export SUM = 'sum'
 export SYNCED = 'synced'
 
-UID_CTIME = 'uidCtime'
+CTIME = 'ctime'
 < PREV = 'prev'
 
-[DB,R,W] = await IDB.art(
-  1 # version
-  upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
-    store = db.createObjectStore(
-      FAV
-      keyPath: ['uid','cid','rid','ctime']
-    )
-    store.createIndex(UID_CTIME,['uid','ctime'])
-
-    db.createObjectStore(FAV_STATE, KEY_PATH)
-    db.createObjectStore(
-      FAV_YM
-      keyPath: ['uid','y','m']
-    )
-    db.createObjectStore(
-      FAV_Y
-      keyPath: ['uid','y']
-    )
-    db.createObjectStore(
-      SUM
-      keyPath: ['uid','table']
-    )
-    db.createObjectStore(
-      SYNCED
-      keyPath: ['uid','table']
-    )
-    return
-)
++ _R, _W, _DB, INTERVAL, PRE, UID
 
 _iter = (direction,table,range,index)->
-  c = R[table]
+  console.log {_R}
+  c = _R[table]
   if index
     c = c.index(index)
   c = await c.openCursor(range,direction)
@@ -54,20 +30,57 @@ _iter = (direction,table,range,index)->
 export nextIter = _iter.bind _iter,undefined
 export prevIter = _iter.bind _iter,PREV
 
-> wac.tax/user/User.js > Uid onMe
-
-+ INTERVAL, PRE
-
-onMe =>
+onMe (user)=>
+  UID = user.id or 0
   PRE = {}
+  _DB?.close()
+  [_DB,_R,_W] = await IDB['u-'+UID.toString(36)](
+    1 # version
+    upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
+      store = db.createObjectStore(
+        FAV
+        keyPath: ['cid','rid','ctime']
+      )
+      store.createIndex(CTIME,['ctime'])
+
+      db.createObjectStore(FAV_STATE, keyPath)
+      db.createObjectStore(
+        FAV_YM
+        keyPath: ['y','m']
+      )
+      db.createObjectStore(
+        FAV_Y
+        keyPath: ['y']
+      )
+      for t from [SUM,SYNCED]
+        db.createObjectStore t,keyPath:['table']
+      return
+  )
+  return
+
+# export DB = DB
+export R = new Proxy(
+    (args...)=>
+      _R(...args)
+    get:(_,n)=>
+      _R[n]
+  )
+
+export W = new Proxy(
+    (args...)=>
+      _W(...args)
+    get:(_,n)=>
+      _W[n]
+  )
 
 ON.add (leader)=>
   if leader
-    setInterval(
+    INTERVAL = setInterval(
       =>
-        sum = R[SUM]
-        uid = Uid()
-        c = await sum.openCursor(IDBKeyRange.lowerBound [uid,''])
+        read = _R
+        write = _W
+        sum = read[SUM]
+        c = await sum.openCursor()
         updated = []
         while c
           {n, table} = c.value
@@ -76,9 +89,9 @@ ON.add (leader)=>
             PRE[table] = n
           c = await c.continue()
 
-        range = [IDBKeyRange.upperBound([uid+1,0]),UID_CTIME]
+        range = [IDBKeyRange.upperBound([0]),CTIME]
         for [table, n] from updated
-          synced = (await R[SYNCED].get([uid, table]))?.n or 0
+          synced = (await write[SYNCED].get([ table]))?.n or 0
           if n != synced
             diff = n - synced
             # 拉出最后 diff 条，然后扔给服务器
@@ -86,12 +99,11 @@ ON.add (leader)=>
             li = []
             console.log {diff}
             for await o from prevIter(table,...range)
-              delete o.uid
               li.unshift o
               if -- diff == 0
                 break
-            # {uid: 1, cid: 2, rid: 215060, ctime: 1687861084018, action: 1}
-            console.log li
+            # { cid: 2, rid: 215060, ctime: 1687861084018, action: 1}
+            console.log UID, li
             # c = await R[table].index(UID_CTIME).openCursor(),PREV)
             # while c
             #   console.log c.value
