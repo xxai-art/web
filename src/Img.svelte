@@ -232,11 +232,12 @@ _refresh = =>
   return
 
 _turn = (state)=>
-  {classList} = aFav
-  if state
-    classList.add D
-  else
-    classList.remove D
+  if aFav
+    {classList} = aFav
+    if state
+      classList.add D
+    else
+      classList.remove D
   return
 
 fav = =>

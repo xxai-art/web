@@ -33,6 +33,9 @@ onMe (user)=>
   UID = user.id or 0
   PRE = {}
   _DB?.close()
+  if not UID
+    return
+
   [_DB,_R,_W] = await IDB['u-'+UID.toString(36)](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
@@ -75,6 +78,8 @@ ON.add (leader)=>
   if leader
     INTERVAL = setInterval(
       =>
+        if not UID
+          return
         read = _R
         write = _W
         sum = read[SUM]
