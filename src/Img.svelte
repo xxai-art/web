@@ -194,19 +194,17 @@ main
 > svelte > onMount
   wac.tax/wtax/On.js
   wac.tax/_/SDK.js
-  wac.tax/user/logined.js
   wac.tax/user/User.js
   ./lib/goto.coffee
   ./lib/CID.coffee > CID_IMG
   ./lib/sampler.coffee
   ./conf.js > META IMG_HASH
-  ./lib/IDB.coffee > R W FAV FAV_INDEX_UID_CID_RID_ID
+  ./db/fav.coffee > favPut
   wac.tax/_/req.js
   @w5/urlb64/b64e
   @w5/uintb64/b64Uint.js
   @w5/link
   @w5/sd_token/a.js:sdA
-  @w5/time/ms.js
   wac.tax/user/User.js > onMe
 
 < ID
@@ -231,42 +229,20 @@ load = ->
 D = 'd'
 
 _refresh = =>
-  action = 0
-  uid = User().id
-  if uid
-    begin = [uid,CID_IMG,ID,0]
-    end = begin.slice()
-    ++end[2]
-    c = await R[FAV].index(FAV_INDEX_UID_CID_RID_ID).openCursor(
-      IDBKeyRange.bound(begin,end),'prev'
-    )
-    while c
-      {action} = c.value
-      break
-      #console.log(c.key, c.value)
-      # c = await c.continue()
-    # if action
   {classList} = aFav
-  if action
+  if await favGet(CID_IMG, ID)
     classList.add D
   else
     classList.remove D
   return
 
-fav = logined (uid)=>
+fav = =>
   if not aFav
     return
+  favPut(CID_IMG,ID,turn)
   {classList} = aFav
   classList.toggle D
   turn = +(classList.contains D)
-
-  await W[FAV].put {
-    id:ms()
-    action: turn
-    rid:ID
-    cid:CID_IMG
-    uid
-  }
   return
 
 
