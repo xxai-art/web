@@ -3,8 +3,11 @@
   wac.tax/user/logined.js
   @w5/vbyte/vbyteE
 
-yearMonthMs = =>
-  d = new Date()
+yearMonthMs = (timestamp)=>
+  if timestamp != undefined
+    d = new Date timestamp
+  else
+    d = new Date
   [
     d.getUTCFullYear()
     d.getUTCMonth() + 1
@@ -24,7 +27,8 @@ _countIncr = (store, uid, map)=>
   store.put o
   return
 
-countIncr = (table, store_li, uid, y, m)=>
+countIncr = (table, uid, y, m)=>
+  store_li = W FAV_YM, FAV_Y, SUM
   Promise.all [
     {y, m}
     {y}
@@ -40,8 +44,7 @@ countIncr = (table, store_li, uid, y, m)=>
   [
     fav
     state
-  ] = store_li = W FAV, FAV_STATE, FAV_YM, FAV_Y, SUM
-
+  ] = W FAV, FAV_STATE
 
   Promise.all [
     fav.put {
@@ -51,8 +54,8 @@ countIncr = (table, store_li, uid, y, m)=>
       ctime
       action
     }
+    countIncr(FAV, uid, year, month)
     stateSet(state, uid, cid, rid, action)
-    countIncr(FAV,store_li.slice(2), uid, year, month)
   ]
 
 
@@ -62,27 +65,27 @@ countIncr = (table, store_li, uid, y, m)=>
     return await R[FAV_STATE].get vbyteE [uid, cid, rid]
   return
 
-# favSync [时间戳, uid, cid, rid, action]
-< favSync = (row)=> # id 是操作的时间戳
-  [uid, cid, rid, ctime, action] = row
-  await W[FAV].put({uid, cid, rid, ctime, action})
-
-  row[3] = 0
-  row.pop()
-
-  begin = row # [uid,cid,rid,0]
-  end = begin.slice()
-  ++end[2]
-  #   const myIndex = objectStore.index("lName");
-
-  c = await R[FAV].openCursor(
-    IDBKeyRange.bound(begin,end),'prev'
-  )
-
-  if c
-    {uid,cid,rid,action} = c.value
-    return stateSet(W[FAV_STATE],uid,cid,rid,action)
-# while c
-#   console.log c.value
-#   c = await c.continue()
-  return
+# # favSync [时间戳, uid, cid, rid, action]
+# < favSync = (row)=> # id 是操作的时间戳
+#   [uid, cid, rid, ctime, action] = row
+#   await W[FAV].put({uid, cid, rid, ctime, action})
+#
+#   row[3] = 0
+#   row.pop()
+#
+#   begin = row # [uid,cid,rid,0]
+#   end = begin.slice()
+#   ++end[2]
+#   #   const myIndex = objectStore.index("lName");
+#
+#   c = await R[FAV].openCursor(
+#     IDBKeyRange.bound(begin,end),'prev'
+#   )
+#
+#   if c
+#     {uid,cid,rid,action} = c.value
+#     return stateSet(W[FAV_STATE],uid,cid,rid,action)
+# # while c
+# #   console.log c.value
+# #   c = await c.continue()
+#   return
