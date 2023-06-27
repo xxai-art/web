@@ -38,9 +38,8 @@ onMe (user)=>
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
       store = db.createObjectStore(
         FAV
-        keyPath: ['cid','rid','ctime']
+        keyPath: 'ctime'
       )
-      store.createIndex(CTIME,['ctime'])
 
       db.createObjectStore(FAV_STATE, keyPath)
       db.createObjectStore(
@@ -88,7 +87,6 @@ ON.add (leader)=>
             PRE[table] = n
           c = await c.continue()
 
-        range = [IDBKeyRange.upperBound([0]),CTIME]
         for [table, n] from updated
           synced = (await write[SYNCED].get([ table]))?.n or 0
           if n != synced
@@ -97,7 +95,7 @@ ON.add (leader)=>
 
             li = []
             console.log {diff}
-            for await o from prevIter(table,...range)
+            for await o from prevIter(table)
               li.unshift o
               if -- diff == 0
                 break
