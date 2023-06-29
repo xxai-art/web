@@ -47,10 +47,12 @@ countIncr = (table, y, m)=>
   c = await R[FAV].openCursor(
     IDBKeyRange.bound(begin,end),'prev'
   )
-  if c and c.value.action == action
-    c.ctime = ms()
-    W[FAV].put(c)
-    return 1
+  if c
+    {value} = c
+    if value.action == action
+      value.ctime = ms()
+      W[FAV].put(value)
+      return 1
 
   [year,month,ctime] = yearMonthMs()
 
