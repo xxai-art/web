@@ -14,6 +14,9 @@ yearMonthMs = (timestamp)=>
     Math.floor(d)
   ]
 
+ms = =>
+  Math.floor new Date
+
 stateSet = (store, cid, rid, action)=>
   key = vbyteE [cid, rid]
   if action then store.put(id:key) else store.delete(key)
