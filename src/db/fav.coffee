@@ -45,7 +45,9 @@ countIncr = (table, y, m)=>
     IDBKeyRange.bound(begin,end),'prev'
   )
   if c and c.value.action == action
-      return 1
+    c.ctime = ms()
+    W[FAV].put(c)
+    return 1
 
   [year,month,ctime] = yearMonthMs()
 
