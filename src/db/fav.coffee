@@ -38,6 +38,14 @@ countIncr = (table, y, m)=>
 
 < favPut = logined (uid, cid, rid, action)=>
   # return favSync [uid, cid, rid, ms(),action]
+  begin = [cid,rid,0]
+  end = begin.slice()
+  end[1]+=1
+  c = await R[FAV].openCursor(
+    IDBKeyRange.bound(begin,end),'prev'
+  )
+  if c and c.value.action == action
+      return 1
 
   [year,month,ctime] = yearMonthMs()
 
@@ -53,7 +61,7 @@ countIncr = (table, y, m)=>
       ctime
       action
     }
-    countIncr(FAV,  year, month)
+    countIncr(FAV, year, month)
     stateSet(state, cid, rid, action)
   ]
 

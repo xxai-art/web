@@ -41,7 +41,7 @@ onMe (user)=>
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
       store = db.createObjectStore(
         FAV
-        keyPath: 'ctime'
+        keyPath: ['cid','rid','ctime']
       )
 
       db.createObjectStore(FAV_STATE, keyPath)
