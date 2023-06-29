@@ -50,10 +50,10 @@ countIncr = (table, y, m)=>
   if c
     {value} = c
     if value.action == action
-      w = W[FAV]
-      w.delete [value.cid,value.rid,value.ctime]
-      value.ctime = ms()
-      w.put(value)
+      # w = W[FAV]
+      # w.delete [value.cid,value.rid,value.ctime]
+      # value.ctime = ms()
+      # w.put(value)
       return 1
 
   [year,month,ctime] = yearMonthMs()
