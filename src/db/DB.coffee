@@ -16,7 +16,7 @@ export SYNCED_ID = 'syncedId'
 CTIME = 'ctime'
 < PREV = 'prev'
 
-+ _R, _W, _DB, INTERVAL, PRE, UID
++ _R, _W, _DB, INTERVAL, PRE, UID, LEADER
 
 _iter = (direction,table,range,index)->
   c = _R[table]
@@ -59,6 +59,10 @@ onMe (user)=>
         db.createObjectStore t,keyPath:['table']
       return
   )
+
+  clearInterval INTERVAL
+  if UID and LEADER
+    _onLeader()
   return
 
 # export DB = DB
@@ -76,49 +80,60 @@ export W = new Proxy(
       _W[n]
   )
 
+
+
+
+> ../conf > API
+
+
+_onLeader = =>
+  INTERVAL = setInterval(
+    =>
+      read = _R
+      write = _W
+      sum = read[SUM]
+      c = await sum.openCursor()
+      updated = []
+      while c
+        {n, table} = c.value
+        if PRE[table] != n
+          updated.push [table, n]
+          PRE[table] = n
+        c = await c.continue()
+
+      for [table, n] from updated
+        synced = (await read[SYNCED].get([ table]))?.n or 0
+        if n != synced
+          diff = n - synced
+          # 拉出最后 diff 条，然后扔给服务器
+
+          li = []
+          for await o from prevIter(table)
+            li.unshift Object.values o
+            if -- diff == 0
+              break
+
+          id = await SDK.fav UID, li
+          if id
+            await write[SYNCED_ID].put({table, id})
+          await write[SYNCED].put({table, n})
+          # c = await R[table].index(UID_CTIME).openCursor(),PREV)
+          # while c
+          #   console.log c.value
+          #   c = await c.continue()
+      return
+    1e3
+  )
+  return
+
 ON.add (leader)=>
   if leader
-    INTERVAL = setInterval(
-      =>
-        if not UID
-          return
-        read = _R
-        write = _W
-        sum = read[SUM]
-        c = await sum.openCursor()
-        updated = []
-        while c
-          {n, table} = c.value
-          if PRE[table] != n
-            updated.push [table, n]
-            PRE[table] = n
-          c = await c.continue()
-
-        for [table, n] from updated
-          synced = (await read[SYNCED].get([ table]))?.n or 0
-          if n != synced
-            diff = n - synced
-            # 拉出最后 diff 条，然后扔给服务器
-
-            li = []
-            for await o from prevIter(table)
-              li.unshift Object.values o
-              if -- diff == 0
-                break
-
-            id = await SDK.fav UID, li
-            if id
-              await write[SYNCED_ID].put({table, id})
-            await write[SYNCED].put({table, n})
-            # c = await R[table].index(UID_CTIME).openCursor(),PREV)
-            # while c
-            #   console.log c.value
-            #   c = await c.continue()
-        return
-      1e3
-    )
+    LEADER = 1
+    if UID
+      _onLeader()
     document.title = 'leader'
   else
+    LEADER = undefined
     clearInterval INTERVAL
     PRE = {}
     document.title = ''
