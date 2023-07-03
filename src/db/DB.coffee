@@ -105,7 +105,7 @@ ON.add (leader)=>
               if -- diff == 0
                 break
             # { cid: 2, rid: 215060, ctime: 1687861084018, action: 1}
-            console.log UID, li
+            await SDK.fav UID, li
             # c = await R[table].index(UID_CTIME).openCursor(),PREV)
             # while c
             #   console.log c.value
