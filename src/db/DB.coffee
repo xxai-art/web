@@ -106,7 +106,9 @@ ON.add (leader)=>
               if -- diff == 0
                 break
 
-            console.log await SDK.fav UID, li
+            id = await SDK.fav UID, li
+            if id
+              await write[SYNCED_ID].put({table, id})
             await write[SYNCED].put({table, n})
             # c = await R[table].index(UID_CTIME).openCursor(),PREV)
             # while c
