@@ -54,7 +54,7 @@ onMe (user)=>
         FAV_Y
         keyPath: ['y']
       )
-      for t from [SUM,SYNCED]
+      for t from [SUM,SYNCED,SYNCED_ID]
         db.createObjectStore t,keyPath:['table']
       return
   )
