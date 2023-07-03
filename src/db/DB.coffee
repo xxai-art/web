@@ -4,6 +4,7 @@
   ../lib/keyPath.coffee
   wac.tax/user/User.js > onMe
   wac.tax/_/SDK.js
+  @w5/uintb64/uintB64.js
 
 export FAV = 'fav'
 export FAV_STATE = 'favState'
@@ -31,8 +32,8 @@ _iter = (direction,table,range,index)->
 export nextIter = _iter.bind _iter,undefined
 export prevIter = _iter.bind _iter,PREV
 
-uid36 = =>
-  UID.toString 36
+uidb64 = =>
+  uintB64 UID
 
 onMe (user)=>
   UID = user.id or 0
@@ -41,7 +42,7 @@ onMe (user)=>
   if not UID
     return
 
-  [_DB,_R,_W] = await IDB['u-'+uid36()](
+  [_DB,_R,_W] = await IDB['u-'+uidb64()](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
       store = db.createObjectStore(
@@ -128,7 +129,7 @@ _onLeader = =>
     1e3
   )
 
-  es = new EventSource API+'s/'+uid36(),withCredentials:true
+  es = new EventSource API+'s/'+uidb64(),withCredentials:true
   console.log es
   return
 
