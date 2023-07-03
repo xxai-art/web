@@ -139,6 +139,7 @@ _onLeader = =>
     1e3
   )
 
+  #TODO 每 90 秒 es 断开重新连
   return
 
 _clear = =>
