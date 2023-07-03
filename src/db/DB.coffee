@@ -17,7 +17,7 @@ export SYNCED_ID = 'syncedId'
 CTIME = 'ctime'
 < PREV = 'prev'
 
-+ _R, _W, _DB, INTERVAL, PRE, UID, LEADER
++ _R, _W, _DB, INTERVAL, PRE, UID, UID_B64, LEADER, ES
 
 _iter = (direction,table,range,index)->
   c = _R[table]
@@ -32,17 +32,16 @@ _iter = (direction,table,range,index)->
 export nextIter = _iter.bind _iter,undefined
 export prevIter = _iter.bind _iter,PREV
 
-uidb64 = =>
-  uintB64 UID
 
 onMe (user)=>
   UID = user.id or 0
   PRE = {}
-  _DB?.close()
-  if not UID
-    return
 
-  [_DB,_R,_W] = await IDB['u-'+uidb64()](
+  _DB?.close()
+
+  UID_B64 = uintB64 UID
+
+  [_DB,_R,_W] = await IDB['u-'+UID_B64](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
       store = db.createObjectStore(
@@ -64,9 +63,10 @@ onMe (user)=>
       return
   )
 
-  clearInterval INTERVAL
   if UID and LEADER
     _onLeader()
+  else
+    _clear()
   return
 
 # export DB = DB
@@ -91,6 +91,16 @@ export W = new Proxy(
 
 
 _onLeader = =>
+  es_url = API+'s/'+UID_B64
+  if ES?.url.endsWith(es_url)
+    return
+
+  _clear()
+
+  ES = new EventSource es_url,withCredentials:true
+
+  console.log ES
+
   INTERVAL = setInterval(
     =>
       read = _R
@@ -129,18 +139,24 @@ _onLeader = =>
     1e3
   )
 
-  es = new EventSource API+'s/'+uidb64(),withCredentials:true
-  console.log es
+  return
+
+_clear = =>
+  clearInterval INTERVAL
+  ES?.close()
+  ES = undefined
   return
 
 ON.add (leader)=>
-  clearInterval INTERVAL
   if leader
     LEADER = 1
     if UID
       _onLeader()
+    else
+      _clear()
     document.title = 'leader'
   else
+    _clear()
     LEADER = undefined
     PRE = {}
     document.title = ''
