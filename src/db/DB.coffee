@@ -100,7 +100,6 @@ ON.add (leader)=>
             # 拉出最后 diff 条，然后扔给服务器
 
             li = []
-            console.log {diff}
             for await o from prevIter(table)
               li.unshift o
               if -- diff == 0
