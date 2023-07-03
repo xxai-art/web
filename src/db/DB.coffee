@@ -128,7 +128,7 @@ _onLeader = =>
     1e3
   )
 
-  es = new EventSource API+'s/'+uid36()
+  es = new EventSource API+'s/'+uid36(),withCredentials:true
   console.log es
   return
 
