@@ -31,6 +31,9 @@ _iter = (direction,table,range,index)->
 export nextIter = _iter.bind _iter,undefined
 export prevIter = _iter.bind _iter,PREV
 
+uid36 = =>
+  UID.toString 36
+
 onMe (user)=>
   UID = user.id or 0
   PRE = {}
@@ -38,7 +41,7 @@ onMe (user)=>
   if not UID
     return
 
-  [_DB,_R,_W] = await IDB['u-'+UID.toString(36)](
+  [_DB,_R,_W] = await IDB['u-'+uid36()](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
       store = db.createObjectStore(
@@ -124,9 +127,13 @@ _onLeader = =>
       return
     1e3
   )
+
+  es = new EventSource API+'s/'+uid36()
+  console.log es
   return
 
 ON.add (leader)=>
+  clearInterval INTERVAL
   if leader
     LEADER = 1
     if UID
@@ -134,7 +141,6 @@ ON.add (leader)=>
     document.title = 'leader'
   else
     LEADER = undefined
-    clearInterval INTERVAL
     PRE = {}
     document.title = ''
   return
