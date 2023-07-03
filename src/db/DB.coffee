@@ -3,6 +3,7 @@
   wac.tax/_/channel.js > toAll hook
   ../lib/keyPath.coffee
   wac.tax/user/User.js > onMe
+  wac.tax/_/SDK.js
 
 export FAV = 'fav'
 export FAV_STATE = 'favState'
@@ -101,10 +102,10 @@ ON.add (leader)=>
 
             li = []
             for await o from prevIter(table)
-              li.unshift o
+              li.unshift Object.values o
               if -- diff == 0
                 break
-            # { cid: 2, rid: 215060, ctime: 1687861084018, action: 1}
+
             await SDK.fav UID, li
             # c = await R[table].index(UID_CTIME).openCursor(),PREV)
             # while c
