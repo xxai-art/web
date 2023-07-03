@@ -95,7 +95,7 @@ ON.add (leader)=>
           c = await c.continue()
 
         for [table, n] from updated
-          synced = (await write[SYNCED].get([ table]))?.n or 0
+          synced = (await read[SYNCED].get([ table]))?.n or 0
           if n != synced
             diff = n - synced
             # 拉出最后 diff 条，然后扔给服务器
@@ -106,7 +106,8 @@ ON.add (leader)=>
               if -- diff == 0
                 break
 
-            await SDK.fav UID, li
+            console.log await SDK.fav UID, li
+            await write[SYNCED].put({table, n})
             # c = await R[table].index(UID_CTIME).openCursor(),PREV)
             # while c
             #   console.log c.value
