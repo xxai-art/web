@@ -7,7 +7,6 @@
   wac.tax/user/User.js > onMe
   wac.tax/_/SDK.js
   @w5/uintb64/uintB64.js
-  @w5/nanoid
 
 export FAV = 'fav'
 export FAV_STATE = 'favState'
@@ -20,7 +19,7 @@ export SYNCED_ID = 'syncedId'
 CTIME = 'ctime'
 < PREV = 'prev'
 
-+ _R, _W, _DB, INTERVAL, PRE, UID, UID_B64, LEADER, ES
++ _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES
 
 _iter = (direction,table,range,index)->
   c = _R[table]
@@ -42,9 +41,7 @@ onMe (user)=>
 
   _DB?.close()
 
-  UID_B64 = uintB64 UID
-
-  [_DB,_R,_W] = await IDB['u-'+UID_B64](
+  [_DB,_R,_W] = await IDB['u-'+uintB64(UID)](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
       store = db.createObjectStore(
@@ -94,13 +91,13 @@ export W = new Proxy(
 
 
 _onLeader = =>
-  es_url = API+'es/'+UID_B64+'/'
+  es_url = API+'es/'
   if ES?.url.includes(es_url)
     return
 
   _clear()
 
-  t = []
+  t = [UID]
   [synced,syncedid] = R(SYNCED,SYNCED_ID)
   for table from [FAV]
     [_n,_id] = await Promise.all [
@@ -112,7 +109,7 @@ _onLeader = =>
       _id?.id or 0
     ]
 
-  ES = new EventSource es_url+nanoid()+'/'+b64e(vbyteE(t)),withCredentials:true
+  ES = new EventSource es_url+b64e(vbyteE(t)),withCredentials:true
 
 
   INTERVAL = setInterval(
