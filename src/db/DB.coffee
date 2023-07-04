@@ -5,6 +5,7 @@
   wac.tax/user/User.js > onMe
   wac.tax/_/SDK.js
   @w5/uintb64/uintB64.js
+  @w5/nanoid
 
 export FAV = 'fav'
 export FAV_STATE = 'favState'
@@ -91,13 +92,13 @@ export W = new Proxy(
 
 
 _onLeader = =>
-  es_url = API+'s/'+UID_B64
-  if ES?.url.endsWith(es_url)
+  es_url = API+'s/'+UID_B64+'/'
+  if ES?.url.includes(es_url)
     return
 
   _clear()
 
-  ES = new EventSource es_url,withCredentials:true
+  ES = new EventSource es_url+nanoid(),withCredentials:true
 
   console.log ES
 
