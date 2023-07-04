@@ -91,13 +91,7 @@ export W = new Proxy(
 > ../conf > API
 
 
-_onLeader = =>
-  es_url = API+'es/'
-  if ES?.url.includes(es_url)
-    return
-
-  _clear()
-
+reconnect = =>
   {ES:lastEventId} = localStorage
   if lastEventId
     lastEventId = b64Uint lastEventId
@@ -118,15 +112,22 @@ _onLeader = =>
       _id?.id or 0
     ]
 
-  es_url+=b64e(vbyteE(t))
-
-  ES = new EventSource es_url,{
+  ES = new EventSource(
+    API+'es/'+b64e(vbyteE(t))
     withCredentials:true
-  }
+  )
+
+  console.log ES
+
   close = ES.close.bind(ES)
+
   ES.close = =>
-    console.log 'es close'
-    close()
+    if ES.readyState <= 1
+      close()
+      if UID and LEADER
+        reconnect()
+      else
+        ES = undefined
     return
 
   ES.onmessage = (e)=>
@@ -135,20 +136,30 @@ _onLeader = =>
     console.log (e.data)
     return
 
+  timer = setTimeout(
+    ES.close
+    99e3
+  )
+
   ES.onerror = =>
-    console.log 'es error'
+    clearTimeout timer
+    close()
+    setTimeout(
+      reconnect
+      1e3
+    )
     return
 
-  console.log ES
+  return
 
-  es_n = 0
+_onLeader = =>
+  _clear()
+
+  if not ES
+    reconnect()
+
   INTERVAL = setInterval(
     =>
-      es_n = (++es_n)%5
-      console.log {es_n}
-      if es_n == 0
-        ES.close()
-
       read = _R
       write = _W
       sum = read[SUM]
@@ -191,7 +202,6 @@ _onLeader = =>
 _clear = =>
   clearInterval INTERVAL
   ES?.close()
-  ES = undefined
   return
 
 ON.add (leader)=>
