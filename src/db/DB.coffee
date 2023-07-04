@@ -94,7 +94,7 @@ export W = new Proxy(
 
 
 _onLeader = =>
-  es_url = API+'s/'+UID_B64+'/'
+  es_url = API+'es/'+UID_B64+'/'
   if ES?.url.includes(es_url)
     return
 
