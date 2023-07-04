@@ -60,7 +60,7 @@ onMe (user)=>
         keyPath: ['y']
       )
       for t from [SUM,SYNCED,SYNCED_ID]
-        db.createObjectStore t,keyPath:['table']
+        db.createObjectStore t,keyPath:'table'
       return
   )
 
@@ -98,9 +98,21 @@ _onLeader = =>
 
   _clear()
 
-  ES = new EventSource es_url+nanoid(),withCredentials:true
+  t = []
+  [synced,syncedid] = R(SYNCED,SYNCED_ID)
+  for table from [FAV]
+    [_n,_id] = await Promise.all [
+      synced.get(table)
+      syncedid.get(table)
+    ]
+    t = t.concat [
+      table
+      _n?.n or 0
+      _id?.id or 0
+    ]
 
-  console.log ES
+  ES = new EventSource es_url+nanoid()+'/'+t.join(':'),withCredentials:true
+
 
   INTERVAL = setInterval(
     =>
@@ -117,7 +129,7 @@ _onLeader = =>
         c = await c.continue()
 
       for [table, n] from updated
-        synced = (await read[SYNCED].get([ table]))?.n or 0
+        synced = (await read[SYNCED].get(table))?.n or 0
         if n != synced
           diff = n - synced
           # 拉出最后 diff 条，然后扔给服务器
