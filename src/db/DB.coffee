@@ -121,14 +121,6 @@ reconnect = =>
 
   close = ES.close.bind(ES)
 
-  ES.close = =>
-    if ES.readyState <= 1
-      close()
-      if UID and LEADER
-        reconnect()
-      else
-        ES = undefined
-    return
 
   ES.onmessage = (e)=>
     {lastEventId} = e
@@ -140,6 +132,17 @@ reconnect = =>
     ES.close
     99e3
   )
+
+  ES.close = =>
+    clearTimeout timer
+
+    if ES.readyState <= 1
+      close()
+      if UID and LEADER
+        reconnect()
+      else
+        ES = undefined
+    return
 
   ES.onerror = =>
     clearTimeout timer
