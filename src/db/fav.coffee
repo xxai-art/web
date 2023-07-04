@@ -21,8 +21,8 @@ stateSet = (store, cid, rid, action)=>
   key = vbyteE [cid, rid]
   if action then store.put(id:key) else store.delete(key)
 
-_countIncr = (store, map)=>
-  o = await store.get [...Object.values(map)]
+_countIncr = (store, key)=>
+  o = await store.get key
   if o
     o.n += 1
   else
@@ -33,9 +33,9 @@ _countIncr = (store, map)=>
 countIncr = (table, y, m)=>
   store_li = W FAV_YM, FAV_Y, SUM
   Promise.all [
-    {y, m}
-    {y}
-    {table}
+    [y, m]
+    [y]
+    table
   ].map (m,p)=> _countIncr(store_li[p],m)
 
 
