@@ -121,7 +121,6 @@ reconnect = =>
 
   close = ES.close.bind(ES)
 
-
   ES.onmessage = (e)=>
     {lastEventId} = e
     localStorage.ES = uintB64 +lastEventId.slice(0,-2)
