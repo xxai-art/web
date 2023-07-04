@@ -123,18 +123,32 @@ _onLeader = =>
   ES = new EventSource es_url,{
     withCredentials:true
   }
+  close = ES.close.bind(ES)
+  ES.close = =>
+    console.log 'es close'
+    close()
+    return
 
   ES.onmessage = (e)=>
-    console.log (e)
     {lastEventId} = e
-    localStorage.ES = uintB64 +lastEventId.slice(0,lastEventId.lastIndexOf(':')-1)
+    localStorage.ES = uintB64 +lastEventId.slice(0,-2)
     console.log (e.data)
+    return
+
+  ES.onerror = =>
+    console.log 'es error'
     return
 
   console.log ES
 
+  es_n = 0
   INTERVAL = setInterval(
     =>
+      es_n = (++es_n)%5
+      console.log {es_n}
+      if es_n == 0
+        ES.close()
+
       read = _R
       write = _W
       sum = read[SUM]
