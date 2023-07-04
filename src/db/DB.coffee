@@ -117,8 +117,6 @@ reconnect = =>
     withCredentials:true
   )
 
-  console.log ES
-
   close = ES.close.bind(ES)
 
   ES.onmessage = (e)=>
