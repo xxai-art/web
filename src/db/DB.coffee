@@ -7,6 +7,7 @@
   wac.tax/user/User.js > onMe
   wac.tax/_/SDK.js
   @w5/uintb64/uintB64.js
+  @w5/uintb64/b64Uint.js
 
 export FAV = 'fav'
 export FAV_STATE = 'favState'
@@ -97,8 +98,16 @@ _onLeader = =>
 
   _clear()
 
-  t = [UID]
+  {ES:lastEventId} = localStorage
+  if lastEventId
+    lastEventId = b64Uint lastEventId
+  else
+    lastEventId = 0
+
+  t = [UID, lastEventId]
+
   [synced,syncedid] = R(SYNCED,SYNCED_ID)
+
   for table from [FAV]
     [_n,_id] = await Promise.all [
       synced.get(table)
@@ -109,8 +118,20 @@ _onLeader = =>
       _id?.id or 0
     ]
 
-  ES = new EventSource es_url+b64e(vbyteE(t)),withCredentials:true
+  es_url+=b64e(vbyteE(t))
 
+  ES = new EventSource es_url,{
+    withCredentials:true
+  }
+
+  ES.onmessage = (e)=>
+    console.log (e)
+    {lastEventId} = e
+    localStorage.ES = uintB64 +lastEventId.slice(0,lastEventId.lastIndexOf(':')-1)
+    console.log (e.data)
+    return
+
+  console.log ES
 
   INTERVAL = setInterval(
     =>
