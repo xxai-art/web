@@ -135,7 +135,6 @@ reconnect = =>
 
   ES.close = =>
     clearTimeout timer
-
     if ES.readyState <= 1
       close()
       if UID and LEADER
