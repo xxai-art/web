@@ -92,13 +92,8 @@ export W = new Proxy(
 
 
 reconnect = =>
-  {ES:lastEventId} = localStorage
-  if lastEventId
-    lastEventId = b64Uint lastEventId
-  else
-    lastEventId = 0
 
-  t = [UID, lastEventId]
+  t = [UID]
 
   [synced,syncedid] = R(SYNCED,SYNCED_ID)
 
@@ -120,9 +115,8 @@ reconnect = =>
   close = ES.close.bind(ES)
 
   ES.onmessage = (e)=>
-    {lastEventId} = e
-    localStorage.ES = uintB64 +lastEventId.slice(0,-2)
-    console.log (e.data)
+    console.log e
+    console.log e.data
     return
 
   timer = setTimeout(
