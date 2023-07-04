@@ -1,5 +1,7 @@
 > wac.tax/_/IDB.js
   wac.tax/_/leader.js > ON
+  @w5/vbyte/vbyteE.js
+  @w5/urlb64/b64e.js
   wac.tax/_/channel.js > toAll hook
   ../lib/keyPath.coffee
   wac.tax/user/User.js > onMe
@@ -106,12 +108,11 @@ _onLeader = =>
       syncedid.get(table)
     ]
     t = t.concat [
-      table
       _n?.n or 0
       _id?.id or 0
     ]
 
-  ES = new EventSource es_url+nanoid()+'/'+t.join(':'),withCredentials:true
+  ES = new EventSource es_url+nanoid()+'/'+b64e(vbyteE(t)),withCredentials:true
 
 
   INTERVAL = setInterval(
