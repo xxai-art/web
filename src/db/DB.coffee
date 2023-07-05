@@ -8,6 +8,7 @@
   wac.tax/_/SDK.js
   @w5/uintb64/uintB64.js
   @w5/uintb64/b64Uint.js
+  ./es.coffee:ES_MAP
 
 export FAV = 'fav'
 export FAV_STATE = 'favState'
@@ -120,7 +121,9 @@ reconnect = =>
     data = data.slice(2)
     if user_id != UID
       return
-    console.log user_id, kind, data
+    ES_MAP.get(kind)(
+      user_id, _R, _W, data
+    )
     return
 
   timer = setTimeout(
