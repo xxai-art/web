@@ -115,8 +115,12 @@ reconnect = =>
   close = ES.close.bind(ES)
 
   ES.onmessage = (e)=>
-    console.log e
-    console.log e.data
+    data = JSON.parse e.data
+    [user_id, kind] = data
+    data = data.slice(2)
+    if user_id != UID
+      return
+    console.log user_id, kind, data
     return
 
   timer = setTimeout(
