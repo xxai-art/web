@@ -103,8 +103,8 @@ reconnect = =>
       syncedid.get(table)
     ]
     t = t.concat [
-      _n?.n or 0
       _id?.id or 0
+      _n?.n or 0
     ]
 
   ES = new EventSource(
