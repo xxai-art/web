@@ -6,8 +6,8 @@ SYNC_FAV = 1
 MAP.set(
   SYNC_FAV
   (R, W, li)=>
-    last_id = li.shift()
-    console.log user_id, last_id
+    last_id = li.pop()
+    console.log last_id
     for i from group 4,li
       console.log i
     return
