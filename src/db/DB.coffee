@@ -86,7 +86,7 @@ export W = new Proxy(
 
 
 
-reconnect = =>
+reconnect = (onopen)=>
 
   t = [UID]
 
@@ -102,16 +102,21 @@ reconnect = =>
       _n?.n or 0
     ]
 
-  ES = new EventSource(
+  es = new EventSource(
     API+'es/'+b64e(vbyteE(t))
     withCredentials:true
   )
 
-  close = ES.close.bind(ES)
+  close = es.close.bind(es)
 
-  ES.onmessage = (e)=>
+  es.onopen = =>
+    ES = es
+    onopen?()
+    return
+
+  es.onmessage = (e)=>
     data = JSON.parse e.data
-    [user_id, kind] = data
+    [kind, user_id] = data
     data = data.slice(2)
     if user_id != UID
       return
@@ -121,21 +126,25 @@ reconnect = =>
     return
 
   timer = setTimeout(
-    ES.close
-    99e3
+    =>
+      reconnect =>
+        clearTimeout timer
+        close()
+      return
+    94e3
   )
 
-  ES.close = =>
+  es.close = =>
     clearTimeout timer
-    if ES.readyState <= 1
+    if es.readyState <= 1
       close()
       if UID and LEADER
         reconnect()
       else
-        ES = undefined
+        es = undefined
     return
 
-  ES.onerror = =>
+  es.onerror = =>
     clearTimeout timer
     close()
     setTimeout(
@@ -150,6 +159,7 @@ _onLeader = =>
   _clear()
 
   if not ES
+    ES = {}
     reconnect()
 
   INTERVAL = setInterval(
