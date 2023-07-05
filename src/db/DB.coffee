@@ -3,6 +3,7 @@
   @w5/vbyte/vbyteE.js
   @w5/urlb64/b64e.js
   wac.tax/_/channel.js > toAll hook
+  ../conf > API
   ../lib/keyPath.coffee
   wac.tax/user/User.js > onMe
   wac.tax/_/SDK.js
@@ -83,7 +84,6 @@ export W = new Proxy(
 
 
 
-> ../conf > API
 
 
 reconnect = =>
@@ -201,7 +201,7 @@ _clear = =>
 ON.add (leader)=>
   if leader
     LEADER = 1
-    if UID and _R
+    if _R
       _onLeader()
     else
       _clear()
