@@ -21,7 +21,7 @@ stateSet = (store, cid, rid, action)=>
   key = vbyteE [cid, rid]
   if action then store.put(id:key) else store.delete(key)
 
-_countIncr = (store, key)=>
+_countIncr = (store, key, map)=>
   o = await store.get key
   if o
     o.n += 1
@@ -33,10 +33,20 @@ _countIncr = (store, key)=>
 countIncr = (table, y, m)=>
   store_li = W FAV_YM, FAV_Y, SUM
   Promise.all [
-    [y, m]
-    [y]
-    table
-  ].map (m,p)=> _countIncr(store_li[p],m)
+    [
+      [y, m], {y,m}
+    ]
+    [
+      [y]
+      {y}
+    ]
+    [
+      table
+      {
+        table
+      }
+    ]
+  ].map (m,p)=> _countIncr(store_li[p],...m)
 
 
 < favPut = logined (uid, cid, rid, action)=>
