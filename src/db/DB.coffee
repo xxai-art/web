@@ -200,7 +200,7 @@ _clear = =>
 ON.add (leader)=>
   if leader
     LEADER = 1
-    if UID
+    if UID and _R
       _onLeader()
     else
       _clear()
