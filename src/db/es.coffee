@@ -13,6 +13,14 @@ MAP.set(
     )
     for t from group 4,li
       if not await fav.get t.slice(0,3)
-        console.log t
+        [cid, rid, ctime, action] = t
+        console.log {cid, rid, ctime, action}
+        # fav.put {
+        #   cid
+        #   rid
+        #   ctime
+        #   action
+        # }
+
     return
 )

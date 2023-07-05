@@ -3,7 +3,7 @@
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
   @w5/vbyte/vbyteE
-  ../lib/ym.coffee
+  ./countIncr.coffee
 
 ms = =>
   Math.floor new Date
@@ -12,32 +12,6 @@ stateSet = (store, cid, rid, action)=>
   key = vbyteE [cid, rid]
   if action then store.put(id:key) else store.delete(key)
 
-_countIncr = (store, key, map)=>
-  o = await store.get key
-  if o
-    o.n += 1
-  else
-    o = {n:1,...map}
-  store.put o
-  return
-
-countIncr = (table, y, m)=>
-  store_li = W FAV_YM, FAV_Y, SUM
-  Promise.all [
-    [
-      [y, m], {y,m}
-    ]
-    [
-      [y]
-      {y}
-    ]
-    [
-      table
-      {
-        table
-      }
-    ]
-  ].map (m,p)=> _countIncr(store_li[p],...m)
 
 
 < favPut = logined (uid, cid, rid, action)=>
@@ -59,12 +33,11 @@ countIncr = (table, y, m)=>
 
   now = new Date
   ctime = Math.floor(now)
-  [year,month] = ym now
 
   [
     fav
-    state
-  ] = W FAV, FAV_STATE
+    fav_state
+  ] = db_li = W FAV,FAV_STATE,FAV_YM,FAV_Y,SUM
 
   Promise.all [
     fav.put {
@@ -73,8 +46,8 @@ countIncr = (table, y, m)=>
       ctime
       action
     }
-    countIncr(FAV, year, month)
-    stateSet(state, cid, rid, action)
+    countIncr(db_li.slice(2), FAV, now)
+    stateSet(fav_state, cid, rid, action)
   ]
 
 
