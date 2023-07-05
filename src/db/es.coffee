@@ -1,14 +1,16 @@
 > @w5/pair/group
+  ./TABLE.coffee > FAV FAV_STATE FAV_YM FAV_Y SUM
 
 export default MAP = new Map
 
 SYNC_FAV = 1
 MAP.set(
   SYNC_FAV
-  (R, W, li)=>
+  (W, li)=>
     last_id = li.pop()
-    console.log last_id
-    for t from group 4,li
-      console.log t
+    [fav,fav_state,fav_ym,fav_y,sum] = W(
+      FAV,FAV_STATE,FAV_YM,FAV_Y,SUM
+    )
+    # for t from group 4,li
     return
 )

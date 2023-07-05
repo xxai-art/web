@@ -116,7 +116,7 @@ reconnect = =>
     if user_id != UID
       return
     ES_MAP.get(kind)(
-      _R, _W, data
+      _W, data
     )
     return
 
