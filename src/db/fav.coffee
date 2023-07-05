@@ -3,17 +3,7 @@
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
   @w5/vbyte/vbyteE
-
-yearMonthMs = (timestamp)=>
-  if timestamp != undefined
-    d = new Date timestamp
-  else
-    d = new Date
-  [
-    d.getUTCFullYear()
-    d.getUTCMonth() + 1
-    Math.floor(d)
-  ]
+  ../lib/ym.coffee
 
 ms = =>
   Math.floor new Date
@@ -67,7 +57,9 @@ countIncr = (table, y, m)=>
   #     # w.put(value)
   #     return 1
 
-  [year,month,ctime] = yearMonthMs()
+  now = new Date
+  ctime = Math.floor(now)
+  [year,month] = ym now
 
   [
     fav
