@@ -168,7 +168,7 @@ _onLeader = =>
 
       for [table, n] from updated
         synced = (await read[SYNCED].get(table))?.n or 0
-        if n != synced
+        if n > synced
           diff = n - synced
           # 拉出最后 diff 条，然后扔给服务器
 

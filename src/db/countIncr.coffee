@@ -1,6 +1,6 @@
 > ../lib/ym.coffee
 
-_countIncr = (store, key, map)=>
+export incr = (store, key, map)=>
   o = await store.get key
   if o
     o.n += 1
@@ -25,4 +25,4 @@ export default (store_li, table, now)=>
         table
       }
     ]
-  ].map (m,p)=> _countIncr(store_li[p],...m)
+  ].map (m,p)=> incr(store_li[p],...m)
