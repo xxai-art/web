@@ -52,20 +52,20 @@ countIncr = (table, y, m)=>
 
 < favPut = logined (uid, cid, rid, action)=>
   # return favSync [uid, cid, rid, ms(),action]
-  begin = [cid,rid,0]
-  end = begin.slice()
-  end[1]+=1
-  c = await R[FAV].openCursor(
-    IDBKeyRange.bound(begin,end),'prev'
-  )
-  if c
-    {value} = c
-    if value.action == action
-      # w = W[FAV]
-      # w.delete [value.cid,value.rid,value.ctime]
-      # value.ctime = ms()
-      # w.put(value)
-      return 1
+  # begin = [cid,rid,0]
+  # end = begin.slice()
+  # end[1]+=1
+  # c = await R[FAV].openCursor(
+  #   IDBKeyRange.bound(begin,end),'prev'
+  # )
+  # if c
+  #   {value} = c
+  #   if value.action == action
+  #     # w = W[FAV]
+  #     # w.delete [value.cid,value.rid,value.ctime]
+  #     # value.ctime = ms()
+  #     # w.put(value)
+  #     return 1
 
   [year,month,ctime] = yearMonthMs()
 

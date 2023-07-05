@@ -11,6 +11,8 @@ MAP.set(
     [fav,fav_state,fav_ym,fav_y,sum] = W(
       FAV,FAV_STATE,FAV_YM,FAV_Y,SUM
     )
-    # for t from group 4,li
+    for t from group 4,li
+      if not await fav.get t.slice(0,3)
+        console.log t
     return
 )
