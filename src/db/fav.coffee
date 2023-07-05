@@ -1,4 +1,5 @@
-> ./DB.coffee > R W FAV FAV_STATE FAV_YM FAV_Y SUM
+> ./DB.coffee > R W
+  ./TABLE.coffee > FAV FAV_STATE FAV_YM FAV_Y SUM
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
   @w5/vbyte/vbyteE

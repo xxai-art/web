@@ -8,7 +8,7 @@ MAP.set(
   (R, W, li)=>
     last_id = li.pop()
     console.log last_id
-    for i from group 4,li
-      console.log i
+    for t from group 4,li
+      console.log t
     return
 )

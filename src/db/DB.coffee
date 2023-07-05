@@ -9,14 +9,8 @@
   @w5/uintb64/uintB64.js
   @w5/uintb64/b64Uint.js
   ./es.coffee:ES_MAP
+  ./TABLE.coffee >  FAV FAV_STATE FAV_YM FAV_Y SUM SYNCED SYNCED_ID
 
-export FAV = 'fav'
-export FAV_STATE = 'favState'
-export FAV_YM = 'favYm'
-export FAV_Y = 'favY'
-export SUM = 'sum'
-export SYNCED = 'synced'
-export SYNCED_ID = 'syncedId'
 
 CTIME = 'ctime'
 < PREV = 'prev'
