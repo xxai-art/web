@@ -19,7 +19,6 @@ MAP.set(
     for t from group 4,li
       if not await fav.get t.slice(0,3)
         [cid, rid, ctime, action] = t
-        console.log {cid, rid, ctime, action}
         await fav.put {
           cid
           rid

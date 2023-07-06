@@ -115,6 +115,7 @@ reconnect = (onopen)=>
     return
 
   es.onmessage = (e)=>
+    console.log e.data
     data = JSON.parse e.data
     [kind, user_id] = data
     data = data.slice(2)
