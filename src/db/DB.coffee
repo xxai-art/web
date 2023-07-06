@@ -15,6 +15,26 @@ CTIME = 'ctime'
 
 + _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES
 
+_R_PENDING = []
+
+export R = (args...)=>
+  (next)=>
+    if _R
+      next ... _R(...args)
+    else
+      _R_PENDING.push [args,next]
+    return
+
+_W_PENDING = []
+
+export W = (args...)=>
+  (next)=>
+    if _W
+      next ... _W(...args)
+    else
+      _W_PENDING.push [args,next]
+    return
+
 _iter = (direction,table,range,index)->
   c = _R[table]
   if index
@@ -60,6 +80,14 @@ onMe (user)=>
       return
   )
 
+  for [db, pending] from  [
+    [_W,_W_PENDING]
+    [_R,_R_PENDING]
+  ]
+    for [args,next] from pending
+      next ...db(...args)
+    pending.splice(0,pending.length)
+
   if UID and LEADER
     _onLeader()
   else
@@ -67,14 +95,6 @@ onMe (user)=>
   return
 
 
-
-export R = (args...)=>
-  (next)=>
-    next ... _R(...args)
-
-export W = (args...)=>
-  (next)=>
-    next ... _W(...args)
 
 reconnect = (onopen)=>
   R(SYNCED,SYNCED_ID) (synced,syncedid)=>
@@ -187,7 +207,6 @@ _onLeader = =>
     1e3
   )
 
-  #TODO 每 90 秒 es 断开重新连
   return
 
 _clear = =>
