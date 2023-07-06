@@ -5,42 +5,50 @@
 
 export default MAP = new Map
 
-KIND_SYNC_FAV = 1
+[
+  [
+    1 # KIND_SYNC_FAV
+    (W, li)=>
+      last_id = li.pop()
+      table = FAV
+      [synced, synced_id, fav, fav_state] = db_li = W(
+        SYNCED,
+        SYNCED_ID,
+        table
+        FAV_STATE,FAV_YM,FAV_Y,SUM
+      )
+      for t from group 4,li
+        if not await fav.get t.slice(0,3)
+          [cid, rid, ctime, action] = t
+          await fav.put {
+            cid
+            rid
+            ctime
+            action
+          }
+          incr synced, FAV, {table}
+          countIncr(
+            db_li.slice(4)
+            FAV
+            new Date ctime
+          )
+          begin = t.slice(0,3)
+          end = begin.slice()
+          end[1] += 1
+          end[2] = 0
+          c = await fav.openCursor IDBKeyRange.bound(begin, end),'prev'
+          stateSet(fav_state, cid, rid, c.value.action)
 
-MAP.set(
-  KIND_SYNC_FAV
-  (W, li)=>
-    last_id = li.pop()
-    table = FAV
-    [synced, synced_id, fav, fav_state] = db_li = W(
-      SYNCED,
-      SYNCED_ID,
-      table
-      FAV_STATE,FAV_YM,FAV_Y,SUM
-    )
-    for t from group 4,li
-      if not await fav.get t.slice(0,3)
-        [cid, rid, ctime, action] = t
-        await fav.put {
-          cid
-          rid
-          ctime
-          action
-        }
-        incr synced, FAV, {table}
-        countIncr(
-          db_li.slice(4)
-          FAV
-          new Date ctime
-        )
-        begin = t.slice(0,3)
-        end = begin.slice()
-        end[1] += 1
-        end[2] = 0
-        c = await fav.openCursor IDBKeyRange.bound(begin, end),'prev'
-        stateSet(fav_state, cid, rid, c.value.action)
+      synced_id.put {table,id:last_id}
 
-    synced_id.put {table,id:last_id}
-
-    return
-)
+      return
+  ]
+  [
+    2 # KIND_SYNC_FAV_BY_YEAR_MONTH
+    (W, year_month)=>
+      console.log year_month
+      return
+  ]
+].map ([id,func])=>
+  MAP.set id, func
+  return
