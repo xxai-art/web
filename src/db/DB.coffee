@@ -183,10 +183,6 @@ _onLeader = =>
           if id
             await write[SYNCED_ID].put({table, id})
           await write[SYNCED].put({table, n})
-          # c = await R[table].index(UID_CTIME).openCursor(),PREV)
-          # while c
-          #   console.log c.value
-          #   c = await c.continue()
       return
     1e3
   )
