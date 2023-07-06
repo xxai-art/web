@@ -20,17 +20,14 @@ dependencies:
   '@w5/time':
     specifier: ^0.0.3
     version: 0.0.3
-  '@w5/vbyte':
-    specifier: ^0.0.1
-    version: 0.0.1
   '@w5/wasm':
-    specifier: ^0.0.1
-    version: 0.0.1
+    specifier: ^0.0.2
+    version: 0.0.2
 
 devDependencies:
   '@prettier/plugin-pug':
     specifier: ^2.5.1
-    version: 2.5.1(prettier@2.8.8)
+    version: 2.5.1(prettier@3.0.0)
   '@sveltejs/vite-plugin-svelte':
     specifier: ^2.4.2
     version: 2.4.2(svelte@4.0.4)(vite@4.3.9)
@@ -116,8 +113,8 @@ devDependencies:
     specifier: ^1.9.5
     version: 1.9.5
   prettier:
-    specifier: ^2.8.8
-    version: 2.8.8
+    specifier: ^3.0.0
+    version: 3.0.0
   pug:
     specifier: ^3.0.2
     version: 3.0.2
@@ -1653,13 +1650,13 @@ packages:
     dev: true
     optional: true
 
-  /@prettier/plugin-pug@2.5.1(prettier@2.8.8):
+  /@prettier/plugin-pug@2.5.1(prettier@3.0.0):
     resolution: {integrity: sha512-rauAMYyTv6tgoo4DZ+1TwpytjaoJgcg+8btp0CfAUaHwjxfNo4cuAGgsJS6WVT7vx2Sz4Pkos50xuSNZuvJAWQ==}
     engines: {node: ^16.13.0 || >=18.0.0, npm: '>=7.10.0'}
     peerDependencies:
       prettier: ^2.3.0
     dependencies:
-      prettier: 2.8.8
+      prettier: 3.0.0
       pug-lexer: 5.0.1
     dev: true
 
@@ -2039,10 +2036,6 @@ packages:
     resolution: {integrity: sha512-FYkLRJ++nxAVLAzsD953X/Yc7ln7QQeUD2UsbbmtEUDYQYK2kvA7vqqKgwjuMQFUqwJdYdcHx7qtP7IgMUdHsw==}
     dev: true
 
-  /@w5/vbyte@0.0.1:
-    resolution: {integrity: sha512-QkFNMIDTE35YFYSMPJUJD6YIQ2MA6aAmRfWmG+6GDIJK3rMywlXqlgONOU7pPyMzTKvVB9cNGO4EEZmvxnuWZQ==}
-    dev: false
-
   /@w5/walk@0.0.1:
     resolution: {integrity: sha512-+52JzYkbfIujR0gVaOmpd0kytne07iC/HR0e5PuhrA8ugN5yldtI4IAjjpwVIyGsZeMo+pgV37SHUXazMDjDqA==}
     dev: true
@@ -2051,8 +2044,8 @@ packages:
     resolution: {integrity: sha512-Gub64e0QrDkN69Jhucq+7N6ieZXrNN4B9VRpBwmCOE+w9Qx7w41k09qSvTLgGj5/60bhxrX7Kjj7UJpLoSXp2g==}
     dev: true
 
-  /@w5/wasm@0.0.1:
-    resolution: {integrity: sha512-/rhdUAffobEGG/VCx1kWfAEZUZ/ej/DJp+K3KZI3uGi42KDbatBsYecqz+iOz1m9mtb4+eH+XiGTZpiIjNwpsQ==}
+  /@w5/wasm@0.0.2:
+    resolution: {integrity: sha512-UwbqqapU8ZMX9CL3x9f7OB2jV9N1kAin02OgyVcVn1BhwZliCETZgO/aYQU+sq4ocjCSiTJD8CUfk9vctJSUpw==}
     dev: false
 
   /@w5/write@0.0.1:
@@ -4885,9 +4878,9 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier@2.8.8:
-    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
-    engines: {node: '>=10.13.0'}
+  /prettier@3.0.0:
+    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 

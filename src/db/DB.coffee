@@ -1,13 +1,12 @@
 > wac.tax/_/IDB.js
   wac.tax/_/leader.js > ON
-  @w5/vbyte/vbyteE.js
   @w5/urlb64/b64e.js
+  @w5/wasm > vbyteE u64B64
   wac.tax/_/channel.js > toAll hook
   ../conf > API
   ../lib/keyPath.coffee
   wac.tax/user/User.js > onMe
   wac.tax/_/SDK.js
-  @w5/uintb64/uintB64.js
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_STATE FAV_YM FAV_Y SUM SYNCED SYNCED_ID
 
@@ -37,7 +36,7 @@ onMe (user)=>
 
   _DB?.close()
 
-  [_DB,_R,_W] = await IDB['u-'+uintB64(UID)](
+  [_DB,_R,_W] = await IDB['u-'+u64B64(UID)](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
       store = db.createObjectStore(
