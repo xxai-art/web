@@ -1,13 +1,14 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@w5/escape':
     specifier: ^0.0.1
     version: 0.0.1
   '@w5/link':
-    specifier: ^0.0.1
-    version: 0.0.1
-  '@w5/nanoid':
     specifier: ^0.0.1
     version: 0.0.1
   '@w5/pair':
@@ -1864,10 +1865,6 @@ packages:
     dependencies:
       cmark-gfm: 0.9.0
     dev: true
-
-  /@w5/nanoid@0.0.1:
-    resolution: {integrity: sha512-pa0Yobt3Pocphqlk/ai5H9oNe0OSpU/TNJSsKWjj1HEipAAg0cochhkgV17rWIHmcBep8W7YIFz98WkuJ4hNCw==}
-    dev: false
 
   /@w5/ossput@0.0.11:
     resolution: {integrity: sha512-Co2ip9fKd749jVGKyHgkwRlHGQZMExh+cxidOuso1yhmGI7j3WEamdKInM5DPqEuKjz/hJEdTQjR3k9diNVXVA==}
