@@ -201,7 +201,6 @@ main
   ./lib/keymap.coffee
   wac.tax/_/req.js
   @w5/urlb64/b64e
-  @w5/uintb64/b64Uint.js
   @w5/link
   @w5/sd_token/a.js:sdA
   wac.tax/user/User.js > onMe

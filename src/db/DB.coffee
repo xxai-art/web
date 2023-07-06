@@ -8,7 +8,6 @@
   wac.tax/user/User.js > onMe
   wac.tax/_/SDK.js
   @w5/uintb64/uintB64.js
-  @w5/uintb64/b64Uint.js
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_STATE FAV_YM FAV_Y SUM SYNCED SYNCED_ID
 
