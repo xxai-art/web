@@ -1,11 +1,3 @@
-HOOK = new BinMap
-
-export watch = (cid, rid, render)=>
-  key = vbyteE [cid, rid]
-  =>
-    HOOK.set key, render
-    =>
-      HOOK.remove key
 
 export stateSet = (store, cid, rid, action)=>
   key = vbyteE [cid, rid]
