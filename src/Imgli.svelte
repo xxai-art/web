@@ -32,7 +32,7 @@ onMe =>
       Math.round w*HEIGHT/h
       fav
       reply
-      b64VbyteE CID_IMG, id
+      b64VbyteE [CID_IMG, id]
     ]
   li = (li or []).concat sort(t)
 
