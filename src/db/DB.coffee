@@ -15,25 +15,33 @@ CTIME = 'ctime'
 
 + _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES
 
+_rw = (args, next, db, pending)=>
+  if db
+    return next ... db(...args)
+  else
+    return new Promise (resolve,reject)=>
+      pending.push [
+        args
+        (a...)=>
+          try
+            resolve await next(...a)
+          catch err
+            reject err
+          return
+      ]
+  return
+
 _R_PENDING = []
 
 export R = (args...)=>
   (next)=>
-    if _R
-      next ... _R(...args)
-    else
-      _R_PENDING.push [args,next]
-    return
+    _rw(args, next, _R, _R_PENDING)
 
 _W_PENDING = []
 
 export W = (args...)=>
   (next)=>
-    if _W
-      next ... _W(...args)
-    else
-      _W_PENDING.push [args,next]
-    return
+    _rw(args, next, _W, _W_PENDING)
 
 _iter = (direction,table,range,index)->
   c = _R[table]

@@ -1,3 +1,4 @@
+> @w5/wasm > vbyteE
 
 export stateSet = (store, cid, rid, action)=>
   key = vbyteE [cid, rid]

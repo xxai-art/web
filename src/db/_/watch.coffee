@@ -17,6 +17,6 @@ export default (cid, rid, render)=>
 
     HOOK.set key, render
     =>
-      HOOK.remove key
+      HOOK.delete key
       unbind_onme()
       return
