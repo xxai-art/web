@@ -18,11 +18,11 @@ dependencies:
     specifier: ^0.0.10
     version: 0.0.10
   '@w5/time':
-    specifier: ^0.0.3
-    version: 0.0.3
+    specifier: ^0.0.5
+    version: 0.0.5
   '@w5/wasm':
-    specifier: ^0.0.6
-    version: 0.0.6
+    specifier: ^0.0.7
+    version: 0.0.7
 
 devDependencies:
   '@prettier/plugin-pug':
@@ -1977,8 +1977,8 @@ packages:
       svelte: 4.0.4
     dev: true
 
-  /@w5/time@0.0.3:
-    resolution: {integrity: sha512-YdjvCXfkp7FFuvWm8TI3ptw15zdZpEk16Aahc/Q86BN4+Xr6gbG8TZRxANKOLC+0JccbXfS/3Joz7tYbO3JtLw==}
+  /@w5/time@0.0.5:
+    resolution: {integrity: sha512-YqmezpKObdpH0asWR+DCPqTTZ/zrYNDq7nx6ZBOUFUfiMN/vzs/DR0d4c5Mvy4PLqIPzuehIXCtVdEy8p+BuGQ==}
     dev: false
 
   /@w5/tran@0.0.1:
@@ -2047,8 +2047,8 @@ packages:
     resolution: {integrity: sha512-Gub64e0QrDkN69Jhucq+7N6ieZXrNN4B9VRpBwmCOE+w9Qx7w41k09qSvTLgGj5/60bhxrX7Kjj7UJpLoSXp2g==}
     dev: true
 
-  /@w5/wasm@0.0.6:
-    resolution: {integrity: sha512-dISvoporFbYhvKwTG/jULxx6tCUizp0aKgtkclU6jCByHp9hATf0FJ9TPGZPkyOwHYBOa1ZLu1AsmDsGcaGEng==}
+  /@w5/wasm@0.0.7:
+    resolution: {integrity: sha512-yAHtXORuCGaTZeTJ2G28HgYNuLvyGoIRAvF7PhqAIG7m4qOsEcREfYCAHaw/UQLOduRXvXNJtV4YCn1uKa2yoA==}
     dev: false
 
   /@w5/write@0.0.1:

@@ -35,6 +35,10 @@ onMe (user)=>
 
   _DB?.close()
 
+  if not UID
+    _DB = _R = _W = undefined
+    return
+
   [_DB,_R,_W] = await IDB['u-'+u64B64(UID)](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
