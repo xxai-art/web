@@ -1,4 +1,5 @@
 > ./HOOK.coffee:HOOK
+  @w5/wasm > vbyteE
 
 export default (cid, rid, render)=>
   key = vbyteE [cid, rid]
