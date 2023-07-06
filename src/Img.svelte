@@ -198,7 +198,7 @@ main
   ./lib/sampler.coffee
   ./conf.js > META IMG_HASH
   ./db/fav.coffee > favPut favGet
-  ./db/_.coffee > watch
+  ./db/_/watch.coffee
   ./lib/keymap.coffee
   wac.tax/_/req.js
   @w5/urlb64/b64e
