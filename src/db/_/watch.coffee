@@ -1,6 +1,5 @@
 > ./HOOK.coffee:HOOK
 
-
 export default (cid, rid, render)=>
   key = vbyteE [cid, rid]
   =>
