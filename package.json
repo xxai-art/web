@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "license": "Apache-2.0",
+  "license": "SSPL-1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
