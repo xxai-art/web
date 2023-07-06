@@ -35,7 +35,7 @@ port = 5555 or env.VITE_PORT
 
 
 PRODUCTION = process.env.NODE_ENV == 'production'
-TARGET = ["chrome112"]
+TARGET = ["esnext"]
 
 config = {
   publicDir: join ROOT, 'public'
@@ -96,7 +96,6 @@ config = {
     charset:'utf8'
     legalComments: 'none'
     treeShaking: true
-    target:TARGET
   root: SRC
   build:
     outDir: DIST
@@ -106,6 +105,9 @@ config = {
     target:TARGET
     assetsDir: '/'
     emptyOutDir: true
+  optimizeDeps:
+    esbuildOptions:
+      target: TARGET
 }
 
 config = merge config, await do =>
@@ -119,6 +121,7 @@ config = merge config, await do =>
       ]
       base: '//xxai.art/'
       build:
+        minify: 'terser'
         rollupOptions:
           output:
             chunkFileNames: JSNAME

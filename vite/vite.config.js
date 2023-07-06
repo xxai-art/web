@@ -61,7 +61,7 @@ port = 5555 || env.VITE_PORT;
 
 PRODUCTION = process.env.NODE_ENV === 'production';
 
-TARGET = ["chrome112"];
+TARGET = ["esnext"];
 
 config = {
   publicDir: join(ROOT, 'public'),
@@ -142,8 +142,7 @@ config = {
   esbuild: {
     charset: 'utf8',
     legalComments: 'none',
-    treeShaking: true,
-    target: TARGET
+    treeShaking: true
   },
   root: SRC,
   build: {
@@ -156,6 +155,11 @@ config = {
     target: TARGET,
     assetsDir: '/',
     emptyOutDir: true
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: TARGET
+    }
   }
 };
 
@@ -168,6 +172,7 @@ config = merge(config, (await (async() => {
       plugins: [((await import('./plugin/mini_html.js'))).default],
       base: '//xxai.art/',
       build: {
+        minify: 'terser',
         rollupOptions: {
           output: {
             chunkFileNames: JSNAME,
