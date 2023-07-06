@@ -157,6 +157,7 @@ config = {
     emptyOutDir: true
   },
   optimizeDeps: {
+    exclude: ["@w5/wasm"],
     esbuildOptions: {
       target: TARGET
     }
