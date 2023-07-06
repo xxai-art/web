@@ -6,15 +6,12 @@
   ./_/state.coffee > stateSet
 
 < favPut = logined (uid, cid, rid, action)=>
-
-  now = new Date
-  ctime = Math.floor(now)
-
   W(
     FAV,FAV_STATE
     FAV_YM,FAV_Y,SUM
   ) (fav, fav_state, db_li...)=>
-
+    now = new Date
+    ctime = Math.floor(now)
     Promise.all [
       fav.put {
         cid

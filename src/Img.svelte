@@ -243,7 +243,6 @@ fav = =>
       _turn turn
   return
 
-onMount watch CID_IMG, ID, _turn
 
 onMount =>
   unbind_key = keymap(
@@ -334,11 +333,14 @@ onMount =>
     user = 0
   src=IMG_HASH+b64e hash_bin
 
+  unbind_watch = watch CID_IMG, ID, _turn
+
   try
     await document.body.requestFullscreen()
 
   =>
     unbind_key()
+    unbind_watch()
     return
 </script>
 
