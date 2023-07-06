@@ -35,6 +35,7 @@ port = 5555 or env.VITE_PORT
 
 
 PRODUCTION = process.env.NODE_ENV == 'production'
+TARGET = ["chrome112"]
 
 config = {
   publicDir: join ROOT, 'public'
@@ -95,13 +96,14 @@ config = {
     charset:'utf8'
     legalComments: 'none'
     treeShaking: true
+    target:TARGET
   root: SRC
   build:
     outDir: DIST
     rollupOptions:
       input:
         index:SRC_INDEX_HTML
-    target:['chrome110']
+    target:TARGET
     assetsDir: '/'
     emptyOutDir: true
 }
