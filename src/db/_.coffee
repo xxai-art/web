@@ -1,5 +1,5 @@
 > ../lib/ym.coffee
-  @w5/vbyte/vbyteE
+  @w5/wasm > vbyteE
 
 export incr = (store, key, map)=>
   o = await store.get key

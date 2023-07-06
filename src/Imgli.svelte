@@ -3,8 +3,8 @@
   ./lib/goto.coffee
   ./conf.js > IMG_HASH
   ./lib/CID.coffee > CID_IMG
-  @w5/uintb64/cidB64.js
   @w5/urlb64/b64e
+  @w5/wasm > b64VbyteE
   svelte > onMount
   wac.tax/_/SDK.js
   wac.tax/user/User.js > onMe
@@ -32,7 +32,7 @@ onMe =>
       Math.round w*HEIGHT/h
       fav
       reply
-      cidB64 CID_IMG, id
+      b64VbyteE CID_IMG, id
     ]
   li = (li or []).concat sort(t)
 

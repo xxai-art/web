@@ -16,7 +16,7 @@ svelte:component(this="{ M }")
   ./Img.svelte
   svelte > tick
   ./lib/CID.coffee > CID_IMG
-  @w5/uintb64/b64Cid.js
+  @w5/wasm > b64VbyteD
 
 + M,P
 
@@ -34,7 +34,7 @@ route (url)=>
     p = url.indexOf('/',1)
     if p <= 0
       p = undefined
-    [cid, ID] = b64Cid url.slice(1,p)
+    [cid, ID] = b64VbyteD url.slice(1,p)
     kw = {ID}
     P = MAP.get(cid)
     if M

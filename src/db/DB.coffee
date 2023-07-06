@@ -1,7 +1,6 @@
 > wac.tax/_/IDB.js
   wac.tax/_/leader.js > ON
-  @w5/urlb64/b64e.js
-  @w5/wasm > vbyteE u64B64
+  @w5/wasm > b64VbyteE u64B64
   wac.tax/_/channel.js > toAll hook
   ../conf > API
   ../lib/keyPath.coffee
@@ -101,7 +100,7 @@ reconnect = (onopen)=>
     ]
 
   es = new EventSource(
-    API+'es/'+b64e(vbyteE(t))
+    API+'es/'+b64VbyteE(t)
     withCredentials:true
   )
 
