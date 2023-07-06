@@ -28,7 +28,6 @@ _iter = (direction,table,range,index)->
 export nextIter = _iter.bind _iter,undefined
 export prevIter = _iter.bind _iter,PREV
 
-
 onMe (user)=>
   UID = user.id or 0
   PRE = {}
@@ -67,96 +66,84 @@ onMe (user)=>
     _clear()
   return
 
-# export DB = DB
-export R = new Proxy(
-    (args...)=>
-      _R(...args)
-    get:(_,n)=>
-      _R[n]
-  )
-
-export W = new Proxy(
-    (args...)=>
-      _W(...args)
-    get:(_,n)=>
-      _W[n]
-  )
 
 
+export R = (args...)=>
+  (next)=>
+    next ... _R(...args)
 
-
-
+export W = (args...)=>
+  (next)=>
+    next ... _W(...args)
 
 reconnect = (onopen)=>
+  R(SYNCED,SYNCED_ID) (synced,syncedid)=>
+    t = [UID]
 
-  t = [UID]
+    for table from [FAV]
+      [_n,_id] = await Promise.all [
+        synced.get(table)
+        syncedid.get(table)
+      ]
+      t = t.concat [
+        _id?.id or 0
+        _n?.n or 0
+      ]
 
-  [synced,syncedid] = R(SYNCED,SYNCED_ID)
-
-  for table from [FAV]
-    [_n,_id] = await Promise.all [
-      synced.get(table)
-      syncedid.get(table)
-    ]
-    t = t.concat [
-      _id?.id or 0
-      _n?.n or 0
-    ]
-
-  es = new EventSource(
-    API+'es/'+b64VbyteE(t)
-    withCredentials:true
-  )
-
-  close = es.close.bind(es)
-
-  es.onopen = =>
-    ES = es
-    onopen?()
-    return
-
-  es.onmessage = (e)=>
-    console.log e.data
-    data = JSON.parse e.data
-    [kind, user_id] = data
-    data = data.slice(2)
-    if user_id != UID
-      return
-    ES_MAP.get(kind)(
-      _W, data
+    es = new EventSource(
+      API+'es/'+b64VbyteE(t)
+      withCredentials:true
     )
-    return
 
-  timer = setTimeout(
-    =>
-      reconnect =>
-        clearTimeout timer
-        close()
+    close = es.close.bind(es)
+
+    es.onopen = =>
+      ES = es
+      onopen?()
       return
-    94e3
-  )
 
-  es.close = =>
-    clearTimeout timer
-    if es.readyState <= 1
-      close()
-      if UID and LEADER
-        reconnect()
-      else
-        es = undefined
-    return
-
-  es.onerror = =>
-    clearTimeout timer
-    close()
-    setTimeout(
-      =>
-        reconnect(onopen)
+    es.onmessage = (e)=>
+      console.log e.data
+      data = JSON.parse e.data
+      [kind, user_id] = data
+      data = data.slice(2)
+      if user_id != UID
         return
-      1e3
-    )
-    return
+      ES_MAP.get(kind)(
+        _W, data
+      )
+      return
 
+    timer = setTimeout(
+      =>
+        reconnect =>
+          clearTimeout timer
+          close()
+        return
+      94e3
+    )
+
+    es.close = =>
+      clearTimeout timer
+      if es.readyState <= 1
+        close()
+        if UID and LEADER
+          reconnect()
+        else
+          es = undefined
+      return
+
+    es.onerror = =>
+      clearTimeout timer
+      close()
+      setTimeout(
+        =>
+          reconnect(onopen)
+          return
+        1e3
+      )
+      return
+    return
   return
 
 _onLeader = =>

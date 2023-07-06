@@ -28,13 +28,6 @@
   ]
 
 
-< favGet = (cid, rid)=>
-  uid = Uid()
-  if uid
-    return await R[FAV_STATE].get vbyteE [
-      cid, rid
-    ]
-  return
 
 # # favSync [时间戳, uid, cid, rid, action]
 # < favSync = (row)=> # id 是操作的时间戳

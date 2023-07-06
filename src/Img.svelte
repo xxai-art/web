@@ -197,7 +197,7 @@ main
   ./lib/CID.coffee > CID_IMG
   ./lib/sampler.coffee
   ./conf.js > META IMG_HASH
-  ./db/fav.coffee > favPut favGet
+  ./db/fav.coffee > favPut
   ./db/_/watch.coffee
   ./lib/keymap.coffee
   wac.tax/_/req.js
