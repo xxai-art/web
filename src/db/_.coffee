@@ -30,4 +30,9 @@ export countIncr = (store_li, table, now)=>
 
 export stateSet = (store, cid, rid, action)=>
   key = vbyteE [cid, rid]
-  if action then store.put(id:key) else store.delete(key)
+  pre = await store.get key
+  if action
+    if not pre
+      store.put(id:key)
+  else if pre
+    store.delete(key)
