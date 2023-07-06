@@ -148,7 +148,9 @@ reconnect = (onopen)=>
     clearTimeout timer
     close()
     setTimeout(
-      reconnect
+      =>
+        reconnect(onopen)
+        return
       1e3
     )
     return
