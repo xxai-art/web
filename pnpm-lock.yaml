@@ -20,10 +20,10 @@ dependencies:
   '@w5/time':
     specifier: ^0.0.3
     version: 0.0.3
-  '@w5/uintb64':
-    specifier: ^0.0.6
-    version: 0.0.6
   '@w5/vbyte':
+    specifier: ^0.0.1
+    version: 0.0.1
+  '@w5/wasm':
     specifier: ^0.0.1
     version: 0.0.1
 
@@ -2023,19 +2023,13 @@ packages:
     resolution: {integrity: sha512-2AGCc0Doaa6iYhcXCaTtOJkKSN/FDuolqj/5eo5/pI9hUYBgFW+juci7v9qc5J2Rm9abOYIa2uND9oaJXhsnBw==}
     dev: true
 
-  /@w5/uintb64@0.0.6:
-    resolution: {integrity: sha512-56clmzrOq96J0z+iMIIe7+EqSibAp/h95P+Y/Mfby3UFr2I11cUE7k8A08Cg8XHgaHCUonB+nMYeKSvpy8bvdw==}
-    dependencies:
-      '@w5/urlb64': 0.0.2
-      '@w5/vbyte': 0.0.1
-    dev: false
-
   /@w5/uridir@0.0.1:
     resolution: {integrity: sha512-5ZNTzgVhQHvfI1apigB10XTPjTg5KgMRxdRzda3nUrRTVvzOW1b5fVkFBwv6iqDurNJIe2jiGL97Ge1445p9/g==}
     dev: true
 
   /@w5/urlb64@0.0.2:
     resolution: {integrity: sha512-BC3iTjVou4F8Wy8zmzI+tBwzJ7doGf4tlXAVeKgZ/n8OlFWYo+o0aidfyD6Dp/KndHNzZ7xOV3Z/c/7dvVyE7A==}
+    dev: true
 
   /@w5/utf8@0.0.1:
     resolution: {integrity: sha512-kJCKQ1zIx1M8NUqDRyLqD6W99ssShYv1twAyWNeZfcJ2/zxVpnRLX3GAtyU6rkmNUnj42aT9paAT4nKHY6hsdw==}
@@ -2056,6 +2050,10 @@ packages:
   /@w5/wasm-set@0.0.1:
     resolution: {integrity: sha512-Gub64e0QrDkN69Jhucq+7N6ieZXrNN4B9VRpBwmCOE+w9Qx7w41k09qSvTLgGj5/60bhxrX7Kjj7UJpLoSXp2g==}
     dev: true
+
+  /@w5/wasm@0.0.1:
+    resolution: {integrity: sha512-/rhdUAffobEGG/VCx1kWfAEZUZ/ej/DJp+K3KZI3uGi42KDbatBsYecqz+iOz1m9mtb4+eH+XiGTZpiIjNwpsQ==}
+    dev: false
 
   /@w5/write@0.0.1:
     resolution: {integrity: sha512-VyQXX2C3yRqfS7D5B+yCcsR1tvzZ1DzPLi5kugBOe/EeL+LOD3ftFamfik7wQr2TG7XQ7VF0snUpqVLaytwfOA==}
