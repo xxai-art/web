@@ -1,5 +1,5 @@
 > ./DB.coffee > R W
-  ./TABLE.coffee > FAV FAV_STATE FAV_YM FAV_Y SUM
+  ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
   ./_.coffee > incr countIncr
@@ -8,7 +8,7 @@
 < favPut = logined (uid, cid, rid, action)=>
   W(
     FAV,FAV_STATE
-    FAV_YM,FAV_Y,SUM
+    FAV_YM,SUM
   ) (fav, fav_state, db_li...)=>
     now = new Date
     ctime = Math.floor(now)

@@ -6,7 +6,7 @@
   wac.tax/user/User.js > onMe
   wac.tax/_/SDK.js
   ./es.coffee:ES_MAP
-  ./TABLE.coffee > FAV FAV_STATE FAV_YM FAV_Y SUM SYNCED SYNCED_ID
+  ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
 
 
 CTIME = 'ctime'
@@ -76,11 +76,7 @@ onMe (user)=>
       db.createObjectStore(FAV_STATE, keyPath)
       db.createObjectStore(
         FAV_YM
-        keyPath: ['y','m']
-      )
-      db.createObjectStore(
-        FAV_Y
-        keyPath: ['y']
+        keyPath: ['id']
       )
       for t from [SUM,SYNCED,SYNCED_ID]
         db.createObjectStore t,keyPath:'table'

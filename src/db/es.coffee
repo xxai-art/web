@@ -1,5 +1,5 @@
 > @w5/pair/group
-  ./TABLE.coffee > FAV FAV_STATE FAV_YM FAV_Y SUM SYNCED SYNCED_ID
+  ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
 
@@ -15,7 +15,7 @@ export default MAP = new Map
         SYNCED,
         SYNCED_ID,
         table
-        FAV_STATE,FAV_YM,FAV_Y,SUM
+        FAV_STATE,FAV_YM,SUM
       )
       for t from group 4,li
         if not await fav.get t.slice(0,3)
