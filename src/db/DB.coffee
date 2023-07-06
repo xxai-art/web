@@ -76,7 +76,7 @@ onMe (user)=>
       db.createObjectStore(FAV_STATE, keyPath)
       db.createObjectStore(
         FAV_YM
-        keyPath: ['id']
+        keyPath
       )
       for t from [SUM,SYNCED,SYNCED_ID]
         db.createObjectStore t,keyPath:'table'
