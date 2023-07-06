@@ -37,7 +37,7 @@ MAP.set(
         end[1] += 1
         end[2] = 0
         c = await fav.openCursor IDBKeyRange.bound(begin, end),'prev'
-        stateSet(fav_state, cid, rid, c.value,action)
+        stateSet(fav_state, cid, rid, c.value.action)
 
     synced_id.put {table,id:last_id}
 
