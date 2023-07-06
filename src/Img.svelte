@@ -226,9 +226,6 @@ load = ->
 
 D = 'd'
 
-# _refresh = =>
-#   _turn await favGet(CID_IMG, ID)
-#   return
 
 _turn = (state)=>
   if aFav
@@ -246,8 +243,7 @@ fav = =>
       _turn turn
   return
 
-onMount watch CID_IMG, ID, =>
-  return
+onMount watch CID_IMG, ID, _turn
 
 onMount =>
   unbind_key = keymap(
