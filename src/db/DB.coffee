@@ -130,8 +130,8 @@ reconnect = (onopen)=>
       return
 
     es.onmessage = (e)=>
-      console.log e.data
       data = JSON.parse e.data
+      console.log data
       [kind, user_id] = data
       data = data.slice(2)
       if user_id != UID
@@ -143,9 +143,7 @@ reconnect = (onopen)=>
 
     timer = setTimeout(
       =>
-        reconnect =>
-          clearTimeout timer
-          close()
+        reconnect close
         return
       94e3
     )
