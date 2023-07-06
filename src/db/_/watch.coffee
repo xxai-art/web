@@ -15,8 +15,18 @@ export default (cid, rid, render)=>
       render()
     return
 
-  HOOK.set key, render
+  set = HOOK.get key
+  if not set
+    HOOK.set key, new Set([render])
+  else
+    set.add render
+
   =>
-    HOOK.delete key
+    s = HOOK.get(key)
+    if s.size == 1
+      HOOK.delete key
+    else
+      s.delete render
+
     unbind_onme()
     return

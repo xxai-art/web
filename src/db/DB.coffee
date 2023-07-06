@@ -219,7 +219,7 @@ _onLeader = =>
 
 _clear = =>
   clearInterval INTERVAL
-  ES?.close()
+  ES?.close?()
   return
 
 ON.add (leader)=>
