@@ -23,7 +23,3 @@ export stateSet = (store, cid, rid, action)=>
     store.delete(key)
     send key
   return
-
-
-
-

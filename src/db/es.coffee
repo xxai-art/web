@@ -6,6 +6,7 @@
 export default MAP = new Map
 
 SYNC_FAV = 1
+
 MAP.set(
   SYNC_FAV
   (W, li)=>

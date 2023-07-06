@@ -182,6 +182,8 @@ _onLeader = =>
 
   INTERVAL = setInterval(
     =>
+      if not _R
+        return
       read = _R
       write = _W
       sum = read[SUM]
