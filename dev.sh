@@ -13,15 +13,15 @@ rm -rf conf.js
 ln -s ../conf/dev.js conf.js
 cd $DIR
 
-link() {
-  sleep 1
-  wasm=__bg.wasm
-  deps=node_modules/.vite/deps/$wasm
-  if [ ! -s "$deps" ]; then
-    mkdir -p $(dirname $deps)
-    ln -s ../../@w5/wasm/$wasm $deps
-  fi
-}
-link &
+# link() {
+#   sleep 1
+#   wasm=__bg.wasm
+#   deps=node_modules/.vite/deps/$wasm
+#   if [ ! -s "$deps" ]; then
+#     mkdir -p $(dirname $deps)
+#     ln -s ../../@w5/wasm/$wasm $deps
+#   fi
+# }
+# link &
 cd $DIR
 exec ./sh/dev.sh
