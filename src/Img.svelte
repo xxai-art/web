@@ -226,21 +226,10 @@ load = ->
 
 D = 'd'
 
-
-_turn = (state)=>
-  if aFav
-    {classList} = aFav
-    if state
-      classList.add D
-    else
-      classList.remove D
-  return
-
 fav = =>
   if aFav # 没加载之前可能会被快捷键触发
     turn = +(not aFav.classList.contains D)
-    if favPut(CID_IMG,ID,turn)
-      _turn turn
+    favPut(CID_IMG,ID,turn)
   return
 
 
@@ -333,7 +322,13 @@ onMount =>
     user = 0
   src=IMG_HASH+b64e hash_bin
 
-  unbind_watch = watch CID_IMG, ID, _turn
+  unbind_watch = watch CID_IMG, ID,  (state)=>
+    {classList} = aFav
+    if state
+      classList.add D
+    else
+      classList.remove D
+    return
 
   try
     await document.body.requestFullscreen()
