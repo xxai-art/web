@@ -1,7 +1,6 @@
 > wac.tax/_/IDB.js
   wac.tax/_/leader.js > ON
   @w5/wasm > b64VbyteE u64B64
-  wac.tax/_/channel.js > toAll hook
   ../conf > API
   ../lib/keyPath.coffee
   wac.tax/user/User.js > onMe
