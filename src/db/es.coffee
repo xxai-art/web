@@ -5,10 +5,10 @@
 
 export default MAP = new Map
 
-SYNC_FAV = 1
+KIND_SYNC_FAV = 1
 
 MAP.set(
-  SYNC_FAV
+  KIND_SYNC_FAV
   (W, li)=>
     last_id = li.pop()
     table = FAV
