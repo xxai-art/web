@@ -3,7 +3,8 @@
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
   @w5/wasm > vbyteE
-  ./_.coffee > incr countIncr stateSet
+  ./_.coffee > incr countIncr
+  ./_state.coffee > stateSet
 
 < favPut = logined (uid, cid, rid, action)=>
 

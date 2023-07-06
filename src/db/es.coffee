@@ -1,6 +1,7 @@
 > @w5/pair/group
   ./TABLE.coffee > FAV FAV_STATE FAV_YM FAV_Y SUM SYNCED SYNCED_ID
-  ./_.coffee > incr countIncr stateSet
+  ./_.coffee > incr countIncr
+  ./_state.coffee > stateSet
 
 export default MAP = new Map
 

@@ -198,12 +198,12 @@ main
   ./lib/sampler.coffee
   ./conf.js > META IMG_HASH
   ./db/fav.coffee > favPut favGet
+  ./db/_.coffee > watch
   ./lib/keymap.coffee
   wac.tax/_/req.js
   @w5/urlb64/b64e
   @w5/link
   @w5/sd_token/a.js:sdA
-  wac.tax/user/User.js > onMe
 
 < ID
 
@@ -226,9 +226,9 @@ load = ->
 
 D = 'd'
 
-_refresh = =>
-  _turn await favGet(CID_IMG, ID)
-  return
+# _refresh = =>
+#   _turn await favGet(CID_IMG, ID)
+#   return
 
 _turn = (state)=>
   if aFav
@@ -244,6 +244,9 @@ fav = =>
     turn = +(not aFav.classList.contains D)
     if favPut(CID_IMG,ID,turn)
       _turn turn
+  return
+
+onMount watch CID_IMG, ID, =>
   return
 
 onMount =>
@@ -338,10 +341,8 @@ onMount =>
   try
     await document.body.requestFullscreen()
 
-  unbind_on_me = onMe _refresh
   =>
     unbind_key()
-    unbind_on_me()
     return
 </script>
 

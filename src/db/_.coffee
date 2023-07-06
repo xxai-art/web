@@ -1,5 +1,5 @@
 > ../lib/ym.coffee
-  @w5/wasm > vbyteE
+  @w5/wasm > vbyteE BinMap
 
 export incr = (store, key, map)=>
   o = await store.get key
@@ -28,11 +28,3 @@ export countIncr = (store_li, table, now)=>
     ]
   ].map (m,p)=> incr(store_li[p],...m)
 
-export stateSet = (store, cid, rid, action)=>
-  key = vbyteE [cid, rid]
-  pre = await store.get key
-  if action
-    if not pre
-      store.put(id:key)
-  else if pre
-    store.delete(key)
