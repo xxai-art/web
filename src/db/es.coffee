@@ -5,7 +5,8 @@
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
-  ./TOOL.coffee > getOr0 nextIter
+  ./TOOL.coffee > getOr0 nextIter bound PREV
+  ./COL.coffee > CTIME
 
 export default MAP = new Map
 
@@ -41,7 +42,7 @@ export default MAP = new Map
           end = begin.slice()
           end[1] += 1
           end[2] = 0
-          c = await fav.openCursor IDBKeyRange.bound(begin, end),'prev'
+          c = await fav.openCursor bound(begin, end),PREV
           stateSet(fav_state, cid, rid, c.value.action)
 
       synced_id.put {table,id:last_id}
@@ -69,8 +70,9 @@ export default MAP = new Map
           null
           # year_month.delete id
 
+      ctime = fav.index CTIME
       for ym from year_month.keys()
-        console.log ymMs ... n2ym ym
+        console.log IDBKeyRange.bound ... ymMs ... n2ym ym
       #   await get
       #   to_server = []
       #

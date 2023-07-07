@@ -1,3 +1,5 @@
+< bound = IDBKeyRange.bound
+
 < getOr0 = (store, key)=>
   new Proxy(
     {}
@@ -18,5 +20,7 @@ _iter = (direction)=>
 
 < nextIter = _iter()
 
-< prevIter = _iter('prev')
+< PREV = 'prev'
+
+< prevIter = _iter(PREV)
 
