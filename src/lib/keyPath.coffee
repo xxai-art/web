@@ -1,2 +1,2 @@
 
-export default keyPath:'id'
+export default keyPath:'id',unique:true
