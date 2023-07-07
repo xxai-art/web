@@ -1,5 +1,6 @@
 > @w5/pair/group
   @w5/pair
+  @w5/wasm > binSet vbyteE
   @w5/time/n2ym
   @w5/time/ymMs
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
@@ -71,12 +72,10 @@ export default MAP = new Map
           # year_month.delete id
 
       ctime = fav.index CTIME
-      ym_exist = []
-      for ym from year_month.keys()
-        ym_exist.push li = [ym]
+      year_month_li = [...year_month.keys()]
+      for ym from  year_month_li
         for await i from prevIter ctime,bound ... ymMs ... n2ym ym
-          li.push ... Object.values i
-      console.log JSON.stringify ym_exist
+          console.log vbyteE Object.values i
       #   await get
       #   to_server = []
       #

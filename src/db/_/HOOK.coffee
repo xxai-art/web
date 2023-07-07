@@ -1,6 +1,6 @@
-> @w5/wasm > BinMap
+> @w5/wasm > binMap
 
-export default HOOK = new BinMap
+export default HOOK = binMap()
 
 < hook = (key, val)=>
   s = HOOK.get key

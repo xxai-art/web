@@ -21,8 +21,8 @@ dependencies:
     specifier: ^0.0.7
     version: 0.0.7
   '@w5/wasm':
-    specifier: ^0.0.8
-    version: 0.0.8
+    specifier: ^0.0.10
+    version: 0.0.10
 
 devDependencies:
   '@prettier/plugin-pug':
@@ -2047,8 +2047,8 @@ packages:
     resolution: {integrity: sha512-Gub64e0QrDkN69Jhucq+7N6ieZXrNN4B9VRpBwmCOE+w9Qx7w41k09qSvTLgGj5/60bhxrX7Kjj7UJpLoSXp2g==}
     dev: true
 
-  /@w5/wasm@0.0.8:
-    resolution: {integrity: sha512-L/P4VohO1d0O6+u725WoF/yjjMwJF9i6wfOfNWj1RKaa/83pYIdcoiYf1YDlWVXkcnldjnZ8pEx01bIUod1oQQ==}
+  /@w5/wasm@0.0.10:
+    resolution: {integrity: sha512-ipavhpGO0HHcw9AEgwxN4ML/bbmZDhCKmrFuMqaf3wtZOglMvQK4E2fcYScbLHOhBcBhUwoTQ5PI6y58pb/lvA==}
     dev: false
 
   /@w5/write@0.0.1:
