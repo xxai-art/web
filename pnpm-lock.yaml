@@ -18,8 +18,8 @@ dependencies:
     specifier: ^0.0.10
     version: 0.0.10
   '@w5/time':
-    specifier: ^0.0.6
-    version: 0.0.6
+    specifier: ^0.0.7
+    version: 0.0.7
   '@w5/wasm':
     specifier: ^0.0.7
     version: 0.0.7
@@ -1977,8 +1977,8 @@ packages:
       svelte: 4.0.5
     dev: true
 
-  /@w5/time@0.0.6:
-    resolution: {integrity: sha512-JscWGvDS+H0lyuVRM4JywHIJbhzhhyzs+eQPv3eirEtKn1PzGNUwuCAf916GFaI8Qt4KyThqsF9Fb1R1eQcwuA==}
+  /@w5/time@0.0.7:
+    resolution: {integrity: sha512-MoT4suA79aeiyNbfyyfmF2aXElSX0UbZwhzrofALQUpU5mtgfD+5PtEZCiTefzegRGKuKKygCU+VxsX+Pyd+rg==}
     dev: false
 
   /@w5/tran@0.0.1:

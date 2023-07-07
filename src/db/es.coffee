@@ -1,6 +1,7 @@
 > @w5/pair/group
   @w5/pair
   @w5/time/n2ym
+  @w5/time/ymMs
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
@@ -69,7 +70,7 @@ export default MAP = new Map
           # year_month.delete id
 
       for ym from year_month.keys()
-        console.log n2ym ym
+        console.log ymMs .. n2ym ym
       #   await get
       #   to_server = []
       #
