@@ -20,16 +20,14 @@ favSet = (fav, fav_state, t)=>
   end[1] += 1
   end[2] = 0
   c = (await fav.openCursor bound(begin, end),PREV)?.value
-
-  if (not c) or ( c.action != action and c.ctime < ctime )
-    stateSet(fav_state, cid, rid, action)
-
-  fav.put {
+  await fav.put {
     cid
     rid
     ctime
     action
   }
+  if (not c) or ( c.action != action and c.ctime < ctime )
+    stateSet(fav_state, cid, rid, action)
   return
 
 [
