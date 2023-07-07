@@ -90,7 +90,7 @@ favSet = (fav, fav_state, t)=>
           ++n
           li.push ...Object.values i
 
-        diff = n - ym_n[ym]
+        diff = n - (ym_n[ym] or 0)
         if diff
           sum_n += diff
           await fav_ym.put {id:ym, n}
