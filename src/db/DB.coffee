@@ -8,7 +8,7 @@
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./TOOL.coffee > getOr0 prevIter
-  ./DB.coffee > CTIME
+  ./COL.coffee > CTIME
 
 + _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES
 
