@@ -51,10 +51,12 @@ export default MAP = new Map
     (W, year_month)=>
       year_month = new Map pair year_month
       table = FAV
-      [fav, fav_ym] = W(
+      [fav, fav_ym, sum] = W(
         table
         FAV_YM
+        SUM
       )
+      pre_sum = await getOr0(sum,table).n
 
       sum_n = 0
 
@@ -79,11 +81,9 @@ export default MAP = new Map
       #   sum_n += to_server.length
 
       return
-      sum = W[SUM]
-      pre = await getOr0(sum,table).n
-      diff = sum_n - pre
+      diff = sum_n - pre_sum
       if diff
-        sum.put {table,n:sum_n}
+        W[SUM].put {table,n:sum_n}
         synced = W[SYNCED]
         synced.put {
           table

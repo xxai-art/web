@@ -7,11 +7,10 @@
   ./toSrv.coffee
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
-  ./TOOL.coffee > getOr0
+  ./TOOL.coffee > getOr0 prevIter
 
 
 CTIME = 'ctime'
-< PREV = 'prev'
 
 + _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES
 
@@ -42,19 +41,6 @@ _W_PENDING = []
 export W = (args...)=>
   (next)=>
     _rw(args, next, _W, _W_PENDING)
-
-_iter = (direction,table,range,index)->
-  c = _R[table]
-  if index
-    c = c.index(index)
-  c = await c.openCursor(range,direction)
-  while c
-    yield c.value
-    c = await c.continue()
-  return
-
-export nextIter = _iter.bind _iter,undefined
-export prevIter = _iter.bind _iter,PREV
 
 onMe (user)=>
   UID = user.id or 0
@@ -201,7 +187,7 @@ _onLeader = =>
           # 拉出最后 diff 条，然后扔给服务器
 
           li = []
-          for await o from prevIter(table)
+          for await o from prevIter(read[table])
             li.unshift Object.values o
             if -- diff == 0
               break
