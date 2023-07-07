@@ -74,9 +74,7 @@ export default MAP = new Map
           ym_n[id] = n
 
       ctime = fav.index CTIME
-      to_srv = [
-        user_id
-      ]
+      to_srv = []
       for [ym, srv_n] from year_month.entries()
         n = 0
         li = [ym]
@@ -92,8 +90,8 @@ export default MAP = new Map
         if n!=srv_n or 1 # TODO remove
           to_srv.push li
 
-      if to_srv.length > 1
-        to_insert = await SDK[FAV_YM] to_srv
+      if to_srv.length
+        to_insert = await SDK[FAV_YM] user_id,to_srv
         console.log to_insert
 
       #   to_server = []
