@@ -13,17 +13,16 @@
 export default MAP = new Map
 
 favSet = (fav, fav_state, t)=>
+  [cid, rid, ctime, action] = t
+
   begin = t.slice(0,3)
   end = begin.slice()
   end[1] += 1
   end[2] = 0
-  c = await fav.openCursor bound(begin, end),PREV
-  [cid, rid, ctime, action] = t
+  c = (await fav.openCursor bound(begin, end),PREV)?.value
 
-  if c
-    {value} = c
-    if ( value.action != action and value.ctime < ctime )
-      stateSet(fav_state, cid, rid, action)
+  if (not c) or ( c.action != action and c.ctime < ctime )
+    stateSet(fav_state, cid, rid, action)
 
   fav.put {
     cid
@@ -79,7 +78,7 @@ favSet = (fav, fav_state, t)=>
       for await {id,n} from nextIter(fav_ym)
         real = year_month.get id
         sum_n += real
-        if n == real and 0 # TODO remove
+        if n == real
           year_month.delete id
         else
           ym_n[id] = n
@@ -96,9 +95,9 @@ favSet = (fav, fav_state, t)=>
         diff = n - ym_n[ym]
         if diff
           sum_n += diff
-          fav_ym.put {id:ym, n}
+          await fav_ym.put {id:ym, n}
 
-        if n!=srv_n or 1 # TODO remove
+        if n!=srv_n
           to_srv.push li
 
       if to_srv.length
@@ -111,25 +110,16 @@ favSet = (fav, fav_state, t)=>
           ym = time2ym new Date ctime
           ym_n.set ym, (ym_n.get(ym) or 0) + 1
           favSet fav, fav_state, t
-          # TODO add
-          # fav.put {cid, rid, ctime, action}
 
         if ym_n.size
           fav_ym = W[FAV_YM]
           for [ym,n] from ym_n.entries()
             sum_n += n
             fav_ym.put {
-              id:ym
-              n: n + await getOr0(fav_ym, table).n
+              id: ym
+              n: n + await getOr0(fav_ym, ym).n
             }
 
-      #   to_server = []
-      #
-      #   for iter
-      #
-      #   sum_n += to_server.length
-
-      return
       diff = sum_n - pre_sum
       if diff
         sum = W[SUM]
@@ -142,7 +132,7 @@ favSet = (fav, fav_state, t)=>
           table
           n:Math.max(
             sum_n
-            diff + getOr0(synced,table).n
+            diff + await getOr0(synced,table).n
           )
         }
 
