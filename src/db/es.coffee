@@ -1,8 +1,8 @@
 > @w5/pair/group
   @w5/pair
-  @w5/wasm > binMap vbyteE
   @w5/time/n2ym
   @w5/time/ymMs
+  wac.tax/_/SDK.js
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
@@ -52,7 +52,7 @@ export default MAP = new Map
   ]
   [
     2 # KIND_SYNC_FAV_BY_YEAR_MONTH
-    (W, year_month)=>
+    (W, year_month, user_id)=>
       year_month = new Map pair year_month
       table = FAV
       [fav, fav_ym, sum] = W(
@@ -64,22 +64,38 @@ export default MAP = new Map
 
       sum_n = 0
 
+      ym_n = {}
       for await {id,n} from nextIter(fav_ym)
         real = year_month.get id
         sum_n += real
-        if n == real
-          null
-          # year_month.delete id
+        if n == real and 0 # TODO remove
+          year_month.delete id
+        else
+          ym_n[id] = n
 
       ctime = fav.index CTIME
-      year_month_li = [...year_month.keys()]
-      m = binMap()
-      for ym from  year_month_li
+      to_srv = [
+        user_id
+      ]
+      for [ym, srv_n] from year_month.entries()
+        n = 0
+        li = [ym]
         for await i from prevIter ctime,bound ... ymMs ... n2ym ym
-          i = Object.values(i)
-          m.set vbyteE(i.slice(0,3)),i[3]
-      console.log m
-      #   await get
+          ++n
+          li.push ...Object.values i
+
+        diff = n - ym_n[ym]
+        if diff
+          sum_n += diff
+          fav_ym.put {id:ym, n}
+
+        if n!=srv_n or 1 # TODO remove
+          to_srv.push li
+
+      if to_srv.length
+        to_insert = await SDK[FAV_YM] to_srv
+        console.log to_insert
+
       #   to_server = []
       #
       #   for iter

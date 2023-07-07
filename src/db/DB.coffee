@@ -121,7 +121,7 @@ reconnect = (onopen)=>
       if user_id != UID
         return
       ES_MAP.get(kind)(
-        _W, data
+        _W, data, user_id
       )
       return
 
