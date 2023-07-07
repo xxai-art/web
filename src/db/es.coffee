@@ -5,7 +5,7 @@
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
-  ./TOOL.coffee > getOr0 nextIter bound PREV
+  ./TOOL.coffee > getOr0 prevIter nextIter bound PREV
   ./COL.coffee > CTIME
 
 export default MAP = new Map
@@ -71,8 +71,10 @@ export default MAP = new Map
           # year_month.delete id
 
       ctime = fav.index CTIME
+      console.log {ctime}
       for ym from year_month.keys()
-        console.log IDBKeyRange.bound ... ymMs ... n2ym ym
+        for await i from prevIter ctime,bound ... ymMs ... n2ym ym
+          console.log i
       #   await get
       #   to_server = []
       #
