@@ -3,6 +3,7 @@
   @w5/time/n2ym
   @w5/time/ymMs
   wac.tax/_/SDK.js
+  ../lib/ym.coffee:time2ym
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
@@ -92,7 +93,12 @@ export default MAP = new Map
 
       if to_srv.length
         to_insert = await SDK[FAV_YM] user_id,to_srv
-        console.log to_insert
+        fav = W[table]
+        ym_n = {}
+        for li from group 4,to_insert
+          [cid, rid, ctime, action] = li.map (i)=>Number(i)
+          console.log time2ym new Date ctime
+          # fav.put {cid, rid, ctime, action}
 
       #   to_server = []
       #
