@@ -92,7 +92,7 @@ export default MAP = new Map
         if n!=srv_n or 1 # TODO remove
           to_srv.push li
 
-      if to_srv.length
+      if to_srv.length > 1
         to_insert = await SDK[FAV_YM] to_srv
         console.log to_insert
 
