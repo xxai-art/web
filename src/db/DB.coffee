@@ -7,6 +7,7 @@
   ./toSrv.coffee
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
+  ./TOOL.coffee > getOr0
 
 
 CTIME = 'ctime'
@@ -194,7 +195,7 @@ _onLeader = =>
         c = await c.continue()
 
       for [table, n] from updated
-        synced = (await read[SYNCED].get(table))?.n or 0
+        synced = await getOr0(read[SYNCED],table).n
         if n > synced
           diff = n - synced
           # 拉出最后 diff 条，然后扔给服务器

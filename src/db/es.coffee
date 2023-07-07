@@ -3,6 +3,7 @@
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
+  ./TOOL.coffee > getOr0
 
 export default MAP = new Map
 
@@ -79,7 +80,7 @@ export default MAP = new Map
 
       return
       sum = W[SUM]
-      pre = (await sum.get table)?.n or 0
+      pre = await getOr0(sum,table).n
       diff = sum_n - pre
       if diff
         sum.put {table,n:sum_n}
@@ -88,7 +89,7 @@ export default MAP = new Map
           table
           n:Math.max(
             sum_n
-            diff + ((synced.get table)?.n or 0)
+            diff + getOr0(synced,table).n
           )
         }
 

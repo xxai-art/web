@@ -1,4 +1,4 @@
-< get_or_0 = (store, key)=>
+< getOr0 = (store, key)=>
   new Proxy(
     {}
     get:(_,attr)=>
