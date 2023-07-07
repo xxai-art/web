@@ -71,10 +71,12 @@ export default MAP = new Map
           # year_month.delete id
 
       ctime = fav.index CTIME
-      console.log {ctime}
+      ym_exist = []
       for ym from year_month.keys()
+        ym_exist.push li = [ym]
         for await i from prevIter ctime,bound ... ymMs ... n2ym ym
-          console.log i
+          li.push ... Object.values i
+      console.log JSON.stringify ym_exist
       #   await get
       #   to_server = []
       #
