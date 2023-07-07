@@ -57,6 +57,7 @@ export default MAP = new Map
 
       sum_n = 0
 
+      ### TODO REMOVE
       c = await fav_ym.openCursor()
       while c
         {value:{id,n}} = c
@@ -65,6 +66,7 @@ export default MAP = new Map
         if n == real
           year_month.delete id
         c = await c.continue()
+      ###
 
       console.log year_month
       # for ym from year_month.keys()
