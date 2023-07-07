@@ -84,7 +84,7 @@ onMe (user)=>
   )
 
   # for t from [SUM,SYNCED]
-  #   _W[t].put {table:FAV, n:3}
+  #   await _W[t].put {table:FAV, n:3}
 
   for [db, pending] from  [
     [_W,_W_PENDING]
@@ -204,7 +204,12 @@ _onLeader = =>
             li.unshift Object.values o
             if -- diff == 0
               break
+
           toSrv(table, user_id, write, li)
+          write[SYNCED].put({
+            table
+            n
+          })
       return
     1e3
   )

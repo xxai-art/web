@@ -66,6 +66,7 @@ export default MAP = new Map
           year_month.delete id
         c = await c.continue()
 
+      console.log year_month
       # for ym from year_month.keys()
       #   await get
       #   to_server = []
@@ -74,9 +75,20 @@ export default MAP = new Map
       #
       #   sum_n += to_server.length
 
-      sum = W(SUM]
-      if sum_n != (await sum.get table)?.n
-        await sum.put {table,n:sum_n}
+      return
+      sum = W[SUM]
+      pre = (await sum.get table)?.n or 0
+      diff = sum_n - pre
+      if diff
+        sum.put {table,n:sum_n}
+        synced = W[SYNCED]
+        synced.put {
+          table
+          n:Math.max(
+            sum_n
+            diff + ((synced.get table)?.n or 0)
+          )
+        }
 
       return
   ]

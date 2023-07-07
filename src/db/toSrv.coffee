@@ -7,7 +7,4 @@
     write[SYNCED_ID].put({
       table, id
     })
-  write[SYNCED].put({
-    table, n
-  })
   return
