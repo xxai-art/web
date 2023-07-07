@@ -1,6 +1,6 @@
 > @w5/pair/group
   @w5/pair
-  @w5/wasm > binSet vbyteE
+  @w5/wasm > binMap vbyteE
   @w5/time/n2ym
   @w5/time/ymMs
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
@@ -73,9 +73,12 @@ export default MAP = new Map
 
       ctime = fav.index CTIME
       year_month_li = [...year_month.keys()]
+      m = binMap()
       for ym from  year_month_li
         for await i from prevIter ctime,bound ... ymMs ... n2ym ym
-          console.log vbyteE Object.values i
+          i = Object.values(i)
+          m.set vbyteE(i.slice(0,3)),i[3]
+      console.log m
       #   await get
       #   to_server = []
       #
