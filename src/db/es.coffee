@@ -94,11 +94,21 @@ export default MAP = new Map
       if to_srv.length
         to_insert = await SDK[FAV_YM] user_id,to_srv
         fav = W[table]
-        ym_n = {}
+        ym_n = new Map
         for li from group 4,to_insert
           [cid, rid, ctime, action] = li.map (i)=>Number(i)
-          console.log time2ym new Date ctime
+          ym = time2ym new Date ctime
+          ym_n.set ym, (ym_n.get(ym) or 0) + 1
+          # TODO add
           # fav.put {cid, rid, ctime, action}
+
+        if ym_n.size
+          fav_ym = W[fav_ym]
+          for [ym,n] from ym_n.entries()
+            sum_n += n
+            fav_ym.put {
+              id:ym
+            }
 
       #   to_server = []
       #
@@ -109,7 +119,11 @@ export default MAP = new Map
       return
       diff = sum_n - pre_sum
       if diff
-        W[SUM].put {table,n:sum_n}
+        sum = W[SUM]
+        sum.put {
+          table
+          n:getOr0(sum,table).n + diff # 重新获取，因为上面同步添加收藏的时候可能变动
+        }
         synced = W[SYNCED]
         synced.put {
           table
