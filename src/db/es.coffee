@@ -1,4 +1,5 @@
 > @w5/pair/group
+  @w5/pair
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
@@ -12,10 +13,11 @@ export default MAP = new Map
       last_id = li.pop()
       table = FAV
       [synced, synced_id, fav, fav_state] = db_li = W(
-        SYNCED,
-        SYNCED_ID,
+        SYNCED
+        SYNCED_ID
         table
-        FAV_STATE,FAV_YM,SUM
+        FAV_STATE
+        FAV_YM,SUM
       )
       for t from group 4,li
         if not await fav.get t.slice(0,3)
@@ -46,16 +48,29 @@ export default MAP = new Map
   [
     2 # KIND_SYNC_FAV_BY_YEAR_MONTH
     (W, year_month)=>
+      year_month = new Map pair year_month
+      table = FAV
       [fav, fav_ym, sum] = W(
-        FAV
+        table
         FAV_YM
         SUM
       )
-      console.log year_month
+
+      sum_n = 0
+
       c = await fav_ym.openCursor()
       while c
-        console.log c.value
+        {value:{id,n}} = c
+        real = year_month.get id
+        sum_n += real
+        if n == real
+          year_month.delete id
         c = await c.continue()
+
+      console.log year_month
+
+      if sum_n != (await sum.get table)?.n
+        await sum.put {table,n:sum_n}
 
       return
   ]
