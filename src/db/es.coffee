@@ -12,6 +12,27 @@
 
 export default MAP = new Map
 
+favSet = (fav, fav_state, t)=>
+  begin = t.slice(0,3)
+  end = begin.slice()
+  end[1] += 1
+  end[2] = 0
+  c = await fav.openCursor bound(begin, end),PREV
+  [cid, rid, ctime, action] = t
+
+  if c
+    {value} = c
+    if ( value.action != action and value.ctime < ctime )
+      stateSet(fav_state, cid, rid, action)
+
+  fav.put {
+    cid
+    rid
+    ctime
+    action
+  }
+  return
+
 [
   [
     1 # KIND_SYNC_FAV
@@ -28,24 +49,13 @@ export default MAP = new Map
       for t from group 4,li
         if not await fav.get t.slice(0,3)
           [cid, rid, ctime, action] = t
-          await fav.put {
-            cid
-            rid
-            ctime
-            action
-          }
+          favSet fav, fav_state, t
           incr synced, FAV, {table}
           countIncr(
             db_li.slice(4)
             FAV
             new Date ctime
           )
-          begin = t.slice(0,3)
-          end = begin.slice()
-          end[1] += 1
-          end[2] = 0
-          c = await fav.openCursor bound(begin, end),PREV
-          stateSet(fav_state, cid, rid, c.value.action)
 
       synced_id.put {table,id:last_id}
 
@@ -93,21 +103,24 @@ export default MAP = new Map
 
       if to_srv.length
         to_insert = await SDK[FAV_YM] user_id,to_srv
-        fav = W[table]
+        [fav, fav_state] = W(table, FAV_STATE)
         ym_n = new Map
-        for li from group 4,to_insert
-          [cid, rid, ctime, action] = li.map (i)=>Number(i)
+        for t from group 4,to_insert
+          t = t.map (i)=>Number(i)
+          [cid, rid, ctime, action] = t
           ym = time2ym new Date ctime
           ym_n.set ym, (ym_n.get(ym) or 0) + 1
+          favSet fav, fav_state, t
           # TODO add
           # fav.put {cid, rid, ctime, action}
 
         if ym_n.size
-          fav_ym = W[fav_ym]
+          fav_ym = W[FAV_YM]
           for [ym,n] from ym_n.entries()
             sum_n += n
             fav_ym.put {
               id:ym
+              n: n + await getOr0(fav_ym, table).n
             }
 
       #   to_server = []
@@ -122,7 +135,7 @@ export default MAP = new Map
         sum = W[SUM]
         sum.put {
           table
-          n:getOr0(sum,table).n + diff # 重新获取，因为上面同步添加收藏的时候可能变动
+          n:diff + await getOr0(sum,table).n
         }
         synced = W[SYNCED]
         synced.put {

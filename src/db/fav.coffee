@@ -2,7 +2,7 @@
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
-  ./_.coffee > incr countIncr
+  ./_.coffee > countIncr
   ./_/state.coffee > stateSet
 
 < favPut = logined (uid, cid, rid, action)=>

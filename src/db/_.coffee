@@ -10,10 +10,13 @@ export incr = (store, key, map)=>
   return
 
 export countIncr = (store_li, table, now)=>
+  id = ym now
   Promise.all [
     [
-      id:ym now
-      {id}
+      id
+      {
+        id
+      }
     ]
     [
       table
