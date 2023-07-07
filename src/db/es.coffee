@@ -70,7 +70,7 @@ export default MAP = new Map
           # year_month.delete id
 
       for ym from year_month.keys()
-        console.log ymMs .. n2ym ym
+        console.log ymMs ... n2ym ym
       #   await get
       #   to_server = []
       #

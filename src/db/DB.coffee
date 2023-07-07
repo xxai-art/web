@@ -55,10 +55,12 @@ onMe (user)=>
   [_DB,_R,_W] = await IDB['u-'+u64B64(UID)](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
+      ctime = 'ctime'
       store = db.createObjectStore(
         FAV
-        keyPath: ['cid','rid','ctime']
+        keyPath: ['cid','rid',ctime]
       )
+      store.createIndex ctime,ctime
 
       db.createObjectStore(FAV_STATE, keyPath)
       db.createObjectStore(
