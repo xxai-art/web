@@ -8,9 +8,7 @@
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./TOOL.coffee > getOr0 prevIter
-
-
-CTIME = 'ctime'
+  ./DB.coffee > CTIME
 
 + _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES
 
@@ -55,12 +53,11 @@ onMe (user)=>
   [_DB,_R,_W] = await IDB['u-'+u64B64(UID)](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
-      ctime = 'ctime'
       store = db.createObjectStore(
         FAV
-        keyPath: ['cid','rid',ctime]
+        keyPath: ['cid','rid',CTIME]
       )
-      store.createIndex ctime,ctime
+      store.createIndex CTIME,CTIME
 
       db.createObjectStore(FAV_STATE, keyPath)
       db.createObjectStore(
