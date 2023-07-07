@@ -46,7 +46,17 @@ export default MAP = new Map
   [
     2 # KIND_SYNC_FAV_BY_YEAR_MONTH
     (W, year_month)=>
+      [fav, fav_ym, sum] = W(
+        FAV
+        FAV_YM
+        SUM
+      )
       console.log year_month
+      c = await fav_ym.openCursor()
+      while c
+        console.log c.value
+        c = await c.continue()
+
       return
   ]
 ].map ([id,func])=>
