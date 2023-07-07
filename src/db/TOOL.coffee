@@ -4,12 +4,13 @@
     get:(_,attr)=>
       new Promise (resolve)=>
         t = await store.get(key)
-        if t then t[attr] else 0
+        resolve if t then t[attr] else 0
+        return
   )
 
 _iter = (direction)=>
   (store, range)->
-    c = store.openCursor(range, direction)
+    c = await store.openCursor(range, direction)
     while c
       yield c.value
       c = await c.continue()

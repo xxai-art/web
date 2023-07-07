@@ -3,7 +3,7 @@
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
-  ./TOOL.coffee > getOr0
+  ./TOOL.coffee > getOr0 nextIter
 
 export default MAP = new Map
 
@@ -60,16 +60,12 @@ export default MAP = new Map
 
       sum_n = 0
 
-      ### TODO REMOVE
-      c = await fav_ym.openCursor()
-      while c
-        {value:{id,n}} = c
+      for await {id,n} from nextIter(fav_ym)
+        console.log {id,n}
         real = year_month.get id
         sum_n += real
         if n == real
           year_month.delete id
-        c = await c.continue()
-      ###
 
       console.log year_month
       # for ym from year_month.keys()
