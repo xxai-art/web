@@ -4,7 +4,7 @@
   ../conf > API
   ../lib/keyPath.coffee
   wac.tax/user/User.js > onMe
-  wac.tax/_/SDK.js
+  ./toSrv.coffee
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
 
@@ -182,6 +182,7 @@ _onLeader = =>
         return
       read = _R
       write = _W
+      user_id = UID
       sum = read[SUM]
       c = await sum.openCursor()
       updated = []
@@ -203,11 +204,7 @@ _onLeader = =>
             li.unshift Object.values o
             if -- diff == 0
               break
-
-          id = await SDK.fav UID, li
-          if id
-            await write[SYNCED_ID].put({table, id})
-          await write[SYNCED].put({table, n})
+          toSrv(table, user_id, write, li)
       return
     1e3
   )

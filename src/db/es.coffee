@@ -50,10 +50,9 @@ export default MAP = new Map
     (W, year_month)=>
       year_month = new Map pair year_month
       table = FAV
-      [fav, fav_ym, sum] = W(
+      [fav, fav_ym] = W(
         table
         FAV_YM
-        SUM
       )
 
       sum_n = 0
@@ -67,8 +66,15 @@ export default MAP = new Map
           year_month.delete id
         c = await c.continue()
 
-      console.log year_month
+      # for ym from year_month.keys()
+      #   await get
+      #   to_server = []
+      #
+      #   for iter
+      #
+      #   sum_n += to_server.length
 
+      sum = W(SUM]
       if sum_n != (await sum.get table)?.n
         await sum.put {table,n:sum_n}
 
