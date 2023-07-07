@@ -1,5 +1,6 @@
 > @w5/pair/group
   @w5/pair
+  @w5/time/n2ym
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
@@ -61,14 +62,14 @@ export default MAP = new Map
       sum_n = 0
 
       for await {id,n} from nextIter(fav_ym)
-        console.log {id,n}
         real = year_month.get id
         sum_n += real
         if n == real
-          year_month.delete id
+          null
+          # year_month.delete id
 
-      console.log year_month
-      # for ym from year_month.keys()
+      for ym from year_month.keys()
+        console.log n2ym ym
       #   await get
       #   to_server = []
       #
