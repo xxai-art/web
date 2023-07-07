@@ -83,6 +83,9 @@ onMe (user)=>
       return
   )
 
+  # for t from [SUM,SYNCED]
+  #   _W[t].put {table:FAV, n:3}
+
   for [db, pending] from  [
     [_W,_W_PENDING]
     [_R,_R_PENDING]
