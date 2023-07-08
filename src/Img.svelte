@@ -40,7 +40,7 @@ main>b>header>b.R>a
       background-color transparent
       filter invert(45%) sepia(82%) saturate(2903%) hue-rotate(0) brightness(102%) contrast(106%)
 
-  &:global(.s.d)
+  &:global(.s.D)
     background-image url(':/svg/faved.svg')
     filter invert(14%) sepia(98%) saturate(7409%) hue-rotate(360deg) brightness(112%) contrast(111%)
 
@@ -214,8 +214,7 @@ GENWAY = [
   '局部重绘'
 ]
 
-+ src, user, model, genway_id, prompt, nprompt, aFav
-
++ src, user, model, genway_id, prompt, nprompt, faved
 mli = []
 
 CIVITAI = link 'civitai.com'
@@ -224,12 +223,10 @@ load = ->
   @parentNode.classList.remove 'w'
   return
 
-D = 'd'
-
 fav = =>
-  if aFav # 没加载之前可能会被快捷键触发
-    turn = +(not aFav.classList.contains D)
-    favPut(CID_IMG,ID,turn)
+  if faved != undefined # 没加载之前可能会被快捷键触发
+    faved = !faved
+    favPut(CID_IMG,ID,+faved)
   return
 
 
@@ -323,11 +320,7 @@ onMount =>
   src=IMG_HASH+b64e hash_bin
 
   unbind_watch = watch CID_IMG, ID,  (state)=>
-    {classList} = aFav
-    if state
-      classList.add D
-    else
-      classList.remove D
+    faved = !!state
     return
 
   try
@@ -350,7 +343,8 @@ onMount =>
           +if user
             a(href="{ user[0] }") { user[1] }
         b.R
-          a.s(@&aFav @click=fav title="收藏 ( 快捷键 S )")
+          +if faved != undefined
+            a.s(class:D=faved @click=fav title="收藏 ( 快捷键 S )")
           a.p(href="/" title="上一张 ( 快捷键 ← )")
           a.n(href="/" title="下一张 ( 快捷键 → )")
           a.x(href="/" title="关闭 ( 快捷键 X )")
