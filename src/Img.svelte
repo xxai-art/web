@@ -229,7 +229,6 @@ fav = =>
     favPut(CID_IMG,ID,+faved)
   return
 
-
 onMount =>
   unbind_key = keymap(
     88,=>goto '' # x

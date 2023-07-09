@@ -6,6 +6,7 @@
   @w5/urlb64/b64e
   ./lib/goto.coffee
   ./db/_/watch.coffee
+  ./db/fav.coffee > favPut
 
 < href
 < fav
@@ -14,9 +15,13 @@ _cache = (p)=>
   hash = (await req META+p.slice(2))[2]
   fetch(URL_META+b64e(hash),mode:'no-cors')
 
-onMount =>
-  # watch CID_IMG, ID,  (state)=>
++ faved,cid,id
 
+onMount =>
+  [cid,id] = b64VbyteD(href)
+  watch cid, id,  (state)=>
+    faved = !!state
+    return
 
 W = 'W'
 
@@ -28,16 +33,21 @@ click = ->
     goto p
     return
   return
+
+aFav = =>
+  faved = !faved
+  favPut(cid,id,+faved)
+  return
 </script>
 
 <template lang="pug">
-a(:href @click|preventDefault|stopPropagation)
+a(@click|preventDefault|stopPropagation href="/-{href}")
 nav
   //-
     a.comment
       +if comment
         | {comment}
-  a.fav
+  a.fav(class:D=faved @click=aFav)
     +if fav
       | {fav}
 </template>

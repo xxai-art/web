@@ -70,7 +70,7 @@ onMount =>
   ul
     +each('li as [id,hash,w,fav,comment,url]')
       li(style="flex-grow:{w/HEIGHT};width:{w}px;background-image:url({IMG}{hash}),var(--svg-wait)")
-        Cell(href="/-{url}" fav="{fav}")
+        Cell(href="{url}" fav="{fav}")
 </template>
 
 <style lang="stylus">
