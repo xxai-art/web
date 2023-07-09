@@ -9,6 +9,6 @@ export const
 	// API = link("127.0.0.1:8880"),
   // SPI = link('127.0.0.1:8080'),
   SPI = link('i-01.eu.org'),
-  IMG_HASH = link('5ok.pw'),
+  URL_META = link('5ok.pw'),
   META = link('u-01.eu.org')
   ;

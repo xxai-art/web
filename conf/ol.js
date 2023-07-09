@@ -7,5 +7,5 @@ export const
   USER_TAX_CDN = link("ok0.pw"),
 	API = link("api.xxai.art"),
   SPI = link('i-01.eu.org'),
-  IMG_HASH = link('5ok.pw'),
+  URL_META = link('5ok.pw'),
   META = link('u-01.eu.org');

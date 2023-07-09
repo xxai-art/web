@@ -196,7 +196,7 @@ main
   ./lib/goto.coffee
   ./lib/CID.coffee > CID_IMG
   ./lib/sampler.coffee
-  ./conf.js > META IMG_HASH
+  ./conf.js > META URL_META
   ./db/fav.coffee > favPut
   ./db/_/watch.coffee
   ./lib/keymap.coffee
@@ -317,7 +317,7 @@ onMount =>
     ]
   else
     user = 0
-  src=IMG_HASH+b64e hash_bin
+  src=URL_META+b64e hash_bin
 
   unbind_watch = watch CID_IMG, ID,  (state)=>
     faved = !!state

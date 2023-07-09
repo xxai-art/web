@@ -1,7 +1,7 @@
 <script lang="coffee">
 > ./lib/SortImg.coffee
   ./lib/goto.coffee
-  ./conf.js > IMG_HASH
+  ./conf.js > URL_META
   ./lib/CID.coffee > CID_IMG
   @w5/urlb64/b64e
   @w5/wasm > b64VbyteE
@@ -14,7 +14,7 @@
 sortimg = SortImg()
 
 HEIGHT= 475
-IMG = IMG_HASH+'h' + (if devicePixelRatio > 1 then HEIGHT*2 else HEIGHT)+'/'
+IMG = URL_META+'h' + (if devicePixelRatio > 1 then HEIGHT*2 else HEIGHT)+'/'
 
 < load = undefined
 

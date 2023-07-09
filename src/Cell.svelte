@@ -1,15 +1,22 @@
 <script lang="coffee">
-> ./conf.js > META IMG_HASH
+> svelte > onMount
+  @w5/wasm > b64VbyteD
+  ./conf.js > META URL_META
   wac.tax/_/req.js
   @w5/urlb64/b64e
   ./lib/goto.coffee
+  ./db/_/watch.coffee
 
 < href
 < fav
 
 _cache = (p)=>
   hash = (await req META+p.slice(2))[2]
-  fetch(IMG_HASH+b64e(hash),mode:'no-cors')
+  fetch(URL_META+b64e(hash),mode:'no-cors')
+
+onMount =>
+  # watch CID_IMG, ID,  (state)=>
+
 
 W = 'W'
 
@@ -70,11 +77,19 @@ nav
     &:first-child
       margin-left 0
 
+    &.fav
+      background-image url(':/svg/fav.svg')
+
+      &:global(.D)
+        background-image url(':/svg/faved.svg')
+        color #fff
+        filter invert(14%) sepia(98%) saturate(7409%) hue-rotate(360deg) brightness(112%) contrast(111%)
+
     &:hover
       filter invert(53%) sepia(49%) saturate(6297%) hue-rotate(2deg) brightness(104%) contrast(106%)
 
-    &.fav
-      background-image url(':/svg/fav.svg')
+      &:global(.D)
+        color #000
 
     &.comment
       background-image url(':/svg/comment.svg')
