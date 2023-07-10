@@ -2,7 +2,7 @@
 > ./lib/SortImg.coffee
   ./conf.js > URL_META
   ./lib/CID.coffee > CID_IMG
-  @w5/wasm > b64VbyteE b64E
+  @w5/wasm > vbyteE b64E
   svelte > onMount
   wac.tax/_/SDK.js
   wac.tax/user/User.js > onMe
@@ -28,7 +28,7 @@ onMe =>
       id
       b64E hash
       Math.round w*HEIGHT/h
-      b64VbyteE [CID_IMG, id]
+      b64E vbyteE [CID_IMG, id]
     ]
   li = (li or []).concat sort(t)
 
