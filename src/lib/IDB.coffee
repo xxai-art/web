@@ -1,7 +1,7 @@
 > wac.tax/_/IDB.js
 
 export SAMPLER_NAME = 'samplerName'
-export META = 'meta'
+export LI = 'li'
 
 [DB,R,W] = await IDB.art(
   1 # version
@@ -9,7 +9,7 @@ export META = 'meta'
     createStore = (name, keyPath)=>
       db.createObjectStore name, {keyPath}
     createStore(SAMPLER_NAME, 'id')
-    createStore(META, 'id')
+    createStore(LI, 'id')
     return
 )
 
