@@ -1,27 +1,14 @@
 <script lang="coffee">
 > svelte > onMount
-  ./lib/auth.coffee
   wac.tax/wtax/On.js
-  wac.tax/user/User.js > onMe
-  ./lib/CID.coffee > CID_USER
-  @w5/wasm > b64VbyteE
-  @w5/fall
-
-+ menu,ME
 
 FULL = !! document.fullscreenElement
 
 onMount =>
-
-  fall(
-    On(
-      document
-      fullscreenchange: =>
-        FULL = !! document.fullscreenElement
-        return
-    )
-    onMe (user)=>
-      ME = '/-'+ b64VbyteE [CID_USER, user.id]
+  On(
+    document
+    fullscreenchange: =>
+      FULL = !! document.fullscreenElement
       return
   )
 
@@ -32,18 +19,6 @@ full = =>
     await document.body.requestFullscreen()
   return
 
-top = =>
-  if location.pathname == '/'
-    document.body.childNodes[0].childNodes[1].scrollTop = 0
-  return
-
-signUp = =>
-  auth(1)
-  return
-
-signIn = =>
-  auth()
-  return
 
 </script>
 
@@ -52,14 +27,7 @@ nav
   i
     slot
   i
-    u-menu(@&menu)
-      a(@click=signIn)
-        i-t SIGN_IN
-      | /
-      a(@click=signUp)
-        i-t.up SIGN_UP
-      b(slot="ul")
-        a(href:ME) 个人页
+    slot(name="rl")
     u-i18n
     b
       a.ft(@click=full class:f=FULL)
@@ -85,15 +53,6 @@ nav
     &>b
       position relative
 
-    &>u-menu
-      font-size 16px
-
-      &>a
-        margin-left 5px
-
-        &:first-child
-          margin-right 5px
-
     u-i18n
       margin-bottom -4px
       opacity 0.75
@@ -118,24 +77,5 @@ nav
 
         &.gg
           background url(':/svg/google_groups.svg') 50% 50% / 50px no-repeat
-
-  u-menu
-    &>b
-      &>a
-        border 1px solid transparent
-        border-top-color #ccc
-        display block
-        font-weight normal
-        margin 0
-        padding 8px 16px
-        text-align center
-        white-space nowrap
-
-        &:hover
-          background #f40
-          border-color #f40
-          color #fff
-          font-weight normal
-          padding-bottom 8px
 </style>
 
