@@ -20,9 +20,9 @@ svelte:component(this="{ M }")
 
 + M,P
 
-MAP = new Map()
-
-MAP.set CID_IMG, Img
+MAP = new Map [
+  [CID_IMG, Img]
+]
 
 kw = {}
 
