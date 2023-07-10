@@ -1,9 +1,9 @@
 <script lang="coffee">
-
+< ID
 </script>
 
 <template lang="pug">
-h1 123
+h1 User Id {ID}
 </template>
 
 <style lang="stylus"></style>
