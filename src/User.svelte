@@ -3,6 +3,8 @@
 </script>
 
 <template lang="pug">
+nav
+  a(href="/")
 h1 User Id {ID}
 </template>
 

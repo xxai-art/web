@@ -24,12 +24,11 @@ sort = (t)=>
 
 onMe =>
   t = []
-  for [id,hash,w,h,fav,reply] from await SDK.li()
+  for [id,hash,w,h,reply] from await SDK.li()
     t.push [
       id
       b64e hash
       Math.round w*HEIGHT/h
-      fav
       reply
       b64VbyteE [CID_IMG, id]
     ]
@@ -67,9 +66,9 @@ onMount =>
 <template lang="pug">
 +if li
   ul
-    +each('li as [id,hash,w,fav,comment,url]')
+    +each('li as [id,hash,w,comment,url]')
       li(style="flex-grow:{w/HEIGHT};width:{w}px;background-image:url({IMG}{hash}),var(--svg-wait)")
-        Cell(href:url fav:fav)
+        Cell(href:url)
 </template>
 
 <style lang="stylus">

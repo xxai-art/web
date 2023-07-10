@@ -9,7 +9,6 @@
   ./db/fav.coffee > favPut
 
 < href
-< fav
 
 _cache = (p)=>
   hash = (await req META+p.slice(2))[2]
@@ -48,8 +47,6 @@ nav
       +if comment
         | {comment}
   a.fav(class:D=faved @click=aFav)
-    +if fav
-      | {fav}
 </template>
 
 <style lang="stylus">
