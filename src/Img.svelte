@@ -334,7 +334,7 @@ onMount =>
 +if src
   main
     b.L.w
-      img(:src @load)
+      img(src: @load)
     b.R
       header
         b.L
