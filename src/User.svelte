@@ -5,15 +5,17 @@
 
 < ID
 
++ name
+
 onMount =>
-  console.log await SDK.meta location.pathname.slice(2) # await SDK.meta b64VbyteE CID_USER, ID
+  [name] = await SDK.meta location.pathname.slice(2) # await SDK.meta b64VbyteE CID_USER, ID
   return
 </script>
 
 <template lang="pug">
 nav
   a(href="/")
-h1 User Id {ID}
+h1 {name}
 </template>
 
 <style lang="stylus">
