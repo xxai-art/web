@@ -1,9 +1,8 @@
 <script lang="coffee">
 > svelte > onMount
-  @w5/wasm > b64VbyteD
+  @w5/wasm > b64VbyteD b64E
   ./conf.js > META URL_META
   wac.tax/_/req.js
-  @w5/urlb64/b64e
   ./lib/goto.coffee
   ./db/_/watch.coffee
   ./db/fav.coffee > favPut
@@ -12,7 +11,7 @@
 
 _cache = (p)=>
   hash = (await req META+p.slice(2))[2]
-  fetch(URL_META+b64e(hash),mode:'no-cors')
+  fetch(URL_META+b64E(hash),mode:'no-cors')
 
 + faved,cid,id
 

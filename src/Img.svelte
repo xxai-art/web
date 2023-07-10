@@ -201,10 +201,10 @@ main
   ./db/_/watch.coffee
   ./lib/keymap.coffee
   wac.tax/_/req.js
-  @w5/urlb64/b64e
   @w5/link
   @w5/sd_token/a.js:sdA
   @w5/fall
+  @w5/wasm > b64E
 
 < ID
 
@@ -317,7 +317,7 @@ onMount =>
     ]
   else
     user = 0
-  src=URL_META+b64e hash_bin
+  src=URL_META+b64E(hash_bin)
 
   document.body.requestFullscreen().catch(=>)
 
