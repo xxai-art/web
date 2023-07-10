@@ -204,6 +204,7 @@ main
   @w5/urlb64/b64e
   @w5/link
   @w5/sd_token/a.js:sdA
+  @w5/fall
 
 < ID
 
@@ -318,17 +319,15 @@ onMount =>
     user = 0
   src=URL_META+b64e hash_bin
 
-  unbind_watch = watch CID_IMG, ID,  (state)=>
-    faved = !!state
-    return
-
   try
-    await document.body.requestFullscreen()
+    document.body.requestFullscreen()
 
-  =>
-    unbind_key()
-    unbind_watch()
-    return
+  return fall(
+    unbind_key
+    watch CID_IMG, ID,  (state)=>
+      faved = !!state
+      return
+  )
 </script>
 
 <template lang="pug">

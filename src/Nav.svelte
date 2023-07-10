@@ -2,8 +2,10 @@
 > svelte > onMount
   ./lib/auth.coffee
   wac.tax/wtax/On.js
+  wac.tax/user/User.js > onMe
+  @w5/fall
 
-+ menu
++ menu,ME
 
 FULL = !! document.fullscreenElement
 
@@ -13,10 +15,15 @@ onMount =>
       e.preventDefault()
       auth(e.target.className=='up')
       return
-  On(
-    document
-    fullscreenchange: =>
-      FULL = !! document.fullscreenElement
+  fall(
+    On(
+      document
+      fullscreenchange: =>
+        FULL = !! document.fullscreenElement
+        return
+    )
+    onMe (user)=>
+      ME = user?.id
       return
   )
 
@@ -26,7 +33,6 @@ full = =>
   else
     await document.body.requestFullscreen()
   return
-
 
 top = =>
   if location.pathname == '/'
@@ -48,7 +54,7 @@ nav
       a
         i-t.up SIGN_UP
       b(slot="ul")
-        a(href="/123") 我的收藏
+        a(href:ME) 个人页
     u-i18n
     b
       a.ft(@click=full class:f=FULL)
