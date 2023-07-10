@@ -13,9 +13,9 @@ onMount =>
 </script>
 
 <template lang="pug">
-nav
-  a(href="/")
-h1 {name}
++if name != undefined
+  nav
+    i {name}
 </template>
 
 <style lang="stylus">
