@@ -12,11 +12,7 @@
 FULL = !! document.fullscreenElement
 
 onMount =>
-  menu.querySelectorAll("u-menu a").forEach (e) =>
-    e.onclick = (e) =>
-      e.preventDefault()
-      auth(e.target.className=='up')
-      return
+
   fall(
     On(
       document
@@ -41,6 +37,14 @@ top = =>
     document.body.childNodes[0].childNodes[1].scrollTop = 0
   return
 
+signUp = =>
+  auth(1)
+  return
+
+signIn = =>
+  auth()
+  return
+
 </script>
 
 <template lang="pug">
@@ -50,10 +54,10 @@ nav
     a 发现
   i
     u-menu(@&menu)
-      a
+      a(@click=signIn)
         i-t SIGN_IN
       | /
-      a
+      a(@click=signUp)
         i-t.up SIGN_UP
       b(slot="ul")
         a(href:ME) 个人页
@@ -84,11 +88,10 @@ nav
       font-size 16px
 
       &>a
+        margin-left 5px
+
         &:first-child
           margin-right 5px
-
-        &:last-child
-          margin-left 5px
 
     u-i18n
       margin-bottom -4px
