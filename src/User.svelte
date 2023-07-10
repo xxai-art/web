@@ -2,24 +2,25 @@
 > # @w5/wasm > b64VbyteE
   # ./lib/CID.coffee > CID_USER
   svelte > onMount
+  ./Nav.svelte
 
 < ID
 
-+ name
++ name, href
 
 onMount =>
-  [name] = await SDK.meta location.pathname.slice(2) # await SDK.meta b64VbyteE CID_USER, ID
+  href = location.pathname
+  [name] = await SDK.meta href.slice(2) # await SDK.meta b64VbyteE CID_USER, ID
   return
 </script>
 
 <template lang="pug">
 +if name != undefined
-  nav
-    i {name}
+  Nav
+    a(href:) {name}
 </template>
 
 <style lang="stylus">
-h1
-  color #999
+@import './styl/navA.styl'
 </style>
 
