@@ -15,9 +15,10 @@ onMount =>
 </script>
 
 <template lang="pug">
-+if name != undefined
-  Nav
-    a(href:) {name}
+b
+  +if name != undefined
+    Nav
+      a(href:) {name}
 </template>
 
 <style lang="stylus">
