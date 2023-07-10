@@ -2,7 +2,6 @@
   wac.tax/_/leader.js > ON
   @w5/wasm > b64VbyteE u64B64
   ../conf > API
-  ../lib/keyPath.coffee
   wac.tax/user/User.js > onMe
   ./toSrv.coffee
   ./es.coffee:ES_MAP

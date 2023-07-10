@@ -1,5 +1,4 @@
 > wac.tax/_/IDB.js
-  ./keyPath.coffee
 
 export SAMPLER_NAME = 'samplerName'
 
@@ -7,7 +6,9 @@ export SAMPLER_NAME = 'samplerName'
 [DB,R,W] = await IDB.art(
   1 # version
   upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
-    db.createObjectStore(SAMPLER_NAME, keyPath)
+    createStore = (name, keyPath)=>
+      db.createObjectStore name, {keyPath}
+    createStore(SAMPLER_NAME, 'id')
     return
 )
 
