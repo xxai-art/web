@@ -1,5 +1,15 @@
 <script lang="coffee">
+> @w5/wasm > b64VbyteE
+  ./lib/CID.coffee > CID_USER
+  svelte > onMount
+
 < ID
+
+onMount =>
+  console.log await SDK.meta [
+    b64VbyteE CID_USER, ID
+  ]
+  return
 </script>
 
 <template lang="pug">
