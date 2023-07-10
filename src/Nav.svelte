@@ -50,8 +50,7 @@ signIn = =>
 <template lang="pug">
 nav
   i
-    a(@click=top href="/") xxAI.art
-    a 发现
+    slot
   i
     u-menu(@&menu)
       a(@click=signIn)
@@ -68,6 +67,8 @@ nav
 </template>
 
 <style lang="stylus">
+@import './styl/navA.styl'
+
 nav
   background #fff
   display flex
@@ -99,15 +100,6 @@ nav
       transform scale(0.76)
       transform-origin right 50%
 
-    a
-      border-bottom 2px solid transparent
-      color #333
-      cursor pointer
-      display inline-flex
-      font-size 18px
-      line-height 1.6
-      transition all 0.3s
-
     &>b
       display flex
       margin-bottom -3px
@@ -126,27 +118,6 @@ nav
 
         &.gg
           background url(':/svg/google_groups.svg') 50% 50% / 50px no-repeat
-
-    a:hover
-      border-color #f40
-      color #f40
-      font-weight 600
-      margin-bottom 0
-      padding-bottom 2px
-
-    &>a
-      margin-right 24px
-
-      &:first-child
-        background url(':/svg/logoTxt.svg') no-repeat
-        height 32px
-        margin-bottom 0
-        padding 0
-        text-indent -999px
-        width 66px
-
-        &:hover
-          filter invert(14%) sepia(61%) saturate(5346%) hue-rotate(354deg) brightness(119%) contrast(127%)
 
   u-menu
     &>b
