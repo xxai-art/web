@@ -195,7 +195,7 @@ main
   wac.tax/_/SDK.js
   ./lib/goto.coffee
   ./lib/CID.coffee > CID_IMG
-  ./lib/sampler.coffee
+  ./art/sampler.coffee
   ./conf.js > META URL_META
   ./db/fav.coffee > favPut
   ./db/_/watch.coffee
