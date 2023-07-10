@@ -8,6 +8,7 @@
   wac.tax/user/User.js > onMe
   wac.tax/wtax/On.js
   ./Cell.svelte
+  ./art/li.coffee > liPut
 
 sortimg = SortImg()
 
@@ -23,13 +24,16 @@ sort = (t)=>
 
 onMe =>
   t = []
-  for [id,hash,w,h] from await SDK.li()
+  sdk_li = await SDK.li()
+  for [id,hash,w,h] from sdk_li
     t.push [
-      id
+      b64E vbyteE [CID_IMG, id]
       b64E hash
       Math.round w*HEIGHT/h
-      b64E vbyteE [CID_IMG, id]
     ]
+
+  liPut sdk_li.map (i)=> [CID_IMG].concat i
+
   li = (li or []).concat sort(t)
 
   if load
@@ -64,7 +68,7 @@ onMount =>
 <template lang="pug">
 +if li
   ul
-    +each('li as [id,hash,w,url]')
+    +each('li as [url,hash,w]')
       li(style="flex-grow:{w/HEIGHT};width:{w}px;background-image:url({IMG}{hash}),var(--svg-wait)")
         Cell(href:url)
 </template>
