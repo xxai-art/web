@@ -13,14 +13,16 @@ svelte:component(this="{ M }")
 > ./lib/route.coffee
   ./lib/auth.coffee:
   ./Home.svelte
-  ./Img.svelte
   svelte > tick
-  ./lib/CID.coffee > CID_IMG
+  ./lib/CID.coffee > CID_IMG CID_USER
   @w5/wasm > b64VbyteD
+  ./Img.svelte
+  ./User.svelte
 
 + M,P
 
 MAP = new Map [
+  [CID_USER, User]
   [CID_IMG, Img]
 ]
 
