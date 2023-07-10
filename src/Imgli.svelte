@@ -2,8 +2,7 @@
 > ./lib/SortImg.coffee
   ./conf.js > URL_META
   ./lib/CID.coffee > CID_IMG
-  @w5/urlb64/b64e
-  @w5/wasm > b64VbyteE
+  @w5/wasm > b64VbyteE b64E
   svelte > onMount
   wac.tax/_/SDK.js
   wac.tax/user/User.js > onMe
@@ -24,12 +23,11 @@ sort = (t)=>
 
 onMe =>
   t = []
-  for [id,hash,w,h,reply] from await SDK.li()
+  for [id,hash,w,h] from await SDK.li()
     t.push [
       id
-      b64e hash
+      b64E hash
       Math.round w*HEIGHT/h
-      reply
       b64VbyteE [CID_IMG, id]
     ]
   li = (li or []).concat sort(t)
@@ -66,7 +64,7 @@ onMount =>
 <template lang="pug">
 +if li
   ul
-    +each('li as [id,hash,w,comment,url]')
+    +each('li as [id,hash,w,url]')
       li(style="flex-grow:{w/HEIGHT};width:{w}px;background-image:url({IMG}{hash}),var(--svg-wait)")
         Cell(href:url)
 </template>
