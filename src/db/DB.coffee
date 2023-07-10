@@ -74,6 +74,7 @@ onMe (user)=>
           'table'
         ]
       ]
+        config = li.pop()
         for t from li
           createStore t, config
       return

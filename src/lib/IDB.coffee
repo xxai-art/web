@@ -8,8 +8,18 @@ export LI = 'li'
   upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
     createStore = (name, keyPath)=>
       db.createObjectStore name, {keyPath}
-    createStore(SAMPLER_NAME, 'id')
-    createStore(LI, 'id')
+
+    for li from [
+      [
+        SAMPLER_NAME
+        LI
+        'id'
+      ]
+    ]
+      config = li.pop()
+      for t from li
+        createStore t, config
+
     return
 )
 
