@@ -1,0 +1,39 @@
+@import '../animate.styl'
+
+b
+  bottom 0
+  font-weight normal
+  left 0
+  overflow auto
+  position absolute
+  right 0
+  top 0
+
+  &>b
+    display block
+    margin-top 64px
+    transition all 0.3s
+
+  &>nav
+    animation-duration 0.3s
+    animation-fill-mode both
+    display flex
+    height 64px
+    position fixed
+    top 0
+    width 100%
+    z-index 1
+
+    &:global(.D)
+      animation-name slideInDown
+
+    &:global(.N)
+      display none
+      transform translate3d(0, -100%, 0)
+
+    &:global(.H)
+      animation-name slideOutUp
+
+    &:global(.H), &:global(.N)
+      & + b
+        margin-top 0
