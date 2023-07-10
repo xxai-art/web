@@ -319,8 +319,7 @@ onMount =>
     user = 0
   src=URL_META+b64e hash_bin
 
-  try
-    document.body.requestFullscreen()
+  document.body.requestFullscreen().catch(=>)
 
   return fall(
     unbind_key
