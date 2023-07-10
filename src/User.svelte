@@ -3,25 +3,28 @@
   # ./lib/CID.coffee > CID_USER
   svelte > onMount
   ./Nav.svelte
+  ./lib/topfix.coffee
 
 < ID
 
-+ name, href
++ name, href, nav
 
 onMount =>
   href = location.pathname
   [name] = await SDK.meta href.slice(2) # await SDK.meta b64VbyteE CID_USER, ID
-  return
+  return topfix nav, b
 </script>
 
 <template lang="pug">
 b
-  +if name != undefined
+  nav(@&nav)
     Nav
-      a(href:) {name}
+      +if name
+        a(href:) {name}
 </template>
 
 <style lang="stylus">
 @import './styl/nav/a.styl'
+@import './styl/nav/body.styl'
 </style>
 
