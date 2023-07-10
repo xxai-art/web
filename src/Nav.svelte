@@ -126,6 +126,7 @@ nav
         border-top-color #ccc
         display block
         font-weight normal
+        margin 0
         padding 8px 16px
         text-align center
         white-space nowrap
