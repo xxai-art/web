@@ -1,6 +1,5 @@
 <script lang="coffee">
 > ./lib/SortImg.coffee
-  ./lib/goto.coffee
   ./conf.js > URL_META
   ./lib/CID.coffee > CID_IMG
   @w5/urlb64/b64e

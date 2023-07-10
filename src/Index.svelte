@@ -1,7 +1,8 @@
 <template lang="pug">
-svelte:component(this="{ M }")
+b#M
+  svelte:component(this="{M}")
 +if P
-  <svelte:component this={P} {...kw}/>
+  <svelte:component this="{P}" {...kw}/>
 </template>
 
 <style lang="stylus">
@@ -29,7 +30,9 @@ MAP = new Map [
 kw = {}
 
 display = (s)=>
-  document.body.childNodes[0].style
+  if M
+    return document.getElementById('M').style
+  return
 
 route (url)=>
   if url.startsWith('-')
@@ -39,13 +42,11 @@ route (url)=>
     [cid, ID] = b64VbyteD url.slice(1,p)
     kw = {ID}
     P = MAP.get(cid)
-    if M
-      display().display = 'none'
+    display()?.display = 'none'
   else
     if P
       P = undefined
-      if M
-        display().removeProperty 'display'
+      display()?.removeProperty 'display'
     if not M
       M = Home
   return
