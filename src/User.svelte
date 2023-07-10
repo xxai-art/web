@@ -6,5 +6,8 @@
 h1 User Id {ID}
 </template>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+h1
+  color #999
+</style>
 
