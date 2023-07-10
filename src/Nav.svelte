@@ -3,6 +3,8 @@
   ./lib/auth.coffee
   wac.tax/wtax/On.js
   wac.tax/user/User.js > onMe
+  ./lib/CID.coffee > CID_USER
+  @w5/wasm > b64VbyteE
   @w5/fall
 
 + menu,ME
@@ -23,7 +25,7 @@ onMount =>
         return
     )
     onMe (user)=>
-      ME = user?.id
+      ME = '/-'+ b64VbyteE [CID_USER, user.id]
       return
   )
 
