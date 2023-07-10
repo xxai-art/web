@@ -53,19 +53,30 @@ onMe (user)=>
   [_DB,_R,_W] = await IDB['u-'+u64B64(UID)](
     1 # version
     upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
-      store = db.createObjectStore(
-        FAV
-        keyPath: ['cid','rid',CTIME]
-      )
-      store.createIndex CTIME,CTIME
 
-      db.createObjectStore(FAV_STATE, keyPath)
-      db.createObjectStore(
-        FAV_YM
-        keyPath
-      )
-      for t from [SUM,SYNCED,SYNCED_ID]
-        db.createObjectStore t,keyPath:'table'
+      createStore = (name, keyPath)=>
+        db.createObjectStore name, {keyPath}
+
+      createStore(
+        FAV
+        ['cid','rid',CTIME]
+      ).createIndex CTIME,CTIME
+
+      for li from [
+        [
+          FAV_STATE
+          FAV_YM
+          'id'
+        ]
+        [
+          SUM
+          SYNCED
+          SYNCED_ID
+          'table'
+        ]
+      ]
+        for t from li
+          createStore t, config
       return
   )
 
