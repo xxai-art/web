@@ -22,6 +22,6 @@ b
 </template>
 
 <style lang="stylus">
-@import './styl/navA.styl'
+@import './styl/nav/a.styl'
 </style>
 

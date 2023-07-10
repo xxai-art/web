@@ -9,7 +9,7 @@ Nav
 </template>
 
 <style lang="stylus">
-@import './styl/navA.styl'
+@import './styl/nav/a.styl'
 
 a:first-child
   background url(':/svg/logoTxt.svg') no-repeat
