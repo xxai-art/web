@@ -1,4 +1,5 @@
-> ../TOOL.coffee >  bound
+> ../TOOL.coffee > bound
 
-< (cid, rid)=>
-
+export default (cid, rid)=>
+  cr = [cid, rid]
+  bound cr, cr

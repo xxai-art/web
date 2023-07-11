@@ -1,15 +1,16 @@
 > ./HOOK.coffee:HOOK
+  @w5/wasm > vbyteE
   ../DB.coffee > R
   ../TABLE.coffee > FAV
   wac.tax/user/User.js > onMe
 
 export default (cid, rid, render)=>
+  key = vbyteE [cid, rid]
   unbind_onme = onMe (user)=>
     if user.id
-      # R[FAV].get
-      # R(FAV_STATE) (fav)=>
-      #   render await fav.get(key)
-      #   return
+      R(FAV) (fav)=>
+        render (await fav.get([cid,rid]))?.aid
+        return
     else
       render()
     return
