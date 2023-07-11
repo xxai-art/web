@@ -3,9 +3,9 @@
   @w5/wasm > b64VbyteE u64B64
   ../conf > API
   wac.tax/user/User.js > onMe
-  ./toSrv.coffee
   ./es.coffee:ES_MAP
-  ./TABLE.coffee > FAV FAV_YM SYNCED TO_SYNC
+  ./TABLE.coffee > FAV FAV_YM SYNCED
+  ./sync.coffee
   ./SYNC_TABLE.coffee
   ./TOOL.coffee > prevIter
   ./COL.coffee > CTIME
@@ -53,7 +53,9 @@ onMe (user)=>
 
   [_DB,_R,_W] = await IDB['u-'+u64B64(UID)](
     1 # version
-    upgrade
+    {
+      upgrade
+    }
   )
 
   # for t from [SUM,SYNCED]
@@ -76,16 +78,17 @@ onMe (user)=>
   return
 
 
-
 reconnect = (onopen)=>
   R(SYNCED) (synced)=>
-
     es = new EventSource(
       API+'es/'+b64VbyteE(
         [
           UID
         ].concat await Promise.all SYNC_TABLE.map (table)=>
-          synced.get(table)
+          r = await synced.get(table)
+          if r
+            return r.id
+          return 0
       )
       withCredentials:true
     )
@@ -147,43 +150,9 @@ _onLeader = =>
 
   INTERVAL = setInterval(
     =>
-      read = _R
-      if not read
+      if not _R
         return
-      write = _W
-      user_id = UID
-
-      for table from SYNC_TABLE
-        pre = await read[SYNCED].get table
-        #if pre
-
-      # sum = read[SUM]
-      # c = await sum.openCursor()
-      # updated = []
-      # while c
-      #   {n, table} = c.value
-      #   if PRE[table] != n
-      #     updated.push [table, n]
-      #     PRE[table] = n
-      #   c = await c.continue()
-      #
-      # for [table, n] from updated
-      #   synced = await getOr0(read[SYNCED],table).n
-      #   if n > synced
-      #     diff = n - synced
-      #     # 拉出最后 diff 条，然后扔给服务器
-      #
-      #     li = []
-      #     for await o from prevIter(read[table].index(CTIME))
-      #       li.unshift Object.values o
-      #       if -- diff == 0
-      #         break
-      #
-      #     toSrv(table, user_id, write, li)
-      #     write[SYNCED].put({
-      #       table
-      #       n
-      #     })
+      sync(_R,_W)
       return
     1e3
   )

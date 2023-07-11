@@ -4,7 +4,7 @@
   @w5/time/ymMs
   wac.tax/_/SDK.js
   ../lib/ym.coffee:time2ym
-  ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
+  ./TABLE.coffee > FAV FAV_YM SYNCED
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
   ./TOOL.coffee > prevIter nextIter bound PREV
