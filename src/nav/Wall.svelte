@@ -24,10 +24,6 @@ Nav
 
 a.gg
   background url(':/svg/google_groups.svg') 50% 50% / 50px no-repeat
-  height 42px
-  margin-left 25px
-  margin-right 0
-  width 25px
 
 a.logo
   background url(':/svg/logoTxt.svg') no-repeat

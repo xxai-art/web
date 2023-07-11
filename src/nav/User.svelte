@@ -18,9 +18,13 @@ Nav
   +if name
     a(href:) {name}
   R(slot="R")
+    a.x(slot="R")
 </template>
 
 <style lang="stylus">
 @import './a.styl'
+
+a.x
+  background url(':/svg/google_groups.svg') 50% 50% / 50px no-repeat
 </style>
 

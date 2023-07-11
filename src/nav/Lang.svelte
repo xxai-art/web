@@ -34,12 +34,13 @@ b
   margin-bottom -3px
   position relative
 
-  &>a
+  :global(&>a)
     height 42px
     margin-left 25px
     margin-right 0
     width 25px
 
+  &>a
     &.ft
       background url(':/svg/full.svg') 50% 50% / 20px no-repeat
 
