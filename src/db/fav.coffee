@@ -13,6 +13,7 @@
     FAV_YM
   ) ( fav, to_sync, fav_ym )=>
     now = new Date
+    await favRm(fav, cid, rid)
     fav.put {
       cid
       rid

@@ -1,10 +1,9 @@
 > ./TOOL.coffee > nextIter
 
 < (fav, cid, rid)=>
-  begin = t.slice(0,3)
+  begin = [cid, rid, 0]
   end = begin.slice()
   end[1] += 1
-  end[2] = 0
-  for i from nextIter fav,bound(begin, end),PREV)
+  for i from nextIter fav,bound(begin, end)
     await fav.delete i
   return
