@@ -6,8 +6,10 @@
   ./toSrv.coffee
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_YM SYNCED
+  ./SYNC_TABLE.coffee
   ./TOOL.coffee > getOr0 prevIter
   ./COL.coffee > CTIME
+  ./upgrade.coffee
 
 + _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES
 
@@ -51,30 +53,7 @@ onMe (user)=>
 
   [_DB,_R,_W] = await IDB['u-'+u64B64(UID)](
     1 # version
-    upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
-
-      createStore = (name, keyPath)=>
-        db.createObjectStore name, {keyPath}
-
-      createStore(
-        FAV
-        ['cid','rid',CTIME]
-      ).createIndex CTIME,CTIME
-
-      for li from [
-        [
-          FAV_YM
-          'id'
-        ]
-        [
-          SYNCED
-          'table'
-        ]
-      ]
-        config = li.pop()
-        for t from li
-          createStore t, config
-      return
+    upgrade
   )
 
   # for t from [SUM,SYNCED]
@@ -102,8 +81,8 @@ reconnect = (onopen)=>
   R(SYNCED) (synced)=>
     t = [UID]
 
-    for table from [FAV]
-      id =  synced.get(table)
+    for table from SYNC_TABLE
+      id = synced.get(table)
 
     es = new EventSource(
       API+'es/'+b64VbyteE(t)
