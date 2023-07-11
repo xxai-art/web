@@ -5,7 +5,7 @@
   wac.tax/_/SDK.js
   ../lib/ym.coffee:time2ym
   ./TABLE.coffee > FAV SYNCED
-  ./_/state.coffee > stateSet
+  ./fav/toAll.coffee
   ./TOOL.coffee > prevIter nextIter bound PREV
   ./COL.coffee > TS
 

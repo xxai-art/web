@@ -2,8 +2,8 @@
   ./TABLE.coffee > FAV TO_SYNC
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
-  ./_/state.coffee > stateSet
-  ./favRm.coffee
+  ./fav/toAll.coffee
+  ./fav/rm.coffee
   ./getOr0.coffee
 
 < favPut = logined (uid, cid, rid, aid)=>
@@ -12,7 +12,7 @@
     TO_SYNC
   ) ( fav, to_sync, fav_ym )=>
     now = new Date
-    await favRm(fav, cid, rid)
+    await rm(fav, cid, rid)
     fav.put {
       cid
       rid

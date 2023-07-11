@@ -198,7 +198,7 @@ main
   ./art/sampler.coffee
   ./conf.js > META URL_META
   ./db/fav.coffee > favPut
-  ./db/_/watch.coffee
+  ./db/fav/watch.coffee
   ./lib/keymap.coffee
   wac.tax/_/req.js
   @w5/link

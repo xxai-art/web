@@ -4,7 +4,7 @@
   ./conf.js > META URL_META
   wac.tax/_/req.js
   ./lib/goto.coffee
-  ./db/_/watch.coffee
+  ./db/fav/watch.coffee
   ./db/fav.coffee > favPut
 
 < href
