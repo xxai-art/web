@@ -1,4 +1,4 @@
-> ./TABLE.coffee > FAV FAV_YM SYNCED TO_SYNC
+> ./TABLE.coffee > FAV SYNCED TO_SYNC
   ./SYNC_TABLE.coffee
 
 < (R,W)=>
