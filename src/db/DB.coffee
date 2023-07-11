@@ -4,7 +4,7 @@
   ../conf > API
   wac.tax/user/User.js > onMe
   ./es.coffee:ES_MAP
-  ./TABLE.coffee > FAV FAV_YM SYNCED
+  ./TABLE.coffee > SYNCED
   ./sync.coffee
   ./SYNC_TABLE.coffee
   ./TOOL.coffee > prevIter

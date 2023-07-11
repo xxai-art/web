@@ -1,5 +1,5 @@
 > ./COL.coffee > TS
-  ./TABLE.coffee > FAV FAV_YM SYNCED TO_SYNC
+  ./TABLE.coffee > FAV SYNCED TO_SYNC
 
 export default (db)=>
   # upgrade(db, oldVersion, newVersion, transaction, event)
@@ -12,10 +12,6 @@ export default (db)=>
   ).createIndex TS,TS
 
   for li from [
-    [
-      FAV_YM
-      'id'
-    ]
     [
       SYNCED
       TO_SYNC
