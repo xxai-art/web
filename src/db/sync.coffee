@@ -4,20 +4,22 @@
   ./TOOL.coffee > prevIter
   ./COL.coffee > TS
 
-< (R,W)=>
-  for table from SYNC_TABLE
+< (user_id, R,W)=>
+  ing = []
+  for table,pos in SYNC_TABLE
     n = await getOr0(R[TO_SYNC], table)
 
     if n
-      li = []
+      li = [
+        user_id
+        await getOr0(R[SYNCED],table)
+      ]
       for await i from prevIter R[table].index(TS)
         if n-- == 0
           break
-        li.unshift Object.values i
-      id = await getOr0(R[SYNCED],table)
-      console.log li
-
-  return
+        li = li.concat Object.values i
+      ing.push SDK[table](li)
+  return Promise.all ing
     #if pre
 
   # sum = read[SUM]

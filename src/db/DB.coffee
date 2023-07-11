@@ -42,10 +42,14 @@ export W = (args...)=>
     _rw(args, next, _W, _W_PENDING)
 
 onMe (user)=>
+  if _DB
+    _db = _DB
+    sync(UID,_R,_W).then =>
+      _db.close()
+      return
+
   UID = user.id or 0
   PRE = {}
-
-  _DB?.close()
 
   if not UID
     _DB = _R = _W = undefined
@@ -151,7 +155,7 @@ _onLeader = =>
     =>
       if not _R
         return
-      sync(_R,_W)
+      sync(UID,_R,_W)
       return
     1e3
   )
