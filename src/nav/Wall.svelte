@@ -19,7 +19,7 @@ Nav
 </template>
 
 <style lang="stylus">
-@import '../styl/nav/a.styl'
+@import './a.styl'
 
 a.logo
   background url(':/svg/logoTxt.svg') no-repeat

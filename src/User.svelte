@@ -25,7 +25,7 @@ b
 </template>
 
 <style lang="stylus">
-@import './styl/nav/a.styl'
-@import './styl/nav/body.styl'
+@import './nav/a.styl'
+@import './nav/body.styl'
 </style>
 

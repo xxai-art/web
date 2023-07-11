@@ -13,7 +13,7 @@ nav
 </template>
 
 <style lang="stylus">
-@import '../styl/nav/a.styl'
+@import './a.styl'
 
 nav
   background #fff
