@@ -14,7 +14,9 @@
         if n-- == 0
           break
         li.unshift Object.values i
+      id = await getOr0(R[SYNCED],table)
       console.log li
+
   return
     #if pre
 
