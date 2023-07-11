@@ -12,7 +12,7 @@ send = (key, val)=>
   hook key, val
   toAll MSG_FAV, key, val
 
-export stateSet = (store, cid, rid, aid)=>
+< (store, cid, rid, aid)=>
   key = vbyteE [cid, rid]
   pre = await store.get key
   if aid
