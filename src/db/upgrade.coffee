@@ -1,5 +1,5 @@
 > ./COL.coffee > CTIME
-  ./TABLE.coffee > FAV FAV_YM SYNCED
+  ./TABLE.coffee > FAV FAV_YM SYNCED TO_SYNC
 
 export default (db)=>
   # upgrade(db, oldVersion, newVersion, transaction, event)
@@ -18,6 +18,7 @@ export default (db)=>
     ]
     [
       SYNCED
+      TO_SYNC
       'table'
     ]
   ]
