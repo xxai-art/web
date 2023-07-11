@@ -23,22 +23,26 @@ full = =>
 
 <template lang="pug">
 u-i18n
-b
+b.ico
   a.ft(@click=full class:f=FULL)
   slot
 </template>
 
 <style lang="stylus">
+:global(b.ico>a)
+  cursor pointer
+  height 42px
+  margin-left 25px
+  margin-right 0
+  width 25px
+
+  &:hover
+    filter invert(42%) sepia(1) saturate(47)
+
 b
   display flex
   margin-bottom -3px
   position relative
-
-  :global(&>a)
-    height 42px
-    margin-left 25px
-    margin-right 0
-    width 25px
 
   &>a
     &.ft
@@ -48,7 +52,7 @@ b
         background-image url(':/svg/unfull.svg')
 
 u-i18n
-  margin-bottom -4px
+  margin-bottom -5px
   opacity 0.75
   transform scale(0.76)
   transform-origin right 50%
