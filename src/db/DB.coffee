@@ -5,7 +5,7 @@
   wac.tax/user/User.js > onMe
   ./toSrv.coffee
   ./es.coffee:ES_MAP
-  ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
+  ./TABLE.coffee > FAV FAV_YM SYNCED
   ./TOOL.coffee > getOr0 prevIter
   ./COL.coffee > CTIME
 
