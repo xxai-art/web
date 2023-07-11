@@ -4,18 +4,18 @@
 
 MSG_FAV = 1024
 
-channelHook MSG_FAV, (key, action)=>
-  hook key, action
+channelHook MSG_FAV, (key, aid)=>
+  hook key, aid
   return
 
 send = (key, val)=>
   hook key, val
   toAll MSG_FAV, key, val
 
-export stateSet = (store, cid, rid, action)=>
+export stateSet = (store, cid, rid, aid)=>
   key = vbyteE [cid, rid]
   pre = await store.get key
-  if action
+  if aid
     if not pre
       await store.put {id:key}
       send key, 1

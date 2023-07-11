@@ -5,7 +5,7 @@ export LI = 'li'
 
 [DB,R,W] = await IDB.art(
   1 # version
-  upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaction, event)
+  upgrade:(db)=> # upgrade(db, oldVersion, newVersion, transaid, event)
     createStore = (name, keyPath)=>
       db.createObjectStore name, {keyPath}
 

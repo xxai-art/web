@@ -30,9 +30,9 @@
   #       cid
   #       rid
   #       ctime
-  #       action
+  #       aid
   #     }
   #     countIncr(db_li, FAV, now)
-  #     stateSet(fav_state, cid, rid, action)
+  #     stateSet(fav_state, cid, rid, aid)
   #   ]
   return

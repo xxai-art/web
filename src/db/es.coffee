@@ -12,7 +12,7 @@
 export default MAP = new Map
 
 favSet = (fav, fav_state, t)=>
-  [cid, rid, ctime, action] = t
+  [cid, rid, ctime, aid] = t
 
   begin = t.slice(0,3)
   end = begin.slice()
@@ -23,10 +23,10 @@ favSet = (fav, fav_state, t)=>
     cid
     rid
     ctime
-    action
+    aid
   }
-  if (not c) or ( c.action != action and c.ctime < ctime )
-    stateSet(fav_state, cid, rid, action)
+  if (not c) or ( c.aid != aid and c.ctime < ctime )
+    stateSet(fav_state, cid, rid, aid)
   return
 
 [
@@ -44,7 +44,7 @@ favSet = (fav, fav_state, t)=>
       )
       for t from group 4,li
         if not await fav.get t.slice(0,3)
-          [cid, rid, ctime, action] = t
+          [cid, rid, ctime, aid] = t
           favSet fav, fav_state, t
           incr synced, FAV, {table}
           countIncr(
@@ -103,7 +103,7 @@ favSet = (fav, fav_state, t)=>
   #       ym_n = new Map
   #       for t from group 4,to_insert
   #         t = t.map (i)=>Number(i)
-  #         [cid, rid, ctime, action] = t
+  #         [cid, rid, ctime, aid] = t
   #         ym = time2ym new Date ctime
   #         ym_n.set ym, (ym_n.get(ym) or 0) + 1
   #         favSet fav, fav_state, t

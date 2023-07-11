@@ -2,7 +2,7 @@
   ./TABLE.coffee > FAV SYNCED TO_SYNC
 
 export default (db)=>
-  # upgrade(db, oldVersion, newVersion, transaction, event)
+  # upgrade(db, oldVersion, newVersion, transaid, event)
   createStore = (name, keyPath)=>
     db.createObjectStore name, {keyPath}
 

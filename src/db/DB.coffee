@@ -61,7 +61,7 @@ onMe (user)=>
   # for t from [SUM,SYNCED]
   #   await _W[t].put {table:FAV, n:3}
   # await _W[FAV].delete [2, 215060, 1688551713546]
-  # await _W[FAV].put {cid:2, rid:215060, ctime:Math.floor(new Date), action:0}
+  # await _W[FAV].put {cid:2, rid:215060, ctime:Math.floor(new Date), aid:0}
 
   for [db, pending] from  [
     [_W,_W_PENDING]
