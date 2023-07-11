@@ -79,65 +79,64 @@ onMe (user)=>
 
 
 reconnect = (onopen)=>
-  R(SYNCED) (synced)=>
-    es = new EventSource(
-      API+'es/'+b64VbyteE(
-        [
-          UID
-        ].concat await Promise.all SYNC_TABLE.map (table)=>
-          r = await synced.get(table)
-          if r
-            return r.id
-          return 0
-      )
-      withCredentials:true
+  synced = _R[SYNCED]
+  es = new EventSource(
+    API+'es/'+b64VbyteE(
+      [
+        UID
+      ].concat await Promise.all SYNC_TABLE.map (table)=>
+        r = await synced.get(table)
+        if r
+          return r.id
+        return 0
     )
+    withCredentials:true
+  )
 
-    close = es.close.bind(es)
+  close = es.close.bind(es)
 
-    es.onopen = =>
-      ES = es
-      onopen?()
+  es.onopen = =>
+    ES = es
+    onopen?()
+    return
+
+  es.onmessage = (e)=>
+    data = JSON.parse e.data
+    [kind, user_id] = data
+    data = data.slice(2)
+    if user_id != UID
       return
-
-    es.onmessage = (e)=>
-      data = JSON.parse e.data
-      [kind, user_id] = data
-      data = data.slice(2)
-      if user_id != UID
-        return
-      ES_MAP.get(kind)(
-        _W, data, user_id
-      )
-      return
-
-    timer = setTimeout(
-      =>
-        reconnect close
-        return
-      94e3
+    ES_MAP.get(kind)(
+      _W, data, user_id
     )
+    return
 
-    es.close = =>
-      clearTimeout timer
-      if es.readyState <= 1
-        close()
-        if UID and LEADER
-          reconnect()
-        else
-          es = undefined
+  timer = setTimeout(
+    =>
+      reconnect close
       return
+    94e3
+  )
 
-    es.onerror = =>
-      clearTimeout timer
+  es.close = =>
+    clearTimeout timer
+    if es.readyState <= 1
       close()
-      setTimeout(
-        =>
-          reconnect(onopen)
-          return
-        1e3
-      )
-      return
+      if UID and LEADER
+        reconnect()
+      else
+        es = undefined
+    return
+
+  es.onerror = =>
+    clearTimeout timer
+    close()
+    setTimeout(
+      =>
+        reconnect(onopen)
+        return
+      1e3
+    )
     return
   return
 
