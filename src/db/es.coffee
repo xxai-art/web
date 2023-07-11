@@ -7,7 +7,7 @@
   ./TABLE.coffee > FAV FAV_STATE FAV_YM SUM SYNCED SYNCED_ID
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
-  ./TOOL.coffee > getOr0 prevIter nextIter bound PREV
+  ./TOOL.coffee > prevIter nextIter bound PREV
   ./COL.coffee > CTIME
 
 export default MAP = new Map
@@ -58,84 +58,84 @@ favSet = (fav, fav_state, t)=>
 
       return
   ]
-  [
-    2 # KIND_SYNC_FAV_BY_YEAR_MONTH
-    (W, year_month, user_id)=>
-      year_month = new Map pair year_month
-      table = FAV
-      [fav, fav_ym, sum] = W(
-        table
-        FAV_YM
-        SUM
-      )
-      pre_sum = await getOr0(sum,table).n
-
-      sum_n = 0
-
-      ym_n = {}
-      for await {id,n} from nextIter(fav_ym)
-        real = year_month.get id
-        sum_n += real
-        if n == real
-          year_month.delete id
-        else
-          ym_n[id] = n
-
-      ctime = fav.index CTIME
-      to_srv = []
-      for [ym, srv_n] from year_month.entries()
-        n = 0
-        li = [ym]
-        for await i from prevIter ctime,bound ... ymMs ... n2ym ym
-          ++n
-          li.push ...Object.values i
-
-        diff = n - (ym_n[ym] or 0)
-        if diff
-          sum_n += diff
-          await fav_ym.put {id:ym, n}
-
-        if n!=srv_n
-          to_srv.push li
-
-      if to_srv.length
-        to_insert = await SDK[FAV_YM] user_id,to_srv
-        [fav, fav_state] = W(table, FAV_STATE)
-        ym_n = new Map
-        for t from group 4,to_insert
-          t = t.map (i)=>Number(i)
-          [cid, rid, ctime, action] = t
-          ym = time2ym new Date ctime
-          ym_n.set ym, (ym_n.get(ym) or 0) + 1
-          favSet fav, fav_state, t
-
-        if ym_n.size
-          fav_ym = W[FAV_YM]
-          for [ym,n] from ym_n.entries()
-            sum_n += n
-            fav_ym.put {
-              id: ym
-              n: n + await getOr0(fav_ym, ym).n
-            }
-
-      diff = sum_n - pre_sum
-      if diff
-        sum = W[SUM]
-        sum.put {
-          table
-          n:diff + await getOr0(sum,table).n
-        }
-        synced = W[SYNCED]
-        synced.put {
-          table
-          n:Math.max(
-            sum_n
-            diff + await getOr0(synced,table).n
-          )
-        }
-
-      return
-  ]
+  # [
+  #   2 # KIND_SYNC_FAV_BY_YEAR_MONTH
+  #   (W, year_month, user_id)=>
+  #     year_month = new Map pair year_month
+  #     table = FAV
+  #     [fav, fav_ym, sum] = W(
+  #       table
+  #       FAV_YM
+  #       SUM
+  #     )
+  #     pre_sum = await getOr0(sum,table).n
+  #
+  #     sum_n = 0
+  #
+  #     ym_n = {}
+  #     for await {id,n} from nextIter(fav_ym)
+  #       real = year_month.get id
+  #       sum_n += real
+  #       if n == real
+  #         year_month.delete id
+  #       else
+  #         ym_n[id] = n
+  #
+  #     ctime = fav.index CTIME
+  #     to_srv = []
+  #     for [ym, srv_n] from year_month.entries()
+  #       n = 0
+  #       li = [ym]
+  #       for await i from prevIter ctime,bound ... ymMs ... n2ym ym
+  #         ++n
+  #         li.push ...Object.values i
+  #
+  #       diff = n - (ym_n[ym] or 0)
+  #       if diff
+  #         sum_n += diff
+  #         await fav_ym.put {id:ym, n}
+  #
+  #       if n!=srv_n
+  #         to_srv.push li
+  #
+  #     if to_srv.length
+  #       to_insert = await SDK[FAV_YM] user_id,to_srv
+  #       [fav, fav_state] = W(table, FAV_STATE)
+  #       ym_n = new Map
+  #       for t from group 4,to_insert
+  #         t = t.map (i)=>Number(i)
+  #         [cid, rid, ctime, action] = t
+  #         ym = time2ym new Date ctime
+  #         ym_n.set ym, (ym_n.get(ym) or 0) + 1
+  #         favSet fav, fav_state, t
+  #
+  #       if ym_n.size
+  #         fav_ym = W[FAV_YM]
+  #         for [ym,n] from ym_n.entries()
+  #           sum_n += n
+  #           fav_ym.put {
+  #             id: ym
+  #             n: n + await getOr0(fav_ym, ym).n
+  #           }
+  #
+  #     diff = sum_n - pre_sum
+  #     if diff
+  #       sum = W[SUM]
+  #       sum.put {
+  #         table
+  #         n:diff + await getOr0(sum,table).n
+  #       }
+  #       synced = W[SYNCED]
+  #       synced.put {
+  #         table
+  #         n:Math.max(
+  #           sum_n
+  #           diff + await getOr0(synced,table).n
+  #         )
+  #       }
+  #
+  #     return
+  # ]
 ].map ([id,func])=>
   MAP.set id, func
   return

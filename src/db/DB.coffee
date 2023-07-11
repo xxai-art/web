@@ -7,7 +7,7 @@
   ./es.coffee:ES_MAP
   ./TABLE.coffee > FAV FAV_YM SYNCED
   ./SYNC_TABLE.coffee
-  ./TOOL.coffee > getOr0 prevIter
+  ./TOOL.coffee > prevIter
   ./COL.coffee > CTIME
   ./upgrade.coffee
 
@@ -79,13 +79,14 @@ onMe (user)=>
 
 reconnect = (onopen)=>
   R(SYNCED) (synced)=>
-    t = [
-      UID
-    ].concat await Promise.all SYNC_TABLE.map (table)=>
-      synced.get(table)
 
     es = new EventSource(
-      API+'es/'+b64VbyteE(t)
+      API+'es/'+b64VbyteE(
+        [
+          UID
+        ].concat await Promise.all SYNC_TABLE.map (table)=>
+          synced.get(table)
+      )
       withCredentials:true
     )
 
@@ -146,38 +147,43 @@ _onLeader = =>
 
   INTERVAL = setInterval(
     =>
-      if not _R
-        return
       read = _R
+      if not read
+        return
       write = _W
       user_id = UID
-      sum = read[SUM]
-      c = await sum.openCursor()
-      updated = []
-      while c
-        {n, table} = c.value
-        if PRE[table] != n
-          updated.push [table, n]
-          PRE[table] = n
-        c = await c.continue()
 
-      for [table, n] from updated
-        synced = await getOr0(read[SYNCED],table).n
-        if n > synced
-          diff = n - synced
-          # 拉出最后 diff 条，然后扔给服务器
+      for table from SYNC_TABLE
+        pre = await read[SYNCED].get table
+        #if pre
 
-          li = []
-          for await o from prevIter(read[table].index(CTIME))
-            li.unshift Object.values o
-            if -- diff == 0
-              break
-
-          toSrv(table, user_id, write, li)
-          write[SYNCED].put({
-            table
-            n
-          })
+      # sum = read[SUM]
+      # c = await sum.openCursor()
+      # updated = []
+      # while c
+      #   {n, table} = c.value
+      #   if PRE[table] != n
+      #     updated.push [table, n]
+      #     PRE[table] = n
+      #   c = await c.continue()
+      #
+      # for [table, n] from updated
+      #   synced = await getOr0(read[SYNCED],table).n
+      #   if n > synced
+      #     diff = n - synced
+      #     # 拉出最后 diff 条，然后扔给服务器
+      #
+      #     li = []
+      #     for await o from prevIter(read[table].index(CTIME))
+      #       li.unshift Object.values o
+      #       if -- diff == 0
+      #         break
+      #
+      #     toSrv(table, user_id, write, li)
+      #     write[SYNCED].put({
+      #       table
+      #       n
+      #     })
       return
     1e3
   )

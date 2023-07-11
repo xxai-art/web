@@ -1,14 +1,5 @@
 < bound = IDBKeyRange.bound
 
-< getOr0 = (store, key)=>
-  new Proxy(
-    {}
-    get:(_,attr)=>
-      new Promise (resolve)=>
-        t = await store.get(key)
-        resolve if t then t[attr] else 0
-        return
-  )
 
 _iter = (direction)=>
   (store, range)->
