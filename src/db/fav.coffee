@@ -19,6 +19,11 @@
       aid
     }
 
+    to_sync.put {
+      table: FAV
+      n:(to_sync.get(FAV)?.n or 0)+1
+    }
+
   # W(
   #   FAV,FAV_STATE
   #   FAV_YM,SUM
