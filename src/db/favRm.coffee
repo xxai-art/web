@@ -1,4 +1,4 @@
-> ./TOOL.coffee > nextIter
+> ./TOOL.coffee > nextIter bound
 
 < (fav, cid, rid)=>
   begin = [cid, rid, 0]
