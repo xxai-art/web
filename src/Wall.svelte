@@ -1,7 +1,7 @@
 <script lang="coffee">
 > svelte > onMount
   ./lib/topfix.coffee
-  ./nav/Wall.svelte
+  ./nav/Wall.svelte:Nav
   ./Imgli.svelte
 
 + nav,b
@@ -15,7 +15,7 @@ onMount =>
 <template lang="pug">
 b
   nav(@&nav)
-    Wall
+    Nav
   b(@&b)
     Imgli
 </template>
