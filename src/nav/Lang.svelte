@@ -52,7 +52,7 @@ b
         background-image url(':/svg/unfull.svg')
 
 u-i18n
-  margin-bottom -5px
+  margin-bottom -6px
   opacity 0.75
   transform scale(0.76)
   transform-origin right 50%
