@@ -12,14 +12,7 @@ send = (key, val)=>
   hook key, val
   toAll MSG_FAV, key, val
 
-< (store, cid, rid, aid)=>
+< (cid, rid, aid)=>
   key = vbyteE [cid, rid]
-  pre = await store.get key
-  if aid
-    if not pre
-      await store.put {id:key}
-      send key, 1
-  else if pre
-    store.delete(key)
-    send key
+  send key, aid
   return

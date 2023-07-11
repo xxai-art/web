@@ -24,21 +24,6 @@
       table: FAV
       n:await getOr0(to_sync,FAV)+1
     }
+    toAll(cid, rid, aid)
 
-  # W(
-  #   FAV,FAV_STATE
-  #   FAV_YM,SUM
-  # ) (fav, fav_state, db_li...)=>
-  #   now = new Date
-  #   ctime = Math.floor(now)
-  #   Promise.all [
-  #     fav.put {
-  #       cid
-  #       rid
-  #       ctime
-  #       aid
-  #     }
-  #     countIncr(db_li, FAV, now)
-  #     stateSet(fav_state, cid, rid, aid)
-  #   ]
   return
