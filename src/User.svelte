@@ -2,7 +2,7 @@
 > # @w5/wasm > b64VbyteE
   # ./lib/CID.coffee > CID_USER
   svelte > onMount
-  ./Nav.svelte
+  ./nav/Nav.svelte
   ./lib/topfix.coffee
 
 < ID
