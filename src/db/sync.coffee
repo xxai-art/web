@@ -3,8 +3,7 @@
 
 < (R,W)=>
   for table from SYNC_TABLE
-    console.log TO_SYNC
-    # pre = await R[TO_SYNC].get table
+    pre = await R[TO_SYNC].get table
     console.log {pre}
   return
     #if pre
