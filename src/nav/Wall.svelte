@@ -1,5 +1,6 @@
 <script lang="coffee">
 > ./Nav.svelte
+  ./R.svelte
   ./Menu.svelte
 
 top = =>
@@ -13,7 +14,8 @@ top = =>
 Nav
   a.logo(@click=top href="/") xxAI.art
   a 发现
-  Menu(slot="rl")
+  R(slot="R")
+    Menu
 </template>
 
 <style lang="stylus">
