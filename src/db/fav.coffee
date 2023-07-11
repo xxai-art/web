@@ -1,8 +1,7 @@
 > ./DB.coffee > R W
-  ./TABLE.coffee > FAV FAV_YM TO_SYNC
+  ./TABLE.coffee > FAV TO_SYNC
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
-  ./_.coffee > countIncr
   ./_/state.coffee > stateSet
   ./favRm.coffee
 
@@ -10,7 +9,6 @@
   W(
     FAV
     TO_SYNC
-    FAV_YM
   ) ( fav, to_sync, fav_ym )=>
     now = new Date
     await favRm(fav, cid, rid)
