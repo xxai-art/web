@@ -79,10 +79,10 @@ onMe (user)=>
 
 reconnect = (onopen)=>
   R(SYNCED) (synced)=>
-    t = [UID]
-
-    for table from SYNC_TABLE
-      id = synced.get(table)
+    t = [
+      UID
+    ].concat await Promise.all SYNC_TABLE.map (table)=>
+      synced.get(table)
 
     es = new EventSource(
       API+'es/'+b64VbyteE(t)
