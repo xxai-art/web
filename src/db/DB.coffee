@@ -63,14 +63,11 @@ onMe (user)=>
 
       for li from [
         [
-          FAV_STATE
           FAV_YM
           'id'
         ]
         [
-          SUM
           SYNCED
-          SYNCED_ID
           'table'
         ]
       ]
@@ -102,18 +99,11 @@ onMe (user)=>
 
 
 reconnect = (onopen)=>
-  R(SYNCED,SYNCED_ID) (synced,syncedid)=>
+  R(SYNCED) (synced)=>
     t = [UID]
 
     for table from [FAV]
-      [_n,_id] = await Promise.all [
-        synced.get(table)
-        syncedid.get(table)
-      ]
-      t = t.concat [
-        _id?.id or 0
-        _n?.n or 0
-      ]
+      id =  synced.get(table)
 
     es = new EventSource(
       API+'es/'+b64VbyteE(t)
