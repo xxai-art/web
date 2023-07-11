@@ -1,3 +1,6 @@
+> ./COL.coffee > CTIME
+  ./TABLE.coffee > FAV FAV_YM SYNCED
+
 export default (db)=>
   # upgrade(db, oldVersion, newVersion, transaction, event)
   createStore = (name, keyPath)=>
