@@ -4,6 +4,7 @@
   wac.tax/user/logined.js
   ./_/state.coffee > stateSet
   ./favRm.coffee
+  ./getOr0.coffee
 
 < favPut = logined (uid, cid, rid, aid)=>
   W(
@@ -21,7 +22,7 @@
 
     to_sync.put {
       table: FAV
-      n:(to_sync.get(FAV)?.n or 0)+1
+      n:await getOr0(to_sync,FAV)+1
     }
 
   # W(
