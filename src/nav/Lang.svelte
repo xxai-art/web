@@ -25,7 +25,7 @@ full = =>
 u-i18n
 b
   a.ft(@click=full class:f=FULL)
-  a.gg(href="//groups.google.com/g/xxai-art" target="_blank")
+  slot
 </template>
 
 <style lang="stylus">
@@ -45,9 +45,6 @@ b
 
       &.f
         background-image url(':/svg/unfull.svg')
-
-    &.gg
-      background url(':/svg/google_groups.svg') 50% 50% / 50px no-repeat
 
 u-i18n
   margin-bottom -4px
