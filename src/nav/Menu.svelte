@@ -45,6 +45,7 @@ u-menu
     &>a
       border 1px solid transparent
       border-top-color #ccc
+      color #000
       display block
       font-weight normal
       margin 0
