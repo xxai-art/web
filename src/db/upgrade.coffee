@@ -1,4 +1,4 @@
-> ./COL.coffee > CTIME
+> ./COL.coffee > TS
   ./TABLE.coffee > FAV FAV_YM SYNCED TO_SYNC
 
 export default (db)=>
@@ -8,8 +8,8 @@ export default (db)=>
 
   createStore(
     FAV
-    ['cid','rid',CTIME]
-  ).createIndex CTIME,CTIME
+    ['cid','rid',TS]
+  ).createIndex TS,TS
 
   for li from [
     [

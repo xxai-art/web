@@ -17,7 +17,7 @@
     fav.put {
       cid
       rid
-      ctime: Math.floor(now)
+      ts: Math.floor(now)
       aid
     }
 

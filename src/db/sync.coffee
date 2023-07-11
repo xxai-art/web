@@ -25,7 +25,7 @@
   #     # 拉出最后 diff 条，然后扔给服务器
   #
   #     li = []
-  #     for await o from prevIter(read[table].index(CTIME))
+  #     for await o from prevIter(read[table].index(TS))
   #       li.unshift Object.values o
   #       if -- diff == 0
   #         break

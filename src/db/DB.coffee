@@ -8,7 +8,7 @@
   ./sync.coffee
   ./SYNC_TABLE.coffee
   ./TOOL.coffee > prevIter
-  ./COL.coffee > CTIME
+  ./COL.coffee > TS
   ./upgrade.coffee
 
 + _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES

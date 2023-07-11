@@ -8,7 +8,7 @@
   ./_.coffee > incr countIncr
   ./_/state.coffee > stateSet
   ./TOOL.coffee > prevIter nextIter bound PREV
-  ./COL.coffee > CTIME
+  ./COL.coffee > TS
 
 export default MAP = new Map
 
@@ -81,7 +81,7 @@ favSet = (fav, fav_state, t)=>
   #       else
   #         ym_n[id] = n
   #
-  #     ctime = fav.index CTIME
+  #     ctime = fav.index TS
   #     to_srv = []
   #     for [ym, srv_n] from year_month.entries()
   #       n = 0
