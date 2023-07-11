@@ -7,7 +7,7 @@
 
 < ID
 
-+ name, href, nav
++ name, href, nav, b
 
 onMount =>
   href = location.pathname
@@ -21,6 +21,7 @@ b
     Nav
       +if name
         a(href:) {name}
+  b(@&b)
 </template>
 
 <style lang="stylus">
