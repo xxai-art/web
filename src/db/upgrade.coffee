@@ -8,7 +8,7 @@ export default (db)=>
 
   createStore(
     FAV
-    ['cid','rid',TS]
+    ['cid','rid']
   ).createIndex TS,TS
 
   for li from [
