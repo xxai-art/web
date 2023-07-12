@@ -1,5 +1,4 @@
 > ./TABLE.coffee > FAV SYNCED TO_SYNC
-  ./SYNC_TABLE.coffee
   ./getOr0.coffee
   ./TOOL.coffee > prevIter
   ./COL.coffee > TS
@@ -7,8 +6,8 @@
   ./fav/put.coffee
 
 < (uid, R, W)=>
-  sync = (table)=>
-    n = to_sync = await getOr0(R[TO_SYNC], table)
+  sync = ({table, n})=>
+    to_sync = n
 
     if n
       li = []
@@ -33,7 +32,7 @@
             await put w,cid,rid,ts,aid
           await W[SYNCED].put {table, n:id}
     return
-  return Promise.all SYNC_TABLE.map sync
+  Promise.all (await R[TO_SYNC].getAll()).map sync
     #if pre
 
   # sum = read[SUM]
