@@ -1,6 +1,7 @@
 > ./_sync.coffee:_sync
   ./DB.coffee
   ./TABLE.coffee > TO_SYNC
+  ./getOr0.coffee
 
 < (table)=>
   [uid,r,w] = DB()

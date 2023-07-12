@@ -4,7 +4,6 @@
   wac.tax/user/logined.js
   ./fav/toAll.coffee
   ./fav/rm.coffee
-  ./getOr0.coffee
   ./sync.coffee
 
 < favPut = logined (uid, cid, rid, aid)=>
