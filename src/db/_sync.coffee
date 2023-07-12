@@ -33,11 +33,7 @@
             await put w,cid,rid,ts,aid
           await W[SYNCED].put {table, n:id}
     return
-
-  ing = []
-  for table from SYNC_TABLE
-    ing.push sync(table)
-  return Promise.all ing
+  return Promise.all SYNC_TABLE.map sync
     #if pre
 
   # sum = read[SUM]
