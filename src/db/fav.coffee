@@ -21,5 +21,5 @@
     }
 
     toAll(cid, rid, aid)
-    sync(table)
+    sync(FAV)
   return
