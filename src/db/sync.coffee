@@ -6,7 +6,7 @@
   @w5/pair/group
 
 < (user_id, R, W)=>
-  sync = (table,li)=>
+  sync = (to_sync,table,li)=>
     last_id = await getOr0(R[SYNCED],table)
     r = (await SDK[table](
       user_id
@@ -15,6 +15,8 @@
     )).map Number
     id = r.pop()
     if id
+      if await getOr0(R[TO_SYNC],table) == to_sync
+        await W[TO_SYNC].delete table
       if await getOr0(R[SYNCED],table) == last_id
         t = W[table]
         for [cid,rid,ts,aid] from group 4,r
@@ -24,7 +26,7 @@
 
   ing = []
   for table,pos in SYNC_TABLE
-    n = await getOr0(R[TO_SYNC], table)
+    n = to_sync = await getOr0(R[TO_SYNC], table)
 
     if n
       li = []
@@ -32,7 +34,7 @@
         if n-- == 0
           break
         li = li.concat Object.values i
-      ing.push sync(table,li)
+      ing.push sync(to_sync, table,li)
   return Promise.all ing
     #if pre
 
