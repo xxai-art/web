@@ -5,8 +5,9 @@
 
 < (table)=>
   [uid,r,w] = DB()
-  await w[TO_SYNC].put {
+  o = {
     table
     n:await getOr0(r[TO_SYNC],table)+1
   }
+  await w[TO_SYNC].put o
   _sync uid, r, w
