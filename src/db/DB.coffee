@@ -11,7 +11,7 @@
   ./COL.coffee > TS
   ./upgrade.coffee
 
-+ _R, _W, _DB, INTERVAL, PRE, UID, LEADER, ES
++ _R, _W, _DB, TIMER, PRE, UID, LEADER, ES
 
 _rw = (args, next, db, pending)=>
   if db
@@ -144,6 +144,18 @@ reconnect = (onopen)=>
     return
   return
 
+
+_timer = =>
+  TIMER = setTimeout(
+    =>
+      if not _R
+        return
+      sync(UID,_R,_W).finally _timer
+      return
+    1e3
+  )
+  return
+
 _onLeader = =>
   _clear()
 
@@ -151,19 +163,12 @@ _onLeader = =>
     ES = {}
     reconnect()
 
-  INTERVAL = setInterval(
-    =>
-      if not _R
-        return
-      sync(UID,_R,_W)
-      return
-    1e3
-  )
+  _timer()
 
   return
 
 _clear = =>
-  clearInterval INTERVAL
+  clearTimeout TIMER
   ES?.close?()
   return
 
