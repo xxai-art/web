@@ -10,15 +10,16 @@
     n = await getOr0(R[TO_SYNC], table)
 
     if n
-      li = [
-        user_id
-        await getOr0(R[SYNCED],table)
-      ]
+      li = []
       for await i from prevIter R[table].index(TS)
         if n-- == 0
           break
         li = li.concat Object.values i
-      ing.push SDK[table](li)
+      ing.push SDK[table](
+        user_id
+        await getOr0(R[SYNCED],table)
+        ...li
+      )
   return Promise.all ing
     #if pre
 
