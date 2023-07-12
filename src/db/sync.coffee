@@ -1,5 +1,5 @@
-> ./_sync.coffee
+> ./_sync.coffee:_sync
   ./DB.coffee
 
 < =>
-  sync ...DB()
+  _sync ...DB()
