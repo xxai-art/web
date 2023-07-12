@@ -5,6 +5,7 @@
   ./fav/toAll.coffee
   ./fav/rm.coffee
   ./getOr0.coffee
+  ./sync.coffee
 
 < favPut = logined (uid, cid, rid, aid)=>
   W(
@@ -25,5 +26,5 @@
       n:await getOr0(to_sync,FAV)+1
     }
     toAll(cid, rid, aid)
-
+    sync()
   return

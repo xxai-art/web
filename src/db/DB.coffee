@@ -5,13 +5,13 @@
   wac.tax/user/User.js > onMe
   ./es.coffee:ES_MAP
   ./TABLE.coffee > SYNCED
-  ./sync.coffee
+  ./_sync.coffee
   ./SYNC_TABLE.coffee
   ./TOOL.coffee > prevIter
   ./COL.coffee > TS
   ./upgrade.coffee
 
-+ _R, _W, _DB, TIMER, PRE, UID, LEADER, ES
++ _R, _W, _DB,  PRE, UID, LEADER, ES
 
 _rw = (args, next, db, pending)=>
   if db
@@ -31,6 +31,14 @@ _rw = (args, next, db, pending)=>
 
 _R_PENDING = []
 
+export default =>
+  [
+    UID
+    _R
+    _W
+  ]
+
+
 export R = (args...)=>
   (next)=>
     _rw(args, next, _R, _R_PENDING)
@@ -44,7 +52,7 @@ export W = (args...)=>
 onMe (user)=>
   if _DB
     _db = _DB
-    sync(UID,_R,_W).finally =>
+    _sync(UID,_R,_W).finally =>
       _db.close()
       return
 
@@ -145,17 +153,6 @@ reconnect = (onopen)=>
   return
 
 
-_timer = =>
-  TIMER = setTimeout(
-    =>
-      if not _R
-        return
-      sync(UID,_R,_W).finally _timer
-      return
-    1e3
-  )
-  return
-
 _onLeader = =>
   _clear()
 
@@ -163,12 +160,9 @@ _onLeader = =>
     ES = {}
     reconnect()
 
-  _timer()
-
   return
 
 _clear = =>
-  clearTimeout TIMER
   ES?.close?()
   return
 

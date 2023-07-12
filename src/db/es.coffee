@@ -6,6 +6,7 @@
   ../lib/ym.coffee:time2ym
   ./TABLE.coffee > FAV SYNCED
   ./fav/toAll.coffee
+  ./getOr0.coffee
   ./TOOL.coffee > prevIter nextIter bound PREV
   ./COL.coffee > TS
 
@@ -33,25 +34,27 @@ favSet = (fav, fav_state, t)=>
   [
     1 # KIND_SYNC_FAV
     (W, li)=>
-      [prev_id, last_id] = li.slice(0,2)
-      li = li.slice(2)
-      table = FAV
-      [synced, fav] = db_li = W(
-        SYNCED
-        table
-      )
-      for t from group 4,li
-        if not await fav.get t.slice(0,3)
-          [cid, rid, ctime, aid] = t
-          favSet fav, fav_state, t
-          incr synced, FAV, {table}
-          countIncr(
-            db_li.slice(4)
-            FAV
-            new Date ctime
-          )
+      # [prev_id, last_id] = li.slice(0,2)
+      # li = li.slice(2)
+      # table = FAV
+      # [synced, fav] = db_li = W(
+      #   SYNCED
+      #   table
+      # )
+      # if await getOr0(synced, table) == prev_id
+      #   synced[table].put()
+      # for t from group 4,li
+      #   if not await fav.get t.slice(0,3)
+      #     [cid, rid, ctime, aid] = t
+      #     favSet fav, fav_state, t
+      #     incr synced, FAV, {table}
+      #     countIncr(
+      #       db_li.slice(4)
+      #       FAV
+      #       new Date ctime
+      #     )
 
-      synced_id.put {table,id:last_id}
+      # synced_id.put {table,id:last_id}
 
       return
   ]
