@@ -9,7 +9,7 @@
   sync = (to_sync,table,li)=>
     last_id = await getOr0(R[SYNCED],table)
     r = (await SDK[table](
-      user_id
+      uid
       last_id
       ...li
     )).map Number

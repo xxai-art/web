@@ -5,7 +5,7 @@
   wac.tax/user/User.js > onMe
   ./es.coffee:ES_MAP
   ./TABLE.coffee > SYNCED
-  ./_sync.coffee
+  ./_sync.coffee:_sync
   ./SYNC_TABLE.coffee
   ./TOOL.coffee > prevIter
   ./COL.coffee > TS
