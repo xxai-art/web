@@ -3,8 +3,25 @@
   ./getOr0.coffee
   ./TOOL.coffee > prevIter
   ./COL.coffee > TS
+  @w5/pair/group
 
-< (user_id, R,W)=>
+< (user_id, R, W)=>
+  sync = (table,li)=>
+    last_id = await getOr0(R[SYNCED],table)
+    r = (await SDK[table](
+      user_id
+      last_id
+      ...li
+    )).map Number
+    id = r.pop()
+    if id
+      if await getOr0(R[SYNCED],table) == last_id
+        t = W[table]
+        for [cid,rid,ts,aid] from group 4,r
+          await t.put {cid,rid,ts,aid}
+        await W[SYNCED].put {table, n:id}
+    return
+
   ing = []
   for table,pos in SYNC_TABLE
     n = await getOr0(R[TO_SYNC], table)
@@ -15,11 +32,7 @@
         if n-- == 0
           break
         li = li.concat Object.values i
-      ing.push SDK[table](
-        user_id
-        await getOr0(R[SYNCED],table)
-        ...li
-      )
+      ing.push sync(table,li)
   return Promise.all ing
     #if pre
 
