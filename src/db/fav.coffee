@@ -2,7 +2,7 @@
   ./TABLE.coffee > FAV
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
-  ./fav/toAll.coffee
+  ./fav/put.coffee
   ./fav/rm.coffee
   ./sync.coffee
 
@@ -12,13 +12,12 @@
   ) ( fav )=>
     now = new Date
     await rm(fav, cid, rid)
-    fav.put {
+    put(
+      fav
       cid
       rid
-      ts: Math.floor(now)
+      Math.floor(now)
       aid
-    }
-
-    toAll(cid, rid, aid)
+    )
     sync(FAV)
   return

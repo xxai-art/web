@@ -4,28 +4,10 @@
   ./TOOL.coffee > prevIter
   ./COL.coffee > TS
   @w5/pair/group
+  ./fav/put.coffee
 
 < (uid, R, W)=>
-  sync = (to_sync,table,li)=>
-    last_id = await getOr0(R[SYNCED],table)
-    r = (await SDK[table](
-      uid
-      last_id
-      ...li
-    )).map Number
-    id = r.pop()
-    if id
-      if await getOr0(R[TO_SYNC],table) == to_sync
-        await W[TO_SYNC].delete table
-      if await getOr0(R[SYNCED],table) == last_id
-        t = W[table]
-        for [cid,rid,ts,aid] from group 4,r
-          await t.put {cid,rid,ts,aid}
-        await W[SYNCED].put {table, n:id}
-    return
-
-  ing = []
-  for table,pos in SYNC_TABLE
+  sync = (table)=>
     n = to_sync = await getOr0(R[TO_SYNC], table)
 
     if n
@@ -34,7 +16,27 @@
         if n-- == 0
           break
         li = li.concat Object.values i
-      ing.push sync(to_sync, table,li)
+
+      last_id = await getOr0(R[SYNCED],table)
+      r = (await SDK[table](
+        uid
+        last_id
+        ...li
+      )).map Number
+      id = r.pop()
+      if id
+        if await getOr0(R[TO_SYNC],table) == to_sync
+          await W[TO_SYNC].delete table
+        if await getOr0(R[SYNCED],table) == last_id
+          w = W[table]
+          for [cid,rid,ts,aid] from group 4,r
+            await put w,cid,rid,ts,aid
+          await W[SYNCED].put {table, n:id}
+    return
+
+  ing = []
+  for table from SYNC_TABLE
+    ing.push sync(table)
   return Promise.all ing
     #if pre
 
