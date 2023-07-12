@@ -11,31 +11,12 @@
   ./COL.coffee > TS
   ./dbsync.coffee
 
-export default MAP = new Map
-
-favSet = (fav, fav_state, t)=>
-  [cid, rid, ctime, aid] = t
-
-  begin = t.slice(0,3)
-  end = begin.slice()
-  end[1] += 1
-  end[2] = 0
-  c = (await fav.openCursor bound(begin, end),PREV)?.value
-  await fav.put {
-    cid
-    rid
-    ctime
-    aid
-  }
-  if (not c) or ( c.aid != aid and c.ctime < ctime )
-    stateSet(fav_state, cid, rid, aid)
-  return
-
-[
+export default MAP = new Map [
   [
     1 # KIND_SYNC_FAV
     (W, li)=>
       await dbsync()
+      console.log li
       # [prev_id, last_id] = li.slice(0,2)
       # li = li.slice(2)
       # table = FAV
@@ -59,6 +40,7 @@ favSet = (fav, fav_state, t)=>
       # synced_id.put {table,id:last_id}
       return
   ]
+]
   # [
   #   2 # KIND_SYNC_FAV_BY_YEAR_MONTH
   #   (W, year_month, user_id)=>
@@ -137,6 +119,20 @@ favSet = (fav, fav_state, t)=>
   #
   #     return
   # ]
-].map ([id,func])=>
-  MAP.set id, func
-  return
+# favSet = (fav, fav_state, t)=>
+#   [cid, rid, ctime, aid] = t
+#
+#   begin = t.slice(0,3)
+#   end = begin.slice()
+#   end[1] += 1
+#   end[2] = 0
+#   c = (await fav.openCursor bound(begin, end),PREV)?.value
+#   await fav.put {
+#     cid
+#     rid
+#     ctime
+#     aid
+#   }
+#   if (not c) or ( c.aid != aid and c.ctime < ctime )
+#     stateSet(fav_state, cid, rid, aid)
+#   return
