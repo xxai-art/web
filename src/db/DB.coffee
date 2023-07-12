@@ -44,7 +44,7 @@ export W = (args...)=>
 onMe (user)=>
   if _DB
     _db = _DB
-    sync(UID,_R,_W).then =>
+    sync(UID,_R,_W).finally =>
       _db.close()
       return
 
