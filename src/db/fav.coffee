@@ -1,5 +1,5 @@
 > ./DB.coffee > R W
-  ./TABLE.coffee > FAV TO_SYNC
+  ./TABLE.coffee > FAV
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
   ./fav/toAll.coffee
@@ -10,8 +10,7 @@
 < favPut = logined (uid, cid, rid, aid)=>
   W(
     FAV
-    TO_SYNC
-  ) ( fav, to_sync, fav_ym )=>
+  ) ( fav )=>
     now = new Date
     await rm(fav, cid, rid)
     fav.put {
@@ -21,10 +20,6 @@
       aid
     }
 
-    to_sync.put {
-      table: FAV
-      n:await getOr0(to_sync,FAV)+1
-    }
     toAll(cid, rid, aid)
-    sync()
+    sync(table)
   return
