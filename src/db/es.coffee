@@ -33,14 +33,12 @@ favSet = (fav, fav_state, t)=>
   [
     1 # KIND_SYNC_FAV
     (W, li)=>
-      last_id = li.pop()
+      [prev_id, last_id] = li.slice(0,2)
+      li = li.slice(2)
       table = FAV
-      [synced, synced_id, fav, fav_state] = db_li = W(
+      [synced, fav] = db_li = W(
         SYNCED
-        SYNCED_ID
         table
-        FAV_STATE
-        FAV_YM,SUM
       )
       for t from group 4,li
         if not await fav.get t.slice(0,3)
