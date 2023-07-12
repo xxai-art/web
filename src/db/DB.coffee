@@ -69,7 +69,7 @@ onMe (user)=>
       upgrade
     }
   )
-  _sync(_DB, _R, _W)
+  _sync(UID, _R, _W)
   # for t from [SUM,SYNCED]
   #   await _W[t].put {table:FAV, n:3}
   # await _W[FAV].delete [2, 215060, 1688551713546]
