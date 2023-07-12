@@ -9,6 +9,7 @@
   ./getOr0.coffee
   ./TOOL.coffee > prevIter nextIter bound PREV
   ./COL.coffee > TS
+  ./dbsync.coffee
 
 export default MAP = new Map
 
@@ -34,6 +35,7 @@ favSet = (fav, fav_state, t)=>
   [
     1 # KIND_SYNC_FAV
     (W, li)=>
+      await dbsync()
       # [prev_id, last_id] = li.slice(0,2)
       # li = li.slice(2)
       # table = FAV
@@ -55,7 +57,6 @@ favSet = (fav, fav_state, t)=>
       #     )
 
       # synced_id.put {table,id:last_id}
-
       return
   ]
   # [
