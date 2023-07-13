@@ -96,7 +96,7 @@ Nav
     input(placeholder="请输入关键词")
     button(type="submit") 搜索
   select
-    option 全部
+    option 全部时间
     option 过去一年
     option 过去半年
     option 过去一季
