@@ -35,22 +35,31 @@ _sync = (uid,R,W)=>
   Promise.all (await R[TO_SYNC].getAll()).map sync
 
 ING = new Map
+AGAIN = new Set
 
 < (uid, R, W)=>
+  sync = =>
+    _sync uid, R, W
+
   ing = ING.get uid
   if ing
-    p = do =>
-      await ing
-      _sync(uid, R, W)
-  else
-    p = _sync(uid, R, W)
+    AGAIN.add uid
+    return ing
+  ing = (
+    do =>
+      await sync().finally =>
+        while AGAIN.has uid
+          await sync().finally =>
+            AGAIN.delete uid
+            return
+        ING.delete uid
+        return
+      return
+  )
+  ING.set uid, ing
+  return ing
 
-  p.finally =>
-    await ING.get uid
-    ING.delete uid
-    return
-  ING.set uid, p
-  p
+
 
     #if pre
 
