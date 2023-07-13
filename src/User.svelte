@@ -36,7 +36,7 @@ onMount =>
       for [cid, li] from cid_rid.entries()
         li.unshift cid
         all.push li
-      console.log await SDK.meta all
+      console.log await SDK.meta ...all
       name = user.name
       return
   else
