@@ -2,6 +2,7 @@
 > ./Nav.svelte
   ./R.svelte
   ./Menu.svelte
+  ./lib/goto.coffee
   svelte > onMount
 
 top = =>
@@ -12,16 +13,27 @@ top = =>
 + form
 
 _input = =>
-  form.getElementsByTagName('input')[0]
+  input = form.getElementsByTagName('input')[0]
+  input.focus()
+  input
 
 onMount =>
-  _input().focus()
+  _input().value = value = decodeURIComponent(
+    location.hash.slice(1)
+  ).trim()
+  if value
+    console.log '搜索'
+  else
+    console.log '图片推荐'
   return
 
 submit = ->
   input = _input()
-  location.hash = input.value
-  input.focus()
+  value = input.value.trim()
+  if value
+    location.hash = value
+  else
+    goto()
   return
 
 
