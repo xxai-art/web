@@ -102,10 +102,11 @@ Nav
     option 过去一季
     option 过去一月
     option 自定义
-  .ico
-    a.D.o(@click=drop)
-  .ico
-    a.H.o(href="/" @&H)
+  b
+    .ico
+      a.D.o(@click=drop)
+    .ico
+      a.H.o(href="/" @&H)
 
   R(slot="R")
     MenuC
@@ -116,6 +117,25 @@ Nav
 @import './a.styl'
 @import '../styl/nav.ico.styl'
 
+select
+  background var(--svg-nabla) no-repeat scroll 85% 53%
+  border 0
+  cursor pointer
+  font-size 16px
+  height 100%
+  outline 0
+  padding 0 32px 0 16px
+  text-align center
+  white-space nowrap
+  width 120px
+  -webkit-appearance none
+
+  &:focus
+    filter saturate(47)
+
+  &:hover
+    filter invert(42%) sepia(1) saturate(47)
+
 .M
   align-items center
   background #fff
@@ -125,6 +145,13 @@ Nav
   position absolute
   right 0
   top 64px
+
+  select
+    background-position 95% 60%
+    border 0
+    border-bottom 1px solid #000
+    height auto
+    padding 8px 16px 8px 0
 
   p
     border-top 1px solid #eee
@@ -142,46 +169,33 @@ Nav
     margin-right 8px
     white-space nowrap
 
-select
-  background var(--svg-nabla) no-repeat scroll 95% 60%
-  border 0
-  border-bottom 1px solid #000
-  cursor pointer
-  font-size 16px
-  outline 0
-  padding 8px 16px 8px 0
-  white-space nowrap
-  width 100px
-  -webkit-appearance none
+b
+  border-left 1px solid #eee
+  display flex
+  height 100%
 
-  &:focus
-    filter saturate(47)
-
-  &:hover
-    filter invert(42%) sepia(1) saturate(47)
-
-.ico
-  &>a.H
-    &:before
-      background-image url(':/svg/logo.svg')
-      opacity 0.9
-
-    &.o
+  &>.ico
+    &>a.H
       &:before
-        filter grayscale(1)
+        background-image url(':/svg/logo.svg')
+        opacity 0.9
 
-    &:hover
+      &.o
+        &:before
+          filter grayscale(1)
+
+      &:hover
+        &:before
+          filter none
+
+    &>a.D
       &:before
-        filter none
+        background-image var(--svg-x)
 
-  &>a.D
-    &:before
-      background-image var(--svg-x)
-
-  &>a.D.o
-    &:before
-      background-image var(--svg-nabla)
-      background-size 12px
+    &>a.D.o
+      &:before
+        background-image var(--svg-nabla)
+        background-size 12px
 
 form
   border-right 1px solid #eee
