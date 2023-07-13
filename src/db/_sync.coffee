@@ -5,7 +5,7 @@
   @w5/pair/group
   ./fav/put.coffee
 
-< (uid, R, W)=>
+_sync = (uid,R,W)=>
   sync = ({table, n})=>
     to_sync = n
 
@@ -33,6 +33,25 @@
           await W[SYNCED].put {table, n:id}
     return
   Promise.all (await R[TO_SYNC].getAll()).map sync
+
+ING = new Map
+
+< (uid, R, W)=>
+  ing = ING.get uid
+  if ing
+    p = do =>
+      await ing
+      _sync(uid, R, W)
+  else
+    p = _sync(uid, R, W)
+
+  p.finally =>
+    await ING.get uid
+    ING.delete uid
+    return
+  ING.set uid, p
+  p
+
     #if pre
 
   # sum = read[SUM]
