@@ -8,8 +8,18 @@
     position relative
     width 64px
 
-    &.now
-      background-color #f9f9f9
+    &:before
+      background no-repeat 50% 55% / 20px
+      content ''
+      height 100%
+      opacity 0.5
+      width 100%
 
     &:hover
       border-bottom 3px solid #f40
+
+      &:before
+        opacity 1
+
+    &.now
+      background-color #f9f9f9

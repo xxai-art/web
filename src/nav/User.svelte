@@ -37,8 +37,11 @@ a.x
   transform-origin 100% 50%
   width 30px
 
-a.fav
-  background url(':/svg/fav.svg') 50% 55% / 20px no-repeat
+.ico
   border-left 1px solid #eee
+
+a.fav
+  &:before
+    background-image url(':/svg/fav.svg')
 </style>
 

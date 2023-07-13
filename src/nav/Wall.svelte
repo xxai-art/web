@@ -57,7 +57,9 @@ Nav
 @import '../styl/nav.ico.styl'
 
 a.drop
-  background var(--svg-nabla) no-repeat 50% 55% / 12px
+  &:before
+    background-image var(--svg-nabla)
+    background-size 12px
 
 form
   border-right 1px solid #eee
@@ -77,16 +79,19 @@ form
     background url(':/svg/q.svg') 50% 50% / 20px no-repeat transparent
     border 0
     cursor pointer
+    opacity 0.5
     overflow hidden
     text-indent -99px
     width 56px
 
     &:hover
       filter invert(42%) sepia(1) saturate(47)
+      opacity 1
 
 a.gg
   background url(':/svg/google_groups.svg') 50% 50% / 50px no-repeat
 
+/*
 a.logo
   background url(':/svg/logoTxt.svg') no-repeat
   border 0
@@ -98,5 +103,6 @@ a.logo
 
   &:hover
     filter invert(14%) sepia(61%) saturate(5346%) hue-rotate(354deg) brightness(119%) contrast(127%)
+*/
 </style>
 
