@@ -17,6 +17,7 @@ onMount =>
 Nav
   +if name
     a(href:) {name}
+    a.fav(href: title="收藏")
   R(slot="R")
     a.x(href="/" slot="R")
 </template>
@@ -33,6 +34,11 @@ a.x
   margin-top 3px
   transform scale(0.7)
   transform-origin 100% 50%
+  width 30px
+
+a.fav
+  background url(':/svg/fav.svg') 50% 60% / 20px no-repeat
+  height 30px
   width 30px
 </style>
 
