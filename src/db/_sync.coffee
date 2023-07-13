@@ -50,7 +50,8 @@ AGAIN = new Set
       await sync().finally =>
         while AGAIN.has uid
           AGAIN.delete uid
-          await sync()
+          try
+            await sync()
         ING.delete uid
         return
       return
