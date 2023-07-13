@@ -160,7 +160,7 @@ Nav
     &:before
       background-image var(--svg-x)
 
-  &>a.D.d
+  &>a.D.o
     &:before
       background-image var(--svg-nabla)
       background-size 12px
