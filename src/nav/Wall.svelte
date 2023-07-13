@@ -38,16 +38,25 @@ _setInput = =>
   )
   return
 
+CLS_D = 'd'
 onMount =>
-  drop = Menu D, (m)->
-    console.log @
-    for i from m.getElementsByTagName('select')
-      i.onclick = (e)=>
-        console.log e
-        e.stopPropagation()
-        return
-    return
-
+  drop = Menu(
+    D
+    (m)->
+      @classList.remove CLS_D
+      for i from m.getElementsByTagName('label')
+        i.onclick = (e)=>
+          e.stopPropagation()
+          return
+      for i from m.getElementsByTagName('select')
+        i.onclick = (e)=>
+          e.stopPropagation()
+          return
+      return
+    ->
+      @classList.add CLS_D
+      return
+  )
   _setInput()
   _on={}
   _on[hashchange] = _setInput
@@ -77,14 +86,13 @@ template(@&D)
         option 成人
         option 全部
 
-
 Nav
   //- a.logo(@click=top href="/") xxAI.art
   form(@&form @submit|preventDefault)
     input(placeholder="请输入关键词")
     button(type="submit") 搜索
   .ico
-    a.D(@click=drop)
+    a.D.d(@click=drop)
   .ico
     a.H(href="/")
 
@@ -98,21 +106,44 @@ Nav
 @import '../styl/nav.ico.styl'
 
 .M
+  align-items center
   background #fff
   border 1px solid #Eee
+  display flex
+  flex-direction column
   position absolute
   right 0
   top 64px
-  width 220px
+
+  p
+    display flex
+    flex-direction column
+    margin 0
+    padding 16px
+
+  label
+    color #666
+    font-size 14px
+    margin-right 8px
+    white-space nowrap
 
   select
+    background var(--svg-nabla) no-repeat scroll 95% 60%
     border 0
     border-bottom 1px solid #000
+    cursor pointer
     font-size 16px
     outline 0
     padding 8px 16px 8px 0
+    white-space nowrap
     width 100px
     -webkit-appearance none
+
+    &:focus
+      filter saturate(47)
+
+    &:hover
+      filter invert(42%) sepia(1) saturate(47)
 
 .ico
   &>a.H
@@ -126,6 +157,10 @@ Nav
         filter none
 
   &>a.D
+    &:before
+      background-image var(--svg-x)
+
+  &>a.D.d
     &:before
       background-image var(--svg-nabla)
       background-size 12px
