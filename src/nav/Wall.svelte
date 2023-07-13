@@ -38,12 +38,12 @@ _setInput = =>
   )
   return
 
-CLS_D = 'd'
+CLS_O = 'o'
 onMount =>
   drop = Menu(
     D
     (m)->
-      @classList.remove CLS_D
+      @classList.remove CLS_O
       for i from m.getElementsByTagName('label')
         i.onclick = (e)=>
           e.stopPropagation()
@@ -54,7 +54,7 @@ onMount =>
           return
       return
     ->
-      @classList.add CLS_D
+      @classList.add CLS_O
       return
   )
   _setInput()
@@ -92,7 +92,7 @@ Nav
     input(placeholder="请输入关键词")
     button(type="submit") 搜索
   .ico
-    a.D.d(@click=drop)
+    a.D.o(@click=drop)
   .ico
     a.H(href="/")
 
