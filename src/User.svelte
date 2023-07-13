@@ -4,12 +4,18 @@
   svelte > onMount
   ./nav/User.svelte:Nav
   ./lib/topfix.coffee
+  wac.tax/user/User.js
 
 < ID
 
 + href, nav, b
 
 onMount =>
+  user = await User()
+  if user.id == ID
+    console.log 'self'
+  else
+    console.log 'not me'
   return topfix nav, b
 </script>
 
