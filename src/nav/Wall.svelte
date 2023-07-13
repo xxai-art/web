@@ -80,6 +80,16 @@ submit = ->
 template(@&D)
   .M
     p
+      label 时间范围
+      select
+        option 全部
+        option 过去一年
+        option 过去半年
+        option 过去一季
+        option 过去一月
+        option 自定义
+
+    p
       label 内容分级
       select
         option 安全
@@ -116,10 +126,14 @@ Nav
   top 64px
 
   p
+    border-top 1px solid #eee
     display flex
     flex-direction column
     margin 0
     padding 16px
+
+    &:first-child
+      border 0
 
   label
     color #666
