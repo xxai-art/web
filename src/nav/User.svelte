@@ -38,7 +38,7 @@ a.x
   width 30px
 
 a.fav
-  background url(':/svg/fav.svg') 50% 60% / 20px no-repeat
+  background url(':/svg/fav.svg') 50% 55% / 20px no-repeat
   border-left 1px solid #eee
 </style>
 
