@@ -2,7 +2,7 @@
 > ./Nav.svelte
   ./R.svelte
   ./Menu.svelte
-  ./lib/goto.coffee
+  ~/lib/goto.coffee
   svelte > onMount
 
 top = =>
