@@ -29,7 +29,7 @@ main(@&main)
       u-i18n
       a(href="//groups.google.com/g/xxai-art")
         i-t GGROUP
-Imgli(:load)
+Imgli(load:)
 </template>
 
 <style lang="stylus">
