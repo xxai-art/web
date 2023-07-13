@@ -152,6 +152,7 @@ select
     border-bottom 1px solid #000
     height auto
     padding 8px 16px 8px 0
+    text-align left
 
   p
     border-top 1px solid #eee
@@ -172,6 +173,7 @@ select
 b
   border-left 1px solid #eee
   display flex
+  font-weight 400
   height 100%
 
   &>.ico
