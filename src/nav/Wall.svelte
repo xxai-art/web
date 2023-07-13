@@ -3,7 +3,8 @@
   ./R.svelte
   ./Menu.svelte
   wac.tax/wtax/On.js
-  ../lib/hashchange.coffee
+  ~/lib/title.coffee:@ > suffix
+  ~/lib/hashchange.coffee
   ~/lib/goto.coffee
   svelte > onMount
 
@@ -26,8 +27,9 @@ _setInput = =>
   ).trim()
   input.select()
   if value
-    document.title = value
+    document.title = value + suffix()
   else
+    document.title = title()
     console.log '图片推荐'
   return
 

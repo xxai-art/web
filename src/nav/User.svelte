@@ -2,10 +2,12 @@
 > svelte > onMount
   ./Nav.svelte
   ./R.svelte
+  ~/lib/title.coffee > suffix
 
 < name
 
 href = location.pathname
+document.title = name + suffix()
 #
 # onMount =>
 #   [name] = await SDK.meta href.slice(2) # await SDK.meta b64VbyteE CID_USER, ID
