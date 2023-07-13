@@ -1,8 +1,9 @@
 <script lang="coffee">
 > ./Nav.svelte
   ./R.svelte
-  ./Menu.svelte
+  ./Menu.svelte:MenuC
   wac.tax/wtax/On.js
+  wac.tax/_/Menu.js
   ~/lib/title.coffee:@ > suffix
   ~/lib/hashchange.coffee
   ~/lib/goto.coffee
@@ -13,7 +14,7 @@ top = =>
     document.getElementById('M').childNodes[0].childNodes[1].scrollTop = 0
   return
 
-+ form
++ form, D, drop
 
 _input = =>
   form.getElementsByTagName('input')[0]
@@ -38,6 +39,15 @@ _setInput = =>
   return
 
 onMount =>
+  drop = Menu D, (m)->
+    console.log @
+    for i from m.getElementsByTagName('select')
+      i.onclick = (e)=>
+        console.log e
+        e.stopPropagation()
+        return
+    return
+
   _setInput()
   _on={}
   _on[hashchange] = _setInput
@@ -55,27 +65,49 @@ submit = ->
     goto()
   return
 
-
 </script>
 
 <template lang="pug">
+template(@&D)
+  .M
+    p
+      label 内容分级
+      select
+        option 安全
+        option 成人
+        option 全部
+
+
 Nav
   //- a.logo(@click=top href="/") xxAI.art
   form(@&form @submit|preventDefault)
     input(placeholder="请输入关键词")
     button(type="submit") 搜索
   .ico
-    a.D
+    a.D(@click=drop)
+  .ico
     a.H(href="/")
 
   R(slot="R")
-    Menu
+    MenuC
     a.gg(href="//groups.google.com/g/xxai-art" slot="R" target="_blank")
 </template>
 
 <style lang="stylus">
 @import './a.styl'
 @import '../styl/nav.ico.styl'
+
+.M
+  background #fff
+  border 1px solid #Eee
+  position absolute
+  right 0
+  top 64px
+  width 220px
+
+  select
+    border 0
+    font-size 16px
 
 .ico
   &>a.H
