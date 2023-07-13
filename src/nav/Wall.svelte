@@ -16,9 +16,7 @@ top = =>
 + form
 
 _input = =>
-  input = form.getElementsByTagName('input')[0]
-  input.focus()
-  input
+  form.getElementsByTagName('input')[0]
 
 _setInput = =>
   input = _input()
@@ -31,6 +29,12 @@ _setInput = =>
   else
     document.title = title()
     console.log '图片推荐'
+
+  setTimeout(
+    =>
+      input.focus()
+      return
+  )
   return
 
 onMount =>
