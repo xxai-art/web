@@ -3,7 +3,6 @@
   wac.tax/user/User.js > Uid
   wac.tax/user/logined.js
   ./fav/put.coffee
-  ./fav/rm.coffee
   ./sync.coffee
 
 < favPut = logined (uid, cid, rid, aid)=>
@@ -11,7 +10,6 @@
     FAV
   ) ( fav )=>
     now = new Date
-    await rm(fav, cid, rid)
     put(
       fav
       cid

@@ -92,7 +92,6 @@ onMe (user)=>
 
 reconnect = (onopen)=>
   synced = new Map (await _R[SYNCED].getAll()).map((i)=>[i.table,i.n])
-  console.log synced
   es = new EventSource(
     API+'es/'+b64VbyteE(
       [
