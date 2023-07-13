@@ -2,6 +2,8 @@
 > ./Nav.svelte
   ./R.svelte
   ./Menu.svelte
+  wac.tax/wtax/On.js
+  ../lib/hashchange.coffee
   ~/lib/goto.coffee
   svelte > onMount
 
@@ -17,15 +19,26 @@ _input = =>
   input.focus()
   input
 
-onMount =>
-  _input().value = value = decodeURIComponent(
+_setInput = =>
+  input = _input()
+  input.value = value = decodeURIComponent(
     location.hash.slice(1)
   ).trim()
+  input.select()
   if value
     console.log '搜索'
   else
     console.log '图片推荐'
   return
+
+onMount =>
+  _setInput()
+  _on={}
+  _on[hashchange] = _setInput
+  On(
+    window
+    _on
+  )
 
 submit = ->
   input = _input()
