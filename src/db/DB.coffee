@@ -91,16 +91,14 @@ onMe (user)=>
 
 
 reconnect = (onopen)=>
-  synced = _R[SYNCED]
+  synced = new Map (await _R[SYNCED].getAll()).map((i)=>[i.table,i.n])
+  console.log synced
   es = new EventSource(
     API+'es/'+b64VbyteE(
       [
         UID
       ].concat await Promise.all SYNC_TABLE.map (table)=>
-        r = await synced.get(table)
-        if r
-          return r.id
-        return 0
+        synced.get(table) or 0
     )
     withCredentials:true
   )
