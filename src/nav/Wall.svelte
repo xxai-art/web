@@ -2,18 +2,35 @@
 > ./Nav.svelte
   ./R.svelte
   ./Menu.svelte
+  svelte > onMount
 
 top = =>
   if location.pathname == '/'
     document.getElementById('M').childNodes[0].childNodes[1].scrollTop = 0
   return
 
++ form
+
+_input = =>
+  form.getElementsByTagName('input')[0]
+
+onMount =>
+  _input().focus()
+  return
+
+submit = ->
+  input = _input()
+  location.hash = input.value
+  input.focus()
+  return
+
+
 </script>
 
 <template lang="pug">
 Nav
   //- a.logo(@click=top href="/") xxAI.art
-  form
+  form(@&form @submit|preventDefault)
     input(placeholder="请输入关键词")
     button(type="submit") 搜索
   R(slot="R")
@@ -25,6 +42,7 @@ Nav
 @import './a.styl'
 
 form
+  border-right 1px solid #eee
   display flex
   height 100%
   margin-left -40px
@@ -38,10 +56,15 @@ form
     width 10em
 
   button
-    background url(':/svg/q.svg') 50% 50% / 50px transparent
+    background url(':/svg/q.svg') 50% 50% / 20px no-repeat transparent
     border 0
+    cursor pointer
     overflow hidden
     text-indent -99px
+    width 56px
+
+    &:hover
+      filter invert(42%) sepia(1) saturate(47)
 
 a.gg
   background url(':/svg/google_groups.svg') 50% 50% / 50px no-repeat
