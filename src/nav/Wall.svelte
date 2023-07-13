@@ -26,7 +26,7 @@ _setInput = =>
   ).trim()
   input.select()
   if value
-    console.log '搜索'
+    document.title = value
   else
     console.log '图片推荐'
   return

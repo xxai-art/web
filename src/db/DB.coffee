@@ -170,10 +170,10 @@ ON.add (leader)=>
       _onLeader()
     else
       _clear()
-    document.title = 'leader'
+    # document.title = 'leader'
   else
     _clear()
     LEADER = undefined
     PRE = {}
-    document.title = ''
+    # document.title = ''
   return
