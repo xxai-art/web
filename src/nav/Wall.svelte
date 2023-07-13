@@ -45,7 +45,8 @@ Nav
   form(@&form @submit|preventDefault)
     input(placeholder="请输入关键词")
     button(type="submit") 搜索
-  a.drop
+  .ico
+    a.drop
   R(slot="R")
     Menu
     a.gg(href="//groups.google.com/g/xxai-art" slot="R" target="_blank")
@@ -53,13 +54,10 @@ Nav
 
 <style lang="stylus">
 @import './a.styl'
+@import '../styl/nav.ico.styl'
 
 a.drop
   background var(--svg-nabla) no-repeat 50% 55% / 12px
-  box-sizing border-box
-  height 64px
-  border-right 1px solid #eee
-  width 64px
 
 form
   border-right 1px solid #eee

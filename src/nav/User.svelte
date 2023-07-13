@@ -16,13 +16,15 @@ href = location.pathname
 <template lang="pug">
 Nav
   a(href:) {name}
-  a.ico.now.fav(href: title="收藏")
+  .ico
+    a.now.fav(href: title="收藏")
   R(slot="R")
     a.x(href="/" slot="R")
 </template>
 
 <style lang="stylus">
 @import './a.styl'
+@import '../styl/nav.ico.styl'
 
 a.x
   background url(':/svg/x.svg') 50% 50% / 20px no-repeat
@@ -37,20 +39,6 @@ a.x
 
 a.fav
   background url(':/svg/fav.svg') 50% 60% / 20px no-repeat
-
-a.ico
   border-left 1px solid #eee
-  border-right 1px solid #eee
-  box-shadow 0 0 3px inset #eee
-  box-sizing border-box
-  height 64px
-  padding 0
-  width 64px
-
-  &.now
-    background-color #f9f9f9
-
-  &:hover
-    border-bottom 3px solid #f40
 </style>
 
