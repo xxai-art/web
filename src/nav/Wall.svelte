@@ -107,7 +107,12 @@ Nav
 
   select
     border 0
+    border-bottom 1px solid #000
     font-size 16px
+    outline 0
+    padding 8px 16px 8px 0
+    width 100px
+    -webkit-appearance none
 
 .ico
   &>a.H
