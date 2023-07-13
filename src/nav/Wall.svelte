@@ -14,10 +14,12 @@ top = =>
     document.getElementById('M').childNodes[0].childNodes[1].scrollTop = 0
   return
 
-+ form, D, drop
++ form, D, drop, H
 
 _input = =>
   form.getElementsByTagName('input')[0]
+
+CLS_O = 'o'
 
 _setInput = =>
   input = _input()
@@ -25,10 +27,13 @@ _setInput = =>
     location.hash.slice(1)
   ).trim()
   input.select()
+
   if value
     document.title = value + suffix()
+    H.classList.add CLS_O
   else
     document.title = title()
+    H.classList.remove CLS_O
     console.log '图片推荐'
 
   setTimeout(
@@ -38,7 +43,6 @@ _setInput = =>
   )
   return
 
-CLS_O = 'o'
 onMount =>
   drop = Menu(
     D
@@ -104,7 +108,7 @@ Nav
   .ico
     a.D.o(@click=drop)
   .ico
-    a.H(href="/")
+    a.H.o(href="/" @&H)
 
   R(slot="R")
     MenuC
@@ -163,8 +167,11 @@ Nav
   &>a.H
     &:before
       background-image url(':/svg/logo.svg')
-      filter grayscale(1)
-      opacity 0.8
+      opacity 0.9
+
+    &.o
+      &:before
+        filter grayscale(1)
 
     &:hover
       &:before
