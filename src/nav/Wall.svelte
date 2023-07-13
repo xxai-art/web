@@ -80,7 +80,13 @@ Nav
 .ico
   &>a.H
     &:before
-      background-image url(':/svg/home.svg')
+      background-image url(':/svg/logo.svg')
+      filter grayscale(1)
+      opacity 0.8
+
+    &:hover
+      &:before
+        filter none
 
   &>a.D
     &:before
