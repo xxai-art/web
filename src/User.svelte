@@ -17,9 +17,9 @@
 onMount =>
   user = await User()
   if user.id == ID
-    cid_rid = new Map
 
     R(FAV) (fav)=>
+      cid_rid = new Map
       #n = 0
       for await {cid,aid,rid,ts} from prevIter fav.index(TS)
         if aid
@@ -32,6 +32,11 @@ onMount =>
           #if n == 100
           #  cid_rid = new Map
           #  n = 0
+      all = []
+      for [cid, li] from cid_rid.entries()
+        li.unshift cid
+        all.push li
+      console.log await SDK.meta all
       name = user.name
       return
   else
