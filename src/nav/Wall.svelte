@@ -61,6 +61,7 @@ Nav
   .ico
     a.D
     a.H(href="/")
+
   R(slot="R")
     Menu
     a.gg(href="//groups.google.com/g/xxai-art" slot="R" target="_blank")
