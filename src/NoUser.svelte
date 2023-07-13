@@ -3,22 +3,21 @@
   ./AuthInput.svelte
   svelte > onMount
 
-+ main
++ b
 
 load = =>
-  if main
-    u = main.nextSibling
-    n = 0
-    u.style.marginTop = 0
-    top = u.scrollHeight - innerHeight - 475
-    u.style.transition = "all #{Math.round top/20}s linear"
-    u.style.marginTop = -top+'px'
+  u = b.childNodes[0]
+  n = 0
+  u.style.marginTop = 0
+  top = u.scrollHeight - innerHeight - 475
+  u.style.transition = "all #{Math.round top/20}s linear"
+  u.style.marginTop = -top+'px'
   return
 
 </script>
 
 <template lang="pug">
-main(@&main)
+main
   h1
     i xxAI.art
     i-t SHARE_IMG
@@ -29,7 +28,8 @@ main(@&main)
       u-i18n
       a(href="//groups.google.com/g/xxai-art")
         i-t GGROUP
-Imgli(load:)
+b(@&b)
+  Imgli(load:)
 </template>
 
 <style lang="stylus">
@@ -86,5 +86,14 @@ main
         &:hover
           border-color #00BBFF
           color #00BBFF
+
+main+b
+  bottom 0
+  left 0
+  overflow hidden
+  pointer-events none
+  position absolute
+  right 0
+  top 0
 </style>
 
