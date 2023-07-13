@@ -46,7 +46,8 @@ Nav
     input(placeholder="请输入关键词")
     button(type="submit") 搜索
   .ico
-    a.drop
+    a.D
+    a.H(href="/")
   R(slot="R")
     Menu
     a.gg(href="//groups.google.com/g/xxai-art" slot="R" target="_blank")
@@ -56,10 +57,15 @@ Nav
 @import './a.styl'
 @import '../styl/nav.ico.styl'
 
-a.drop
-  &:before
-    background-image var(--svg-nabla)
-    background-size 12px
+.ico
+  &>a.H
+    &:before
+      background-image url(':/svg/home.svg')
+
+  &>a.D
+    &:before
+      background-image var(--svg-nabla)
+      background-size 12px
 
 form
   border-right 1px solid #eee
