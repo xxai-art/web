@@ -84,16 +84,6 @@ submit = ->
 template(@&D)
   .M
     p
-      label 时间范围
-      select
-        option 全部
-        option 过去一年
-        option 过去半年
-        option 过去一季
-        option 过去一月
-        option 自定义
-
-    p
       label 内容分级
       select
         option 安全
@@ -105,6 +95,13 @@ Nav
   form(@&form @submit|preventDefault)
     input(placeholder="请输入关键词")
     button(type="submit") 搜索
+  select
+    option 全部
+    option 过去一年
+    option 过去半年
+    option 过去一季
+    option 过去一月
+    option 自定义
   .ico
     a.D.o(@click=drop)
   .ico
@@ -145,23 +142,23 @@ Nav
     margin-right 8px
     white-space nowrap
 
-  select
-    background var(--svg-nabla) no-repeat scroll 95% 60%
-    border 0
-    border-bottom 1px solid #000
-    cursor pointer
-    font-size 16px
-    outline 0
-    padding 8px 16px 8px 0
-    white-space nowrap
-    width 100px
-    -webkit-appearance none
+select
+  background var(--svg-nabla) no-repeat scroll 95% 60%
+  border 0
+  border-bottom 1px solid #000
+  cursor pointer
+  font-size 16px
+  outline 0
+  padding 8px 16px 8px 0
+  white-space nowrap
+  width 100px
+  -webkit-appearance none
 
-    &:focus
-      filter saturate(47)
+  &:focus
+    filter saturate(47)
 
-    &:hover
-      filter invert(42%) sepia(1) saturate(47)
+  &:hover
+    filter invert(42%) sepia(1) saturate(47)
 
 .ico
   &>a.H
