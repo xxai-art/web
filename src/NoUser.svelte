@@ -6,12 +6,13 @@
 + b
 
 load = =>
-  u = b.childNodes[0]
-  n = 0
-  u.style.marginTop = 0
-  top = u.scrollHeight - innerHeight - 475
-  u.style.transition = "all #{Math.round top/20}s linear"
-  u.style.marginTop = -top+'px'
+  if b
+    u = b.childNodes[0]
+    n = 0
+    u.style.marginTop = 0
+    top = u.scrollHeight - innerHeight - 475
+    u.style.transition = "all #{Math.round top/20}s linear"
+    u.style.marginTop = -top+'px'
   return
 
 </script>
