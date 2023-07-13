@@ -5,15 +5,35 @@
   ./nav/User.svelte:Nav
   ./lib/topfix.coffee
   wac.tax/user/User.js
+  ./db/DB.coffee > R
+  ./db/TABLE.coffee > FAV
+  ./db/COL.coffee > TS
+  ./db/TOOL.coffee > prevIter
 
 < ID
 
-+ href, nav, b
++ nav, b, name
 
 onMount =>
   user = await User()
   if user.id == ID
-    console.log 'self'
+    cid_rid = new Map
+
+    R(FAV) (fav)=>
+      #n = 0
+      for await {cid,aid,rid,ts} from prevIter fav.index(TS)
+        if aid
+          li = cid_rid.get(cid)
+          if not li
+            li = []
+            cid_rid.set cid, li
+          li.push rid
+          #++n
+          #if n == 100
+          #  cid_rid = new Map
+          #  n = 0
+      name = user.name
+      return
   else
     console.log 'not me'
   return topfix nav, b
@@ -22,7 +42,8 @@ onMount =>
 <template lang="pug">
 b
   nav(@&nav)
-    Nav
+    +if name
+      Nav(name:)
   b(@&b)
 </template>
 
