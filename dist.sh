@@ -6,7 +6,7 @@ set -ex
 
 rm -rf dist
 ./build.sh
-rm -rf dist/.18
+rm -rf "dist/.18"
 ./sh/cdn.sh
 
 # ./sh/sw.coffee
