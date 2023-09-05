@@ -12,6 +12,7 @@
   ./env > DIST ROOT PWD
   @w5/ossput:put
 
+CDN = process.env.CDN
 BFILE = BaseX '!$-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
 
 encode = (n)=>
@@ -101,10 +102,12 @@ for i from to_replace
 
 for [k,v] from css_js.entries()
   for fp,n in to_replace
+    url = CDN+encode(ID[n])
     v = v.replaceAll(
       fp
-      encode(ID[n])
+      url
     )
+    console.log fp,url
   await writeFile(
     join(DIST,k)
     v
