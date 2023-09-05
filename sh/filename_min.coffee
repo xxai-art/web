@@ -12,7 +12,7 @@
   ./env > DIST ROOT PWD
   @w5/ossput:put
 
-BFILE = BaseX '!$-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
+BFILE = BaseX '!$-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
 
 encode = (n)=>
   bin = Buffer.allocUnsafe 6
@@ -92,7 +92,7 @@ for i from to_replace
     if [
       'I18N'
       'v'
-    ].includes(key) or key.replaceAll('.','')==''
+    ].includes(key)
       await DB(table).where({id}).delete()
       ++id
       await DB(table).insert({id,val})
