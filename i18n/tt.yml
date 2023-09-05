@@ -1,0 +1,43 @@
+type: ЯИ чорын кочаклагыз
+slogan: Без исәпләү сәнгате
+SignUp: Теркәлергә
+SignIn: Керегез
+ggroup: Форумны карау
+ShareImg: Тотрыклы диффузия тәкъдимнәрен бүлешегез
+FoundModel: Яңа модель һәм Лораны табыгыз
+InputMail: Электрон почта кертегез, Башлагыз
+rating: Рейтинг
+time: Вакыт
+any: Anyәрхәлдә
+last: Соңгы
+aDay: Көн
+aWeek: Атна
+aMonth: Ай
+aQ: Квартал
+hY: Ярты ел
+aY: Ел
+qKeyword: Ачкыч сүз кертегез
+safe: Куркынычсыз
+adult: Олылар
+search: Эзләү
+myself: Минем
+hotkey: Кайнар ачкыч
+inpaint: Буяу
+img2img: Img2Img
+txt2img: Txt2Img
+txt2imgSr: Txt2Img + SR
+sample: Ampleрнәк
+step: Адым
+cfg: CFG
+seed: Орлык
+model: Модель
+prompt: Тизрәк
+nPrompt: Тискәре сорау
+fav: Яраткан
+close: Ябу
+prev: Алдагы
+next: Алга
+size: Размер
+fullscreen: Тулы экран
+all: Барысы да
+nothing: Беркем дә ···

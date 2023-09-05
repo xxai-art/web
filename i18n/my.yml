@@ -1,0 +1,43 @@
+type: AI ခေတ်ကို ခင်တွယ်ပါ။
+slogan: ကျွန်တော်တို့က Compute Art ပါ။
+SignUp: ဆိုင်းအပ်
+SignIn: ဆိုင်းအင်လုပ်ခြင်း
+ggroup: ဖိုရမ်ကိုကြည့်ပါ။
+ShareImg: Stable Diffusion Prompts များကိုမျှဝေပါ။
+FoundModel: မော်ဒယ်အသစ် & Lora ကိုရှာဖွေပါ။
+InputMail: အီးမေးလ်ကိုရိုက်ထည့်ပါ၊ စတင်ပါ။
+rating: အဆင့်သတ်မှတ်ချက်
+time: အချိန်
+any: တစ်ခုခု
+last: နောက်ဆုံး
+aDay: နေ့
+aWeek: အေးလေ
+aMonth: လ
+aQ: ရပ်ကွက်
+hY: တစ်နှစ်ခွဲ
+aY: တစ်နှစ်
+qKeyword: Keyword ရိုက်ထည့်ပါ။
+safe: အန္တရာယ်ကင်းတယ်။
+adult: လူကြီး
+search: ရှာရန်
+myself: ငါ့
+hotkey: ဟော့ကီး
+inpaint: ဆေးသုတ်ခြင်း။
+img2img: Img2Img
+txt2img: Txt2Img
+txt2imgSr: Txt2Img+SR
+sample: နမူနာ
+step: အဆင့်
+cfg: CFG
+seed: မျိုးစေ့
+model: မော်ဒယ်
+prompt: အချက်ပေး
+nPrompt: အနုတ်လက္ခဏာပြချက်
+fav: အကြိုက်ဆုံး
+close: ပိတ်လိုက်
+prev: အရင်
+next: နောက်တစ်ခု
+size: အရွယ်အစား
+fullscreen: မျက်နှာပြင်အပြည့်
+all: အားလုံး
+nothing: ဘာမှမဟုတ်ဘူး···

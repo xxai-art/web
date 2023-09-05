@@ -1,0 +1,43 @@
+type: AI эрин үеийг хүлээн авна уу
+slogan: Бид Урлагийг тооцдог
+SignUp: Бүртгүүлэх
+SignIn: Нэвтрэх
+ggroup: Форумыг үзэх
+ShareImg: Тогтвортой тархалтын сануулгыг хуваалц
+FoundModel: Шинэ загвар ба Лоратай танилцаарай
+InputMail: Имэйл оруулна уу, Эхлэх
+rating: Үнэлгээ
+time: Цаг хугацаа
+any: Ямар ч
+last: Сүүлийн
+aDay: Өдөр
+aWeek: Долоо хоног
+aMonth: Сар
+aQ: улирал
+hY: Хагас жил
+aY: Жил
+qKeyword: Түлхүүр үг оруулна уу
+safe: Аюулгүй
+adult: Насанд хүрсэн
+search: Хайх
+myself: миний
+hotkey: Халуун түлхүүр
+inpaint: Будаг
+img2img: Img2Img
+txt2img: Txt2Img
+txt2imgSr: Txt2Img+SR
+sample: Дээж
+step: Алхам
+cfg: CFG
+seed: Үр
+model: Загвар
+prompt: Шуурхай
+nPrompt: Сөрөг сануулга
+fav: Дуртай
+close: Хаах
+prev: Өмнөх
+next: Дараачийн
+size: Хэмжээ
+fullscreen: Дэлгэц дүүрэн
+all: Бүгд
+nothing: Юу ч биш ···
