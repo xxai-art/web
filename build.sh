@@ -4,9 +4,11 @@ DIR=$(dirname $(realpath "$0"))
 cd $DIR
 set -ex
 
-./sh.dist/init.sh
-./sh.dist/svg-compress.sh
+cd sh.dist
+./init.sh
+./svg-compress.sh
 ./sw.sh
+cd ..
 
 esbuild public/s.js \
   --minify \
