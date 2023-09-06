@@ -8,7 +8,6 @@ export const
 	API = link("localhost"),
 	// API = link("127.0.0.1:8880"),
   // SPI = link('127.0.0.1:8080'),
-  SPI = link('i-01.eu.org'),
+  SPI = link('f.ok0.pw'),
   RES = link('5ok.pw'),
-  META = link('u-01.eu.org')
-  ;
+  META = link('m.ok0.pw');
