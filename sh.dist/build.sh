@@ -4,16 +4,29 @@ DIR=$(dirname $(realpath "$0"))
 cd $DIR
 set -ex
 
+if ! command -v sponge &>/dev/null; then
+  case $(uname -s) in
+  Linux*)
+    apt-get install -y moreutils
+    ;;
+  Darwin*)
+    brew install moreutils
+    ;;
+  esac
+fi
+
 ./init.sh
 ./svg-compress.sh
 ./sw.sh
 cd ..
 
-esbuild public/s.js \
+js=public/s.js
+esbuild $js \
   --minify \
-  --outfile=public/s.js \
-  --allow-overwrite
+  --format=iife |
+  sed 's/^.\{6\}//; s/.\{6\}$//' | sponge $js
 
+# --outfile=public/s.js \
 ./i18n.sh
 
 cd src
