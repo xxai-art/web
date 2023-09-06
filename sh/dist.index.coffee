@@ -3,6 +3,9 @@
 > ./env.coffee > PWD DIST
   html-minifier-terser > minify
   path > join
+  @w5/sleep
+  @w5/write
+  @w5/req/reqTxt
   @w5/ossput:put
   @w5/cf
   @w5/cf/Zone
@@ -63,8 +66,24 @@ if not prehtm.includes '.serviceWorker.'
       v
     ''
   )
-  url = 'https://'+CDN
-  {hostname} = new URL(url)
+  cdn = 'https://'+CDN
+  {hostname} = new URL(cdn)
   [{id}] = await cf.GET('?name='+hostname)
-  zone = Zone id
-  await cf.POST id+'/purge_cache', files: [url+filename]
+  url = cdn+filename
+  n = 0
+  loop
+    console.log "清理cloudflare缓存 ， 第 #{++n} 次"
+    await cf.POST id+'/purge_cache', files: [url]
+    t = await reqTxt url
+    if t == v
+      console.log '清理完成'
+      break
+    await sleep 1e3
+  write(
+    prehtm
+    htm
+  )
+
+
+
+
