@@ -3,6 +3,8 @@
 > ./env.coffee > PWD DIST
   html-minifier-terser > minify
   path > join
+  ./mime
+  fs > createReadStream
   @w5/sleep
   @w5/write
   @w5/req/reqTxt
@@ -14,6 +16,7 @@
   coffeescript
   @w5/coffee_plus:hack
   esbuild
+
 
 hack coffeescript
 {CDN} = process.env
@@ -86,6 +89,15 @@ write(
   htm
 )
 
+{env} = process
+for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')
+  env[i] = env['SITE_'+i]
+
+await put(
+  'index.htm'
+  =>createReadStream(prehtm_fp)
+  mime(prehtm_fp)
+)
 
 
 
