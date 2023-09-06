@@ -94,6 +94,13 @@ write(
 for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')
   env[i] = env['SITE_'+i]
 
+DB = knex {
+  client:  'better-sqlite3'
+  useNullAsDefault: true
+  connection: {
+    filename: join PWD, 'dist.public.db'
+  }
+}
 for await i from walkRel DIST
   console.log i
 # await put(
