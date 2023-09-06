@@ -14,7 +14,10 @@
 
 _cache = (p)=>
   hash = (await req META+p.slice(2))[2]
-  fetch(RES+b64E(hash),mode:'no-cors')
+  fetch(
+    RES+b64E(hash)
+    mode:'no-cors'
+  )
 
 + faved,cid,id
 
