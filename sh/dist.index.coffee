@@ -31,7 +31,7 @@ js = coffeescript.compile(
   minify: true
 })
 
-js = js.trim().replace('var t;t=','var t=')
+js = js.trim().replace('var t;t=','var t=').replace(';</script>','</script>')
 
 htm = pug.renderFile(
   join PWD,'index.pug'
