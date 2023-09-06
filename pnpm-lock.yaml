@@ -85,6 +85,9 @@ devDependencies:
   '@w5/uridir':
     specifier: ^0.0.1
     version: 0.0.1
+  '@w5/utf8':
+    specifier: ^0.0.3
+    version: 0.0.3
   '@w5/walk':
     specifier: ^0.0.1
     version: 0.0.1

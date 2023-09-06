@@ -4,7 +4,7 @@
   fs > createReadStream
   fs/promises > rename writeFile readFile opendir unlink
   path > join dirname
-  @w5/blake3 > blake3Hash
+  @w5/blake3/stream.mjs
   @w5/pool > Pool
   base-x
   ./mime
@@ -66,8 +66,9 @@ ID = []
 
 for i from to_replace
   fp = join DIST, i
-  bin = await readFile fp
-  val = Buffer.from blake3Hash bin
+  val = Buffer.from await stream(
+    createReadStream fp
+  )
   id = (await DB(ID_HASH).where({val}))[0]?.id or 0
   if not id
     [id] = await DB(ID_HASH).insert({val})

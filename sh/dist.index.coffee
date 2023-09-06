@@ -1,8 +1,13 @@
 #!/usr/bin/env coffee
 
 > ./env.coffee > PWD DIST
+  @w5/u8 > u8eq
+  @w5/utf8/utf8e.js
   html-minifier-terser > minify
+  @w5/blake3 > blake3Hash
+  @w5/blake3/stream.mjs
   path > join
+  knex
   @w5/walk > walkRel
   ./mime
   fs > createReadStream
@@ -60,30 +65,66 @@ htm = htm.replace(
 
 prehtm_fp = join DIST, 'index.htm'
 prehtm = read prehtm_fp
+
+DB = knex {
+  client:  'better-sqlite3'
+  useNullAsDefault: true
+  connection: {
+    filename: join PWD, 'dist.public.db'
+  }
+}
+TABLE = 'fp_hash'
+
+if not await DB.schema.hasTable TABLE
+  await DB.schema.createTable(
+    TABLE
+    (t) =>
+      t.string('fp').primary()
+      t.binary('hash').notNullable()
+      return
+  )
+
+dbExist = (fp, hash)=>
+  pre = await DB(TABLE).select('hash').where({fp})
+  if pre.length
+    if u8eq pre[0].hash, hash
+      return
+  =>
+    t = DB(TABLE)
+    if pre.length
+      t = t.where({fp}).update(hash)
+    else
+      t = t.insert({fp,hash})
+    t
+
 if not prehtm.includes 'document.write'
   end = prehtm.lastIndexOf '></script>'
   begin = prehtm.lastIndexOf('/',end)+1
   v = prehtm.slice(begin, end)
-  filename = 'v'
-  await put(
-    filename
-    =>
-      v
-    ''
-  )
-  cdn = 'https://'+CDN
-  {hostname} = new URL(cdn)
-  [{id}] = await cf.GET('?name='+hostname)
-  url = cdn+filename
-  n = 0
-  loop
-    console.log "清理cloudflare缓存 ， 第 #{++n} 次"
-    await cf.POST id+'/purge_cache', files: [url]
-    t = await reqTxt url
-    if t == v
-      console.log '清理完成'
-      break
-    await sleep 1e3
+  fp = 'v'
+  hash = blake3Hash utf8e v
+  add = await dbExist fp, hash
+  if add
+    await put(
+      fp
+      =>
+        v
+      ''
+    )
+    cdn = 'https://'+CDN
+    {hostname} = new URL(cdn)
+    [{id}] = await cf.GET('?name='+hostname)
+    url = cdn+fp
+    n = 0
+    loop
+      console.log "清理cloudflare缓存 ， 第 #{++n} 次"
+      await cf.POST id+'/purge_cache', files: [url]
+      t = await reqTxt url
+      if t == v
+        console.log '清理完成'
+        break
+      await sleep 1e3
+    await add()
 
 write(
   prehtm_fp
@@ -94,17 +135,16 @@ write(
 for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')
   env[i] = env['SITE_'+i]
 
-DB = knex {
-  client:  'better-sqlite3'
-  useNullAsDefault: true
-  connection: {
-    filename: join PWD, 'dist.public.db'
-  }
-}
-for await i from walkRel DIST
-  console.log i
-# await put(
-#   'index.htm'
-#   =>createReadStream(prehtm_fp)
-#   mime(prehtm_fp)
-# )
+for await fp from walkRel DIST
+  full_fp = join DIST,fp
+  add = await dbExist fp, await stream createReadStream full_fp
+  if add
+    await put(
+      fp
+      =>
+        createReadStream(full_fp)
+      mime(full_fp)
+    )
+    await add()
+
+process.exit()

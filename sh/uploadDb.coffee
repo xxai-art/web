@@ -19,10 +19,10 @@ export default new Proxy(
     if not await db.schema.hasTable ID_HASH
       await db.schema.createTable(
         ID_HASH
-        (ID_HASH) =>
-          ID_HASH.integer('id').primary()
-          ID_HASH.boolean('uploaded').defaultTo(false)
-          ID_HASH.binary('val').notNullable().unique()
+        (t) =>
+          t.integer('id').primary()
+          t.boolean('uploaded').defaultTo(false)
+          t.binary('val').notNullable().unique()
           return
       )
     db
