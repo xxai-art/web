@@ -31,7 +31,7 @@ if not await DB.schema.hasTable TABLE
   =>
     t = DB(TABLE)
     if pre.length
-      t = t.where({fp}).update(hash)
+      t = t.where({fp}).update({hash})
     else
       t = t.insert({fp,hash})
     t
