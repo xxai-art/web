@@ -25,10 +25,6 @@ rm -rf conf.js
 cp ../conf/ol.js conf.js
 cd ..
 
-bunx vite build
-
-rm src/conf.js
-
 cd public
 
 bun x cep -c $DIR/sw.coffee -o .
@@ -39,3 +35,10 @@ esbuild sw.js \
   sed 's/^.\{6\}//; s/.\{6\}$//' >s.js
 
 rm sw.js
+
+cd ..
+
+bunx vite build
+
+cd dist
+echo -e "1i\nawait navigator.serviceWorker.register('/s.js')\n.\nwq" | ed -s m.js
