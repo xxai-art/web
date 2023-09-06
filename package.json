@@ -43,7 +43,6 @@
     "svgo": "^3.0.2",
     "terser": "^5.19.3",
     "typed.js": "^2.0.132",
-    "uglify-js": "^3.17.4",
     "vite": "^4.4.9",
     "wac.tax": "link:../ui"
   },
