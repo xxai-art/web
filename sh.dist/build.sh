@@ -4,7 +4,6 @@ DIR=$(dirname $(realpath "$0"))
 cd $DIR
 set -ex
 
-cd sh.dist
 ./init.sh
 ./svg-compress.sh
 ./sw.sh

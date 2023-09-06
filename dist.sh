@@ -5,9 +5,10 @@ cd $DIR
 set -ex
 
 rm -rf dist
+cd sh.dist
 ./build.sh
-rm -rf "dist/.18"
-./sh/cdn.sh
+rm -rf "../dist/.18"
+./cdn.sh
 
 # ./sh/sw.coffee
 # cp sh/dist/* dist
