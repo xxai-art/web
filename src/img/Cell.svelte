@@ -14,8 +14,9 @@
 
 _cache = (p)=>
   hash = (await req META+p.slice(2))[2]
+  url = RES+b64E(hash)
   fetch(
-    RES+b64E(hash)
+    url
     mode:'no-cors'
   )
 
