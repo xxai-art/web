@@ -56,7 +56,7 @@ htm = htm.replace(
 
 prehtm_fp = join DIST, 'index.htm'
 prehtm = read prehtm_fp
-if not prehtm.includes '.serviceWorker.'
+if not prehtm.includes 'document.write'
   end = prehtm.lastIndexOf '></script>'
   begin = prehtm.lastIndexOf('/',end)+1
   v = prehtm.slice(begin, end)
