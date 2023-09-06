@@ -4,6 +4,8 @@ DIR=$(dirname $(realpath "$0"))
 cd $DIR
 set -ex
 
+./sh.dist/init.sh
+./sh.dist/svg-compress.sh
 ./sw.sh
 
 esbuild public/s.js \
@@ -19,8 +21,6 @@ rm -rf conf.js
 cp ../conf/ol.js conf.js
 
 cd ..
-
-./sh/init.sh
 
 bunx vite build
 
