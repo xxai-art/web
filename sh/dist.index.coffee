@@ -2,16 +2,11 @@
 
 > ./env.coffee > PWD DIST
   ./distDb.coffee > dbExist
-  @w5/u8 > u8eq
   @w5/utf8/utf8e.js
   html-minifier-terser > minify
   @w5/blake3 > blake3Hash
-  @w5/blake3/stream.mjs
   path > join
   knex
-  @w5/walk > walkRel
-  ./mime
-  fs > createReadStream
   @w5/sleep
   @w5/write
   @w5/req/reqTxt

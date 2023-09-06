@@ -17,3 +17,4 @@ git add -u && git commit -m'i18n' || true
 de filename_min.coffee
 
 de dist.index.coffee
+de dist.public.coffee

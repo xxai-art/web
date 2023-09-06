@@ -2,6 +2,12 @@
 
 > ./distDb.coffee > dbExist
   @w5/ossput:put
+  @w5/walk > walkRel
+  @w5/blake3/stream.mjs
+  path > join
+  fs > createReadStream
+  ./mime
+  ./env > DIST
 
 {env} = process
 for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')

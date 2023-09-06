@@ -3,6 +3,7 @@
 > ./env > PWD
   path > join
   knex
+  @w5/u8 > u8eq
 
 DB = knex {
   client:  'better-sqlite3'
