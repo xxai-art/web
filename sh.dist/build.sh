@@ -17,26 +17,25 @@ fi
 
 ./init.sh
 ./svg-compress.sh
-./sw.sh
 cd ..
-
-js=public/s.js
-esbuild $js \
-  --minify \
-  --format=iife |
-  sed 's/^.\{6\}//; s/.\{6\}$//' | sponge $js
-
 ./i18n.sh
 
 cd src
 rm -rf conf.js
-
 cp ../conf/ol.js conf.js
-
 cd ..
 
 bunx vite build
 
 rm src/conf.js
 
-#./sh/filename_min.coffee
+cd public
+
+bun x cep -c $DIR/sw.coffee -o .
+
+esbuild sw.js \
+  --minify \
+  --format=iife |
+  sed 's/^.\{6\}//; s/.\{6\}$//' >s.js
+
+rm sw.js

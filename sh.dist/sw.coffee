@@ -1,5 +1,4 @@
 con = console
-VERSION = 1
 HOST = location.host
 {protocol,host:HOST} = location
 HOST_URL = protocol+"//#{HOST}/"
@@ -13,8 +12,8 @@ _get = (req) =>
 
   if url.host != HOST
     config = {
-      credentials: "omit"
-      mode: "cors"
+      credentials: 'omit'
+      mode: 'cors'
     }
     try
       res = await fetch(req, config)
@@ -29,7 +28,9 @@ _get = (req) =>
     if res.ok
       rc = new Response(res.clone().body, res)
       rc.headers.set "_", parseInt((new Date)/1000).toString(16)
-      caches.open( VERSION ).then (cache) =>
+      caches.open(
+        1 # version
+      ).then (cache) =>
         cache.put(req, rc)
   return res
 
@@ -61,7 +62,7 @@ fetch: (event) =>
   if not url.startsWith 'http'
     return
 
-  if ["GET", "OPTIONS"].indexOf(method) < 0
+  if ['GET', 'OPTIONS'].indexOf(method) < 0
     return
   if req.headers.get('accept').includes 'stream'
     return
