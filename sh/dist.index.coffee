@@ -34,7 +34,7 @@ js = coffeescript.compile(
   minify: true
 })
 
-js = js.trim().replace('var t;t=','var t=').replace(';</script>','</script>')
+js = js.trim().replace(',document.write',';document.write').replace('var t;t=','var t=').replace(';<\\/script>','<\\/script>')
 
 htm = pug.renderFile(
   join PWD,'index.pug'
@@ -92,7 +92,6 @@ write(
 {env} = process
 for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')
   env[i] = env['SITE_'+i]
-
 await put(
   'index.htm'
   =>createReadStream(prehtm_fp)
