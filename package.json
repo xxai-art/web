@@ -28,6 +28,7 @@
     "coffeescript": "^2.7.0",
     "concurrently": "^8.2.1",
     "dotenv": "^16.3.1",
+    "esbuild": "^0.19.2",
     "eslint-plugin-coffee": "^0.1.15",
     "eslint-plugin-svelte3": "^4.0.0",
     "html-minifier-terser": "^7.2.0",
@@ -44,6 +45,7 @@
     "terser": "^5.19.3",
     "typed.js": "^2.0.132",
     "vite": "^4.4.9",
+    "@w5/yml": "^0.0.2",
     "wac.tax": "link:../ui"
   },
   "dependencies": {
@@ -57,8 +59,6 @@
     "@w5/sd_token": "^0.0.10",
     "@w5/time": "^0.0.8",
     "@w5/u8": "^0.0.3",
-    "@w5/vite": "^0.0.40",
-    "@w5/yml": "^0.0.2",
-    "lightningcss": "^1.21.7"
+    "@w5/vite": "^0.0.40"
   }
 }
