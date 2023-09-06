@@ -5,7 +5,7 @@ cd $DIR
 set -ex
 
 rm -rf dist
-cd sh.dist
+cd sh
 ./build.sh
 rm -rf "../dist/.18"
 ./cdn.sh
