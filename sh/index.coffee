@@ -1,4 +1,9 @@
 do =>
   CDN=''
-  document.write("<script type=module src=#{CDN}#{await (await fetch(CDN+'v')).text()}></script>")
+  script = 'script'
+  s=document.createElement(script)
+  s.type = 'module'
+  s.src = "#{CDN}#{await (await fetch(CDN+'v')).text()}"
+  m=document.getElementsByTagName(script)[0]
+  m.parentNode.insertBefore(a, m)
   return
