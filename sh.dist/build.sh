@@ -26,7 +26,6 @@ esbuild $js \
   --format=iife |
   sed 's/^.\{6\}//; s/.\{6\}$//' | sponge $js
 
-# --outfile=public/s.js \
 ./i18n.sh
 
 cd src
