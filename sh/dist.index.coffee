@@ -1,6 +1,7 @@
 #!/usr/bin/env coffee
 
 > ./env.coffee > PWD DIST
+  ./distDb.coffee > dbExist
   @w5/u8 > u8eq
   @w5/utf8/utf8e.js
   html-minifier-terser > minify
@@ -66,37 +67,6 @@ htm = htm.replace(
 prehtm_fp = join DIST, 'index.htm'
 prehtm = read prehtm_fp
 
-DB = knex {
-  client:  'better-sqlite3'
-  useNullAsDefault: true
-  connection: {
-    filename: join PWD, 'dist.public.db'
-  }
-}
-TABLE = 'fp_hash'
-
-if not await DB.schema.hasTable TABLE
-  await DB.schema.createTable(
-    TABLE
-    (t) =>
-      t.string('fp').primary()
-      t.binary('hash').notNullable()
-      return
-  )
-
-dbExist = (fp, hash)=>
-  pre = await DB(TABLE).select('hash').where({fp})
-  if pre.length
-    if u8eq pre[0].hash, hash
-      return
-  =>
-    t = DB(TABLE)
-    if pre.length
-      t = t.where({fp}).update(hash)
-    else
-      t = t.insert({fp,hash})
-    t
-
 if not prehtm.includes 'document.write'
   end = prehtm.lastIndexOf '></script>'
   begin = prehtm.lastIndexOf('/',end)+1
@@ -130,21 +100,5 @@ write(
   prehtm_fp
   htm
 )
-
-{env} = process
-for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')
-  env[i] = env['SITE_'+i]
-
-for await fp from walkRel DIST
-  full_fp = join DIST,fp
-  add = await dbExist fp, await stream createReadStream full_fp
-  if add
-    await put(
-      fp
-      =>
-        createReadStream(full_fp)
-      mime(full_fp)
-    )
-    await add()
 
 process.exit()
