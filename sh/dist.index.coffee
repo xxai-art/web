@@ -54,7 +54,8 @@ htm = htm.replace(
   '<script type=module>'+js+'</script>'
 )
 
-prehtm = read join DIST, 'index.htm'
+prehtm_fp = join DIST, 'index.htm'
+prehtm = read prehtm_fp
 if not prehtm.includes '.serviceWorker.'
   end = prehtm.lastIndexOf '></script>'
   begin = prehtm.lastIndexOf('/',end)+1
@@ -79,10 +80,11 @@ if not prehtm.includes '.serviceWorker.'
       console.log '清理完成'
       break
     await sleep 1e3
-  write(
-    prehtm
-    htm
-  )
+
+write(
+  prehtm_fp
+  htm
+)
 
 
 
