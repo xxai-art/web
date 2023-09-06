@@ -8,7 +8,6 @@
   @w5/pool > Pool
   base-x
   ./mime
-  knex
   ./env > DIST ROOT PWD
   @w5/ossput:put
   ./uploadDb:@ > ID_HASH

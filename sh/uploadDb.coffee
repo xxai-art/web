@@ -1,5 +1,6 @@
 #!/usr/bin/env coffee
 > ./env > PWD
+  knex
 
 < ID_HASH = 'id_hash'
 
