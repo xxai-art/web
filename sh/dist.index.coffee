@@ -3,6 +3,7 @@
 > ./env.coffee > PWD DIST
   html-minifier-terser > minify
   path > join
+  @w5/walk > walkRel
   ./mime
   fs > createReadStream
   @w5/sleep
@@ -92,11 +93,11 @@ write(
 {env} = process
 for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')
   env[i] = env['SITE_'+i]
-await put(
-  'index.htm'
-  =>createReadStream(prehtm_fp)
-  mime(prehtm_fp)
-)
 
-
-
+for await i from walkRel DIST
+  console.log i
+# await put(
+#   'index.htm'
+#   =>createReadStream(prehtm_fp)
+#   mime(prehtm_fp)
+# )
