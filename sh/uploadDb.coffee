@@ -1,6 +1,7 @@
 #!/usr/bin/env coffee
 > ./env > PWD
   knex
+  path > join
 
 < ID_HASH = 'id_hash'
 
