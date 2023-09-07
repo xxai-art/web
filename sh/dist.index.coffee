@@ -73,7 +73,7 @@ if not prehtm.includes 'document.write'
       fp
       =>
         v
-      ''
+      'text/js'
     )
     cdn = 'https:'+CDN
     {hostname} = new URL(cdn)
