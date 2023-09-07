@@ -33,7 +33,7 @@ _get = (req) =>
       cache = res.headers.get('cache-control') or ''
       if cache != 'no-cache'
         rc = new Response(res.clone().body, res)
-        rc.headers.set '#', now().toString(36)
+        rc.headers.set 't', now().toString(36)
         caches.open(
           1 # version
         ).then (cache) =>
@@ -87,7 +87,7 @@ fetch: (event) =>
             sec = /max-age=(\d+)/.exec(cache)
             if sec and (
               (
-                now - parseInt(res.headers.get("#"),36) - sec[1]
+                now - parseInt(res.headers.get("t"),36) - sec[1]
               ) < 0
             )
               return res
