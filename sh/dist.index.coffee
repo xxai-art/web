@@ -75,7 +75,7 @@ if not prehtm.includes 'document.write'
         v
       ''
     )
-    cdn = 'https://'+CDN
+    cdn = 'https:'+CDN
     {hostname} = new URL(cdn)
     [{id}] = await cf.GET('?name='+hostname)
     url = cdn+fp
