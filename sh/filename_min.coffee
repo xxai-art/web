@@ -10,7 +10,15 @@
   ./mime
   ./env > DIST ROOT PWD
   @w5/ossput:put
-  ./uploadDb:@ > ID_HASH
+  ./uploadDb > DB tableByExt
+  @w5/write
+  @w5/read
+
+fp = join DIST,'m.js'
+wrtie(
+  fp
+  read(fp).replace('.endsWith(".css")','.endsWith(".")')
+)
 
 BFILE = BaseX '!$-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
 
@@ -68,18 +76,19 @@ for i from to_replace
   val = Buffer.from await stream(
     createReadStream fp
   )
-  id = (await DB(ID_HASH).where({val}))[0]?.id or 0
+  table = tableByExt fp
+  id = (await DB(table).where({val}))[0]?.id or 0
   if not id
-    [id] = await DB(ID_HASH).insert({val})
+    [id] = await DB(table).insert({val})
     key = encode id
     # 跳过这些键
     if [
       'I18N'
       'v'
     ].includes(key)
-      await DB(ID_HASH).where({id}).delete()
+      await DB(table).where({id}).delete()
       ++id
-      await DB(ID_HASH).insert({id,val})
+      await DB(table).insert({id,val})
 
   ID.push id
 
@@ -101,13 +110,16 @@ pool = Pool 99
 
 upload = (id, fp)=>
   key = encode(id)
+  table = tableByExt fp
+  if table == 'css'
+    key += '.'
   await put(
     key
     =>
       createReadStream fp
     mime i
   )
-  await DB(ID_HASH).where({id}).update({uploaded:true})
+  await DB(table).where({id}).update({uploaded:true})
   await unlink fp
   return
 
@@ -115,7 +127,8 @@ pool = Pool 64
 for i,p in to_replace
   fp = join DIST, i
   id = ID[p]
-  {uploaded} = (await DB(ID_HASH).where({id}).select())[0]
+  table = tableByExt i
+  {uploaded} = (await DB(table).where({id}).select())[0]
   if uploaded
     await unlink fp
     continue

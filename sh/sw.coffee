@@ -75,25 +75,21 @@ fetch: (event) =>
   event.respondWith(
     caches.match(req).then (res)=>
       if res
-        if pathname == '/v' # 刷新
-          _get req
-          return res
-        else
-          cache = res.headers.get("cache-control") or ''
-          loop
-            if cache
-              if cache == "no-cache"
-                break
-              sec = /max-age=(\d+)/.exec(cache)
-              if sec and (
+        cache = res.headers.get("cache-control") or ''
+        loop
+          if cache
+            if cache == "no-cache"
+              break
+            sec = /max-age=(\d+)/.exec(cache)
+            if sec and (
+              (
                 (
-                  (
-                    new Date()/1000 - parseInt(res.headers.get("_"),16)
-                  ) - sec[1]
-                ) > 0
-              )
-                break
-            return res
+                  new Date()/1000 - parseInt(res.headers.get("_"),16)
+                ) - sec[1]
+              ) > 0
+            )
+              break
+          return res
       try
         r = await get(req)
       catch e

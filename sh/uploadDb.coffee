@@ -3,27 +3,24 @@
   knex
   path > join
 
-< ID_HASH = 'id_hash'
+export DB = knex {
+  client:  'better-sqlite3'
+  useNullAsDefault: true
+  connection: {
+    filename: join PWD, 'filename_min.db'
+  }
+}
 
-export default new Proxy(
-  {}
-  get:(_,name)=>
-    db = knex {
-      client:  'better-sqlite3'
-      useNullAsDefault: true
-      connection: {
-        filename: join PWD, name+'.db'
-      }
-    }
+for name from ['css','file']
+  if not await db.schema.hasTable name
+    await db.schema.createTable(
+      name
+      (t) =>
+        t.integer('id').primary()
+        t.boolean('uploaded').defaultTo(false)
+        t.binary('val').notNullable().unique()
+        return
+    )
 
-    if not await db.schema.hasTable ID_HASH
-      await db.schema.createTable(
-        ID_HASH
-        (t) =>
-          t.integer('id').primary()
-          t.boolean('uploaded').defaultTo(false)
-          t.binary('val').notNullable().unique()
-          return
-      )
-    db
-)
+export tableByExt = (ext)=>
+  'css' if fp.endsWith('.css') else 'file'
