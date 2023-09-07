@@ -1,6 +1,3 @@
-# try
-#   await navigator.serviceWorker.register('/s.js')
-
 > wac.tax/_/SDK > init
   ./conf > API USER_TAX_CDN
   ./lib/reqMsgpack.coffee:

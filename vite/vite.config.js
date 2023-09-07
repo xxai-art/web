@@ -171,15 +171,22 @@ config = {
 };
 
 config = merge(config, (await (async() => {
-  var FILENAME, JSNAME;
+  var FILENAME, JSNAME, base, minify;
   if (PRODUCTION) {
     FILENAME = '[name].[hash].[ext]';
     JSNAME = '[name].[hash].js';
+    if (process.env.DEBUG) {
+      base = '/';
+      minify = false;
+    } else {
+      base = '//ok0.pw';
+      minify = true;
+    }
     return {
       plugins: [((await import('./plugin/mini_html.js'))).default],
-      base: '//ok0.pw/',
+      base,
       build: {
-        minify: 'terser',
+        minify,
         rollupOptions: {
           output: {
             chunkFileNames: JSNAME,

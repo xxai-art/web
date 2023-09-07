@@ -41,4 +41,3 @@ cd ..
 bunx vite build
 
 cd dist
-echo -e "1i\nawait navigator.serviceWorker.register('/s.js')\n.\nwq" | ed -s m.js

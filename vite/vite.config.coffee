@@ -123,18 +123,29 @@ config = merge config, await do =>
     FILENAME = '[name].[hash].[ext]'
     JSNAME = '[name].[hash].js'
 
+    if process.env.DEBUG
+      base = '/'
+      minify = false
+    else
+      base = '//ok0.pw'
+      minify = true
+
     return {
       plugins:[
-        (await import('./plugin/mini_html.js')).default
+        (
+          await import('./plugin/mini_html.js')
+        ).default
       ]
-      base: '//ok0.pw/'
-      build:
-        minify: 'terser'
-        rollupOptions:
+      base
+      build:{
+        minify
+        rollupOptions:{
           output:
             chunkFileNames: JSNAME
             assetFileNames: FILENAME
             entryFileNames: "m.js"
+        }
+      }
     }
   else
     return {

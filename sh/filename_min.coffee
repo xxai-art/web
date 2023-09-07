@@ -16,10 +16,15 @@
 
 fp = join DIST,'m.js'
 
-write(
-  fp
-  read(fp).replace('.endsWith(".css")','.endsWith(".")')
-)
+m_js = read(fp)
+
+end_css = '.endsWith(".css")'
+if m_js.indexOf(end_css) > 0
+  m_js = m_js.replace(end_css,'.endsWith(".")')
+  write(
+    fp
+    'await navigator.serviceWorker.register("/s.js");'+m_js
+  )
 
 BFILE = BaseX '!$-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
 
