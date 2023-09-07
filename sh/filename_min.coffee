@@ -21,6 +21,10 @@ m_js = read(fp)
 end_css = '.endsWith(".css")'
 if m_js.indexOf(end_css) > 0
   m_js = m_js.replace(end_css,'.endsWith(".")')
+  # 修复重复导入
+  begin = m_js.indexOf('(()=>import("./boot') + 12
+  end = m_js.indexOf('"',begin+1)
+  m_js = m_js.slice(0,end+4)+m_js.slice(end*2+4-begin)
   write(
     fp
     'await navigator.serviceWorker.register("/s.js");'+m_js
