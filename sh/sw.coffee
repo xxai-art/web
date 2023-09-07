@@ -1,7 +1,7 @@
 con = console
 HOST = location.host
 {protocol,host:HOST} = location
-HOST_URL = protocol+"//#{HOST}/"
+HOST_URL = protocol+'//#{HOST}/'
 
 sleep = (n)=>
   new Promise (resolve)=>
@@ -81,13 +81,13 @@ fetch: (event) =>
   event.respondWith(
     caches.match(req).then (res)=>
       if res
-        cache = res.headers.get("cache-control") or ''
+        cache = res.headers.get('cache-control') or ''
         loop
           if cache
             sec = /max-age=(\d+)/.exec(cache)
             if sec and (
               (
-                now - parseInt(res.headers.get("t"),36) - sec[1]
+                now - parseInt(res.headers.get('t'),36) - sec[1]
               ) < 0
             )
               return res
