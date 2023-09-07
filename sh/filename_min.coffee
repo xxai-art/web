@@ -64,9 +64,6 @@ for await fp from await opendir DIST
   if not ['s.js','index.html','index.htm'].includes(fp)
     to_replace.push fp
 
-
-DB = await uploadDb.filename_min
-
 to_replace.sort()
 
 ID = []
