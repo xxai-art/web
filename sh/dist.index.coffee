@@ -85,7 +85,7 @@ if not prehtm.includes 'document.write'
       await cf.POST id+'/purge_cache', files: [url]
       t = await reqTxt url
       if t == v
-        console.log '清理完成'
+        console.log "清理完成 #{url} → #{v}"
         break
       await sleep 1e3
     await add()

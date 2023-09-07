@@ -14,8 +14,11 @@ load = =>
       {scrollHeight} = u
       if scrollHeight
         top = scrollHeight - innerHeight - 476
-        u.style.transition = "all #{Math.round top/20}s linear"
-        u.style.marginTop = -top+'px'
+        Object.assign(
+          u.style
+          transition : "all #{Math.round top/20}s linear"
+          marginTop : -top+'px'
+        )
         break
       await tick()
   return
