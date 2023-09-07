@@ -1,7 +1,7 @@
 <script lang="coffee">
 > ./img/NoUser.svelte
   ./AuthInput.svelte
-  svelte > onMount
+  svelte > onMount tick
 
 + b
 
@@ -10,9 +10,14 @@ load = =>
     u = b.childNodes[0]
     n = 0
     u.style.marginTop = 0
-    top = u.scrollHeight - innerHeight - 476
-    u.style.transition = "all #{Math.round top/20}s linear"
-    u.style.marginTop = -top+'px'
+    loop
+      {scrollHeight} = u
+      if scrollHeight
+        top = scrollHeight - innerHeight - 476
+        u.style.transition = "all #{Math.round top/20}s linear"
+        u.style.marginTop = -top+'px'
+        break
+      await tick()
   return
 
 </script>
