@@ -7,6 +7,9 @@ sleep = (n)=>
   new Promise (resolve)=>
     setTimeout(resolve, n)
 
+now = =>
+  parseInt new Date / 1000
+
 _get = (req) =>
   url = new URL(req.url)
 
@@ -27,12 +30,14 @@ _get = (req) =>
     ok = [200,301,304].includes(res.status)
     if ok
       res.ok = ok
-      rc = new Response(res.clone().body, res)
-      rc.headers.set "_", parseInt((new Date)/1000).toString(16)
-      caches.open(
-        1 # version
-      ).then (cache) =>
-        cache.put(req, rc)
+      cache = res.headers.get('cache-control') or ''
+      if cache != 'no-cache'
+        rc = new Response(res.clone().body, res)
+        rc.headers.set '#', now().toString(36)
+        caches.open(
+          1 # version
+        ).then (cache) =>
+          cache.put(req, rc)
   return res
 
 get = (req)=>
@@ -79,18 +84,14 @@ fetch: (event) =>
         cache = res.headers.get("cache-control") or ''
         loop
           if cache
-            if cache == "no-cache"
-              break
             sec = /max-age=(\d+)/.exec(cache)
             if sec and (
               (
-                (
-                  new Date()/1000 - parseInt(res.headers.get("_"),16)
-                ) - sec[1]
-              ) > 0
+                now - parseInt(res.headers.get("#"),36) - sec[1]
+              ) < 0
             )
-              break
-          return res
+              return res
+          break
       try
         r = await get(req)
       catch e
