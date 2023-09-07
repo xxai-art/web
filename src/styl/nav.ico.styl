@@ -1,0 +1,29 @@
+.ico
+  display flex
+  height 100%
+  position relative
+
+  & > a
+    border-right 1px solid #eee
+    box-sizing border-box
+    margin 0
+    padding 0
+    position relative
+    transition all 0.3s
+    width 64px
+
+    &:before
+      background no-repeat 50% 55% / 20px
+      content ''
+      height 100%
+      opacity 0.4
+      width 100%
+
+    &:hover
+      border-bottom 3px solid #f40
+
+      &:before
+        opacity 1
+
+    &.now
+      background-color #f9f9f9
