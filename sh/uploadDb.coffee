@@ -23,4 +23,4 @@ for name from ['css','file']
     )
 
 export tableByExt = (ext)=>
-  'css' if fp.endsWith('.css') else 'file'
+  if fp.endsWith('.css') then 'css' else 'file'
