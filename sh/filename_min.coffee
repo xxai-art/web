@@ -109,8 +109,10 @@ pool = Pool 99
 upload = (id, fp)=>
   key = encode(id)
   table = tableByExt fp
+  console.log fp, table
   if table == 'css'
     key += '.'
+
   await put(
     key
     =>
