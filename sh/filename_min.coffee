@@ -15,7 +15,8 @@
   @w5/read
 
 fp = join DIST,'m.js'
-wrtie(
+
+write(
   fp
   read(fp).replace('.endsWith(".css")','.endsWith(".")')
 )
