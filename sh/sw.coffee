@@ -1,7 +1,6 @@
 con = console
 HOST = location.host
 {protocol,host:HOST} = location
-HOST_URL = protocol+'//#{HOST}/'
 
 sleep = (n)=>
   new Promise (resolve)=>
