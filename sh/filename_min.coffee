@@ -12,7 +12,6 @@
   @w5/ossput:put
   ./uploadDb:@ > ID_HASH
 
-CDN = process.env.CDN
 BFILE = BaseX '!$-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
 
 encode = (n)=>
@@ -86,11 +85,8 @@ for i from to_replace
 
 for [k,v] from css_js.entries()
   for fp,n in to_replace
-    url = CDN+encode(ID[n])
+    url = encode(ID[n])
     v = v.replaceAll(
-      './'+fp
-      url
-    ).replaceAll(
       fp
       url
     )
