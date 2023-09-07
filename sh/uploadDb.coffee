@@ -22,5 +22,5 @@ for name from ['css','file']
         return
     )
 
-export tableByExt = (ext)=>
+export tableByExt = (fp)=>
   if fp.endsWith('.css') then 'css' else 'file'
