@@ -177,7 +177,7 @@ config = merge(config, (await (async() => {
     JSNAME = '[name].[hash].js';
     return {
       plugins: [((await import('./plugin/mini_html.js'))).default],
-      base: '//xxai.art/',
+      base: '//ok0.pw/',
       build: {
         minify: 'terser',
         rollupOptions: {
