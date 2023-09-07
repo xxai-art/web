@@ -56,6 +56,7 @@ nav
       +if comment
         | {comment}
   a.fav(class:D=faved @click=aFav)
+  a.m
 </template>
 
 <style lang="stylus">
@@ -98,6 +99,9 @@ nav
         background-image url(':/svg/faved.svg')
         color #fff
         filter invert(14%) sepia(98%) saturate(7409%) hue-rotate(360deg) brightness(112%) contrast(111%)
+
+    &.m
+      background var(--svg-nabla) 50% 86% / 10px no-repeat
 
     &:hover
       filter invert(53%) sepia(49%) saturate(6297%) hue-rotate(2deg) brightness(104%) contrast(106%)
