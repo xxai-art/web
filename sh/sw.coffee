@@ -31,12 +31,14 @@ _get = (req) =>
       res.ok = ok
       cache = res.headers.get('cache-control') or ''
       if cache != 'no-cache'
-        rc = new Response(res.clone().body, res)
-        rc.headers.set 't', now().toString(36)
-        caches.open(
-          1 # version
-        ).then (cache) =>
-          cache.put(req, rc)
+        sec = /max-age=(\d+)/.exec(cache)
+        if sec
+          sec = +sec[1]
+          if sec > 0
+            rc = new Response(res.clone().body, res)
+            rc.headers.set '@', (now()+sec).toString(36)
+            caches.open(2).then (cache) =>
+              cache.put(req, rc)
   return res
 
 get = (req)=>
@@ -79,18 +81,8 @@ fetch: (event) =>
     req = new Request('/', { method: method })
   event.respondWith(
     caches.match(req).then (res)=>
-      if res
-        cache = res.headers.get('cache-control') or ''
-        loop
-          if cache
-            sec = /max-age=(\d+)/.exec(cache)
-            if sec and (
-              (
-                now - parseInt(res.headers.get('t'),36) - sec[1]
-              ) < 0
-            )
-              return res
-          break
+      if res and parseInt(res.headers.get('@'),36) > now()
+        return res
       try
         r = await get(req)
       catch e
