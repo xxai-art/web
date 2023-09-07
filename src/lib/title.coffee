@@ -7,7 +7,7 @@ export TITLE = 'xxAI.Art'
 DEFAULT_TITLE = TITLE
 
 onMount =>
-  t = TITLE + ' : ' + I18N[SLOGAN]
+  t = TITLE + ' · ' + I18N[SLOGAN]
   if document.title == DEFAULT_TITLE
     document.title = t
   DEFAULT_TITLE = t
