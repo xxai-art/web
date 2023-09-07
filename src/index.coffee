@@ -5,4 +5,4 @@
 init API, USER_TAX_CDN
 
 # 这样可以避免一些奇怪的错误
-await import('./boot.coffee')
+import('./boot.coffee')

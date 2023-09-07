@@ -23,6 +23,5 @@ cd $DIR
 #   fi
 # }
 # link &
-./sw.sh
 cd $DIR
 exec ./sh/dev.sh
