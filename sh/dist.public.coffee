@@ -14,6 +14,10 @@
 for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')
   env[i] = env['SITE_'+i]
 
+{SITE} = env
+
+SITE_URL = 'https//'+SITE+'/'
+
 to_add = []
 files = []
 
@@ -28,12 +32,12 @@ for await fp from walkRel DIST
       mime(full_fp)
     )
     if fp == 'index.htm'
-      fp = '/'
-    files.push fp
+      fp = ''
+    files.push SITE_URL+fp
     to_add.push add
 
 if files.length
-  [{id}] = await cf.GET('?name=xxai.art')
+  [{id}] = await cf.GET('?name='+SITE)
   await cf.POST id+'/purge_cache', {files}
   for add from to_add
     await add()
