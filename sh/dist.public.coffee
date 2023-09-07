@@ -16,7 +16,7 @@ for i from 'OSSPUT_BUCKET BACKBLAZE_url'.split(' ')
 
 {SITE} = env
 
-SITE_URL = 'https//'+SITE+'/'
+SITE_URL = 'https://'+SITE+'/'
 
 to_add = []
 files = []
