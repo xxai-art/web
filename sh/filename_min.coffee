@@ -79,6 +79,8 @@ for i from to_replace
   if not id
     [id] = await DB(table).insert({val})
     key = encode id
+    if key == 'css'
+      continue
     # 跳过这些键
     if [
       'I18N'
@@ -93,6 +95,8 @@ for i from to_replace
 for [k,v] from css_js.entries()
   for fp,n in to_replace
     url = encode(ID[n])
+    if fp.endsWith '.css'
+      url += '.'
     v = v.replaceAll(
       fp
       url
@@ -106,13 +110,10 @@ for [k,v] from css_js.entries()
 pool = Pool 99
 
 
-upload = (id, fp)=>
+upload = (table, id, fp)=>
   key = encode(id)
-  table = tableByExt fp
-  console.log fp, table
   if table == 'css'
     key += '.'
-
   await put(
     key
     =>
@@ -132,7 +133,7 @@ for i,p in to_replace
   if uploaded
     await unlink fp
     continue
-  await pool upload, id, fp
+  await pool upload, table, id, fp
 await pool.done
 
 process.exit()
