@@ -12,8 +12,8 @@ export DB = knex {
 }
 
 for name from ['css','file']
-  if not await db.schema.hasTable name
-    await db.schema.createTable(
+  if not await DB.schema.hasTable name
+    await DB.schema.createTable(
       name
       (t) =>
         t.integer('id').primary()
