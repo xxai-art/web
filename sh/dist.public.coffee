@@ -23,7 +23,8 @@ to_add = []
 files = []
 
 pool = Pool 30
-for await fp from walkRel DIST
+
+upload = (fp)=>
   full_fp = join DIST,fp
   add = await dbExist fp, await stream createReadStream full_fp
   if add
@@ -38,6 +39,10 @@ for await fp from walkRel DIST
       fp = ''
     files.push SITE_URL+fp
     to_add.push add
+  return
+
+for await fp from walkRel DIST
+  await upload fp
 
 await pool.done
 
