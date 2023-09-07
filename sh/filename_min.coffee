@@ -88,6 +88,9 @@ for [k,v] from css_js.entries()
   for fp,n in to_replace
     url = CDN+encode(ID[n])
     v = v.replaceAll(
+      './'+fp
+      url
+    ).replaceAll(
       fp
       url
     )
