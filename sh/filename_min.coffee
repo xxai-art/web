@@ -110,7 +110,7 @@ for [k,v] from css_js.entries()
       fp
       url
     )
-    console.log fp,url
+    # console.log fp,url
   await writeFile(
     join(DIST,k)
     v
