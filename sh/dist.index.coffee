@@ -12,7 +12,6 @@
   @w5/req/reqTxt
   @w5/ossput:put
   @w5/cf
-  @w5/cf/Zone
   pug
   @w5/read
   coffeescript
