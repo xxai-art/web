@@ -12,7 +12,7 @@ load = =>
     u.style.marginTop = 0
     loop
       {scrollHeight} = u
-      if scrollHeight
+      if scrollHeight > innerHeight
         top = scrollHeight - innerHeight - 476
         Object.assign(
           u.style
