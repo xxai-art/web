@@ -4,10 +4,11 @@ import * as C from "./i18n/code.js";
 import byTag from 'wac.tax/_/byTag.js';
 
 const prefix = "i-",
-	TAG_LI = [], 
   E=customElements;
 
 if(!E.get(prefix+'t')){
+
+const TAG_LI = []; 
 
 Object.entries({
 	t: class extends HTMLElement {
