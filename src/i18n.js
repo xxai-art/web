@@ -4,7 +4,10 @@ import * as C from "./i18n/code.js";
 import byTag from 'wac.tax/_/byTag.js';
 
 const prefix = "i-",
-	TAG_LI = [];
+	TAG_LI = [], 
+  E=customElements;
+
+if(!E.get(prefix+'t')){
 
 Object.entries({
 	t: class extends HTMLElement {
@@ -36,14 +39,16 @@ Object.entries({
 		}
 	},
 }).forEach(([name, cls]) => {
-	TAG_LI.push(name);
-	customElements.define(prefix + name, cls);
+  var pn = prefix+name;
+  TAG_LI.push(pn);
+  E.define(pn, cls);
 });
 
 onMount(() => {
 	TAG_LI.forEach((tag) => {
-		[...byTag(document,prefix + tag)].forEach((i) =>
+		[...byTag(document, tag)].forEach((i) =>
 			i.connectedCallback(),
 		);
 	});
 });
+}
