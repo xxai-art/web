@@ -3,6 +3,7 @@
 > ./distDb.coffee > dbExist
   @w5/ossput:put
   @w5/cf
+  @w5/pool > Pool
   @w5/walk > walkRel
   @w5/blake3/stream.mjs
   path > join
@@ -21,11 +22,13 @@ SITE_URL = 'https://'+SITE+'/'
 to_add = []
 files = []
 
+pool = Pool 30
 for await fp from walkRel DIST
   full_fp = join DIST,fp
   add = await dbExist fp, await stream createReadStream full_fp
   if add
-    await put(
+    await pool(
+      put
       fp
       =>
         createReadStream(full_fp)
@@ -35,6 +38,8 @@ for await fp from walkRel DIST
       fp = ''
     files.push SITE_URL+fp
     to_add.push add
+
+await pool.done
 
 if files.length
   [{id}] = await cf.GET('?name='+SITE)
