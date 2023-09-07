@@ -9,7 +9,7 @@
   ./i18n/onMount.js:i18nOnMount
   ./i18n/code.js > INPUT_MAIL
 
-+ mail, form
++ mail, form, ing
 
 placeholder = ''
 
@@ -17,7 +17,7 @@ onMount i18nOnMount (I18N)=>
   placeholder = I18N[INPUT_MAIL]
   return
 
-submit = =>
+_submit = =>
   mail.value = v = mail.value.trim()
   if not v
     return
@@ -35,13 +35,22 @@ submit = =>
   byTag0(box,'u-auth').account = v
   return
 
+submit = =>
+  if ing
+    return
+  ing = 1
+  _submit().finally =>
+    ing = undefined
+    return
+  return
+
 onMount =>
   mail.value = await last()?[3] or ''
   AutoFocus form
 </script>
 
 <template lang="pug">
-form(@&form @submit|preventDefault)
+form(@&form @submit|preventDefault class:I=ing)
   input(@&mail placeholder:placeholder type="email")
   button(type="submit")
 </template>
@@ -66,6 +75,9 @@ form
 
     &:hover
       filter invert(50%) sepia(81%) saturate(1261%) hue-rotate(161deg) brightness(100%) contrast(107%)
+
+  &.I> button
+    background-image var(--svg-wait)
 
   &>input
     background transparent
