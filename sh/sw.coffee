@@ -24,8 +24,9 @@ _get = (req) =>
     res = await fetch(req)
 
   if res
-    res.ok = [200,304].indexOf(res.status) >= 0
-    if res.ok
+    ok = [200,301,304].includes(res.status)
+    if ok
+      res.ok = ok
       rc = new Response(res.clone().body, res)
       rc.headers.set "_", parseInt((new Date)/1000).toString(16)
       caches.open(
