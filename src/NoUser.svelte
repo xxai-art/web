@@ -13,7 +13,7 @@ load = =>
     loop
       {scrollHeight} = u
       if scrollHeight > innerHeight
-        top = scrollHeight - innerHeight - 476
+        top = scrollHeight - innerHeight
         Object.assign(
           u.style
           transition : "all #{Math.round top/20}s linear"
