@@ -3,12 +3,7 @@ import onMount, { I18N } from "./i18n/onMount.js";
 import * as C from "./i18n/code.js";
 import byTag from 'wac.tax/_/byTag.js';
 
-const prefix = "i-",
-  E=customElements;
-
-if(!E.get(prefix+'t')){
-
-const TAG_LI = []; 
+const prefix = "i-",TAG_LI = []; 
 
 Object.entries({
 	t: class extends HTMLElement {
@@ -42,7 +37,7 @@ Object.entries({
 }).forEach(([name, cls]) => {
   var pn = prefix+name;
   TAG_LI.push(pn);
-  E.define(pn, cls);
+  customElements.define(pn, cls);
 });
 
 onMount(() => {
@@ -52,4 +47,3 @@ onMount(() => {
 		);
 	});
 });
-}
