@@ -81,7 +81,9 @@ fetch: (event) =>
     req = new Request('/', { method: method })
   event.respondWith(
     caches.match(req).then (res)=>
-      if res and parseInt(res.headers.get('@'),36) > now()
+      if res and (
+        parseInt(res.headers.get('@'),36) > now()
+      )
         return res
       try
         r = await get(req)
