@@ -29,6 +29,9 @@ dependencies:
   '@w5/sd_token':
     specifier: ^0.0.10
     version: 0.0.10
+  '@w5/sleep':
+    specifier: ^0.0.1
+    version: 0.0.1
   '@w5/time':
     specifier: ^0.0.8
     version: 0.0.8
@@ -76,9 +79,6 @@ devDependencies:
   '@w5/req':
     specifier: ^0.0.13
     version: 0.0.13
-  '@w5/sleep':
-    specifier: ^0.0.1
-    version: 0.0.1
   '@w5/svelte-preprocess':
     specifier: ^5.0.20
     version: 5.0.20(coffeescript@2.7.0)(pug@3.0.2)(stylus@0.60.0)(svelte@4.2.0)
@@ -2301,7 +2301,6 @@ packages:
 
   /@w5/sleep@0.0.1:
     resolution: {integrity: sha512-GjLtl9qx0bYhJO9kUIHkkmaApa6Uvqr93sPYg6obAxSR5+OKYtRTqC+fZZ0gMov+TKchNGvZFKSS7slA3BAVPw==}
-    dev: true
 
   /@w5/snake@0.0.1:
     resolution: {integrity: sha512-WdUByHJ2YYJ3G7h2HN/YASAB2MffEOs94yNgTPfbbodQgoeDpI2N//HSg1l+h9NyLKWY32VCHi9utEOMZHdsmA==}

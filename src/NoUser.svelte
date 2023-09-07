@@ -1,14 +1,14 @@
 <script lang="coffee">
 > ./img/NoUser.svelte
   ./AuthInput.svelte
-  svelte > onMount tick
+  svelte > onMount
+  @w5/sleep
 
 + b
 
 load = =>
   if b
     u = b.childNodes[0]
-    n = 0
     u.style.marginTop = 0
     loop
       {scrollHeight} = u
@@ -20,7 +20,7 @@ load = =>
           marginTop : -top+'px'
         )
         break
-      await tick()
+      await sleep(1000)
   return
 
 </script>
