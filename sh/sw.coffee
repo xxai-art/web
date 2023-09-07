@@ -36,7 +36,7 @@ _get = (req) =>
           sec = +sec[1]
           if sec > 0
             rc = new Response(res.clone().body, res)
-            rc.headers.set '@', (now()+sec).toString(36)
+            rc.headers.set '-', (now()+sec).toString(36)
             caches.open(2).then (cache) =>
               cache.put(req, rc)
   return res
@@ -82,7 +82,7 @@ fetch: (event) =>
   event.respondWith(
     caches.match(req).then (res)=>
       if res and (
-        parseInt(res.headers.get('@'),36) > now()
+        parseInt(res.headers.get('-'),36) > now()
       )
         return res
       try
