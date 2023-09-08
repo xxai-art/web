@@ -23,7 +23,7 @@ export default (url)=>
       msg = unpack new Uint8Array(data)
       WS_FUNC[
         msg[0]
-      ](...msg.slice(1))
+      ].apply(ws,msg.slice(1))
       return
 
     onclose: (ev)=>
