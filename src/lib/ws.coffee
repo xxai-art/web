@@ -9,11 +9,14 @@
 _SEND = []
 
 export send = (args...)=>
-  args = pack args
   if WS
-    WS.send args
+    WS.send ...args
   else
     _SEND.push args
+  return
+
+export wsClose = =>
+  WS?.close()
   return
 
 export default (uid, open)=>
@@ -23,10 +26,15 @@ export default (uid, open)=>
       if import.meta.env.DEV then 'ws:' else 'wss:'
     )+API+'ws/'+u64B64(uid)
   )
-  {close} = WS
+  {close,send:_send} = WS
+
   WS.close = =>
     close.call(WS)
     WS = undefined
+    return
+
+  WS.send = (args...)=>
+    _send.call WS, pack args
     return
 
   Object.assign(
@@ -35,7 +43,7 @@ export default (uid, open)=>
 
     onopen:=>
       while _SEND.length
-        WS.send _SEND.pop()
+        WS.send ..._SEND.pop()
       open.call(WS)
       return
 

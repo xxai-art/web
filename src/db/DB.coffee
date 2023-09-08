@@ -2,7 +2,8 @@
   @w5/vite > u64B64
   wac.tax/user/User.js > onMe
   ./es.coffee:ES_MAP
-  ~/lib/Ws.coffee
+  ~/lib/Ws.coffee:@ > wsClose
+  ~/const/WS.coffee > 同步
   ./TABLE.coffee > SYNCED
   ./_sync.coffee:_sync
   ./SYNC_TABLE.coffee
@@ -15,7 +16,7 @@
 #   console.log 'http://localhost:5555/-'+b64VbyteE [2, i]
 
 
-+ _R, _W, _DB,  PRE, UID, LEADER, WS_CLOSE
++ _R, _W, _DB,  PRE, UID
 
 _rw = (args, next, db, pending)=>
   if db
@@ -64,7 +65,7 @@ onMe (user)=>
   PRE = {}
 
   if not UID
-    WS_CLOSE?()
+    wsClose()
     _DB = _R = _W = undefined
     return
 
@@ -89,7 +90,10 @@ onMe (user)=>
     UID
     ->
       synced = new Map (await _R[SYNCED].getAll()).map((i)=>[i.p,i.n])
-      console.log await Promise.all SYNC_TABLE.map (_,p)=>synced.get(p) or 0
+      @send(
+        同步
+        ...await Promise.all SYNC_TABLE.map (_,p)=>synced.get(p) or 0
+      )
       return
   )
   # if ws # 自由当为 leader 的时候才返回 ws
