@@ -1,17 +1,16 @@
 > wac.tax/_/IDB.js
   @w5/vite > u64B64
   wac.tax/user/User.js > onMe
-  ./es.coffee:ES_MAP
   ~/lib/Ws.coffee:@ > wsClose
   ~/const/WS.coffee > 同步
   ./TABLE.coffee > SYNCED
   ./_sync.coffee:_sync
   ./SYNC_TABLE.coffee
-  ./TOOL.coffee > prevIter
   ./COL.coffee > TS
   ./upgrade.coffee
   ./VER.coffee
 
+  # ./TOOL.coffee > prevIter
 # for i from [1195122, 1060177, 1195121, 1195125, 1195123, 858044, 118321, 1059456, 989581, 394934, 987658, 1308715, 808584, 1060180, 223179, 140472]
 #   console.log 'http://localhost:5555/-'+b64VbyteE [2, i]
 
