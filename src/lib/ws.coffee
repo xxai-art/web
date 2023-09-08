@@ -1,11 +1,11 @@
 > ~/conf > API
   @w5/vite > u64B64
   @w5/u8 > u8merge
-  msgpackr > unpack pack
+  msgpackr > unpack
   ./WS_FUNC.coffee
   wac.tax/_/leader.js > ON
 
-+ WS
++ WS, TIMEOUT
 
 _SEND = []
 
@@ -30,17 +30,18 @@ export default conn = (uid, open)=>
   {close,send:_send} = WS
 
   WS.close = =>
-    close.call(WS)
+    clearTimeout TIMEOUT
+    try
+      close.call(WS)
     WS = undefined
     return
 
-  WS.send = (action, args...)=>
-    # console.log pack args
+  WS.send = (action, bin)=>
     _send.call WS, u8merge(
       [
         action
       ]
-      pack args
+      bin
     )
     return
 
@@ -64,10 +65,9 @@ export default conn = (uid, open)=>
       return
 
     onclose: (ev)=>
-      console.log ev
       if WS # 非主动关闭
         WS = undefined
-        setTimeout(
+        TIMEOUT = setTimeout(
           =>
             conn(uid, open)
             return

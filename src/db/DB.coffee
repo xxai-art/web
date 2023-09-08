@@ -1,5 +1,5 @@
 > wac.tax/_/IDB.js
-  @w5/vite > u64B64
+  @w5/vite > u64B64 vbyteE
   wac.tax/user/User.js > onMe
   ~/lib/Ws.coffee:@ > wsClose
   ~/const/WS.coffee > 同步
@@ -9,6 +9,7 @@
   ./COL.coffee > TS
   ./upgrade.coffee
   ./VER.coffee
+
 
   # ./TOOL.coffee > prevIter
 # for i from [1195122, 1060177, 1195121, 1195125, 1195123, 858044, 118321, 1059456, 989581, 394934, 987658, 1308715, 808584, 1060180, 223179, 140472]
@@ -91,7 +92,7 @@ onMe (user)=>
       synced = new Map (await _R[SYNCED].getAll()).map((i)=>[i.p,i.n])
       @send(
         同步
-        ...await Promise.all SYNC_TABLE.map (_,p)=>synced.get(p) or 0
+        vbyteE await Promise.all SYNC_TABLE.map (_,p)=>synced.get(p) or 0
       )
       return
   )
