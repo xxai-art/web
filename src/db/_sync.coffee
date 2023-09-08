@@ -6,11 +6,12 @@
   ./lastId.coffee
 
 _sync_ = (uid,R,W,table_pos)=>
-  [
-    table
-    encode
-    update
-  ] = SYNC_TABLE[table_pos]
+  # [
+  #   table
+  #   encode
+  #   update
+  # ] =
+  table = SYNC_TABLE[table_pos]
   li = []
   # 没写入远程的 id 为负数
   for await i from prevIter(
@@ -24,14 +25,14 @@ _sync_ = (uid,R,W,table_pos)=>
     return
 
   last_id = await lastId(R,table_pos)
-
-  r = await SDK[table](
-    uid
-    last_id
-    ...encode li
-  )
-
-  update W, R, li, r, last_id, table, table_pos
+  console.log 'last_id', table, last_id
+  # r = await SDK[table](
+  #   uid
+  #   last_id
+  #   ...encode li
+  # )
+  #
+  # update W, R, li, r, last_id, table, table_pos
   return
 
 
