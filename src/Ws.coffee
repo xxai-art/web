@@ -2,7 +2,7 @@
   @w5/vite > u64B64
   @w5/u8 > u8merge
   msgpackr > unpack
-  ./WS_FUNC.coffee
+  ./ws/FUNC.coffee
   wac.tax/_/leader.js > ON
 
 + WS, TIMEOUT
@@ -59,7 +59,7 @@ export default conn = (uid, open)=>
       if data.length
         msg = unpack data
         console.log msg
-        WS_FUNC[
+        FUNC[
           msg[0]
         ].apply(WS,msg.slice(1))
       return
