@@ -88,8 +88,8 @@ onMe (user)=>
   Ws(
     UID
     ->
-      #@send
-      console.log 'todo sync'
+      synced = new Map (await _R[SYNCED].getAll()).map((i)=>[i.p,i.n])
+      console.log await Promise.all SYNC_TABLE.map (_,p)=>synced.get(p) or 0
       return
   )
   # if ws # 自由当为 leader 的时候才返回 ws

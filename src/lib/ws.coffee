@@ -1,10 +1,20 @@
 > ~/conf > API
   @w5/vite > u64B64
-  msgpackr > unpack
+  msgpackr > unpack pack
   ./WS_FUNC.coffee
   wac.tax/_/leader.js > ON
 
 + WS
+
+_SEND = []
+
+export send = (args...)=>
+  args = pack args
+  if WS
+    WS.send args
+  else
+    _SEND.push args
+  return
 
 export default (uid, open)=>
   WS?.close()
@@ -13,29 +23,43 @@ export default (uid, open)=>
       if import.meta.env.DEV then 'ws:' else 'wss:'
     )+API+'ws/'+u64B64(uid)
   )
+  {close} = WS
+  WS.close = =>
+    close.call(WS)
+    WS = undefined
+    return
+
   Object.assign(
     WS
     binaryType: 'arraybuffer'
-    onopen:=>
-      open.call(WS)
-      return
 
-    onerror: (err)=>
-      console.log 'err',err
+    onopen:=>
+      while _SEND.length
+        WS.send _SEND.pop()
+      open.call(WS)
       return
 
     onmessage:({data})=>
       msg = unpack new Uint8Array(data)
+      console.log msg
       WS_FUNC[
         msg[0]
-      ].apply(ws,msg.slice(1))
+      ].apply(WS,msg.slice(1))
       return
 
-    onclose: (ev)=>
-      console.log 'close',ev
+    onclose: =>
+      if WS # 非主动关闭
+        WS = undefined
+        setTimeout(
+          =>
+            conn(uid, open)
+            return
+          1e3
+        )
       return
   )
   return
+
 
 # import URI from "~/config/ws.txt"
 # import {unpack} from 'msgpackr'
