@@ -35,6 +35,7 @@ export default conn = (uid, open)=>
     return
 
   WS.send = (action, args...)=>
+    # console.log pack args
     _send.call WS, u8merge(
       [
         action
