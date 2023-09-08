@@ -5,6 +5,10 @@
   ./SYNC_TABLE.coffee
   ./lastId.coffee
 
+# 第一次调用始终会同步
+
+
+
 _sync_ = (uid,R,W,table_pos)=>
   # [
   #   table
@@ -25,7 +29,6 @@ _sync_ = (uid,R,W,table_pos)=>
     return
 
   last_id = await lastId(R,table_pos)
-  console.log 'last_id', table, last_id
   # r = await SDK[table](
   #   uid
   #   last_id

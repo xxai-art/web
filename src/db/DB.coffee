@@ -88,7 +88,15 @@ onMe (user)=>
   Ws(
     UID
     =>
-      _sync(UID, _R, _W)
+      li = []
+      for {p,n} from await _R[SYNCED].getAll()
+        li.push p,n
+      @send vbyteE li
+      setTimeout(
+        =>
+          _sync(UID, _R, _W)
+        6e3
+      )
       return
   )
   return
