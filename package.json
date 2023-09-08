@@ -55,7 +55,6 @@
   "dependencies": {
     "@w5/escape": "^0.0.1",
     "@w5/fall": "^0.0.5",
-    "@w5/fetch-event-source": "^2.0.5",
     "@w5/fset": "^0.0.2",
     "@w5/hashval": "^0.0.3",
     "@w5/link": "^0.0.1",

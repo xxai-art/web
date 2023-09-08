@@ -37,8 +37,10 @@ _get = (req) =>
           if sec > 0
             rc = new Response(res.clone().body, res)
             rc.headers.set '-', (now()+sec).toString(36)
-            caches.open(2).then (cache) =>
-              cache.put(req, rc)
+
+      # 始终缓存，这样网络故障也可以返回之前的版本
+      caches.open(2).then (cache) =>
+        cache.put(req, rc)
   return res
 
 get = (req)=>
@@ -82,6 +84,7 @@ fetch: (event) =>
   event.respondWith(
     caches.match(req).then (res)=>
       if res and (
+        # 如果 headers 没有 '-' , 那么 NaN > now() 也是 false， 不影响
         parseInt(res.headers.get('-'),36) > now()
       )
         return res

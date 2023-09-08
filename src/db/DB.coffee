@@ -2,10 +2,10 @@
   wac.tax/_/leader.js > ON
   wac.tax/user/User.js > exit
   @w5/vite > b64VbyteE u64B64
-  @w5/fetch-event-source > fetchEventSource
   ../conf > API
   wac.tax/user/User.js > onMe
   ./es.coffee:ES_MAP
+  ~/lib/Ws.coffee
   ./TABLE.coffee > SYNCED
   ./_sync.coffee:_sync
   ./SYNC_TABLE.coffee
@@ -100,60 +100,70 @@ class ErrorClose extends Error
 reconnect = (onopen)=>
   synced = new Map (await _R[SYNCED].getAll()).map((i)=>[i.p,i.n])
 
-  # Event Source 无法获取响应状态吗，无法感知用户已经退出的401，所以改用 https://www.npmjs.com/package/@microsoft/fetch-event-source
-  ctrl = new AbortController()
-
-  ES_CLOSE = =>
-    ES_CLOSE = undefined
-    t = ctrl
-    ctrl = new AbortController()
-    t.abort()
-    return
-
-  es = fetchEventSource(
+  Ws(
     API+'es/'+b64VbyteE(
       [
-        UID
+       UID
       ].concat await Promise.all SYNC_TABLE.map (_,p)=>
         synced.get(p) or 0
     )
-    {
-      signal: ctrl.signal
-      credentials: 'include'
-      onclose: =>
-        if UID
-          throw new ErrorClose
-        return
-      onopen: (r)=>
-        switch r.status
-          when 401
-            UID = 0
-            exit()
-            return
-          when 200
-            return
-        throw r
-        return
-      onmessage: (e)=>
-        {data} = e
-        if not data
-          return
-        # console.log data
-        data = JSON.parse e.data
-        [kind, user_id] = data
-        data = data.slice(2)
-        if user_id != UID
-          return
-        ES_MAP.get(kind)(
-          _W, data, user_id
-        )
-        return
-      onerror: (err) =>
-        if not err instanceof ErrorClose
-          console.error err
-        return
-    }
   )
+
+  # Event Source 无法获取响应状态吗，无法感知用户已经退出的401，所以改用 https://www.npmjs.com/package/@microsoft/fetch-event-source
+  # ctrl = new AbortController()
+  #
+  # ES_CLOSE = =>
+  #   ES_CLOSE = undefined
+  #   t = ctrl
+  #   ctrl = new AbortController()
+  #   t.abort()
+  #   return
+
+  # es = fetchEventSource(
+  #   API+'es/'+b64VbyteE(
+  #     [
+  #       UID
+  #     ].concat await Promise.all SYNC_TABLE.map (_,p)=>
+  #       synced.get(p) or 0
+  #   )
+  #   {
+  #     signal: ctrl.signal
+  #     credentials: 'include'
+  #     onclose: =>
+  #       if UID
+  #         throw new ErrorClose
+  #       return
+  #     onopen: (r)=>
+  #       switch r.status
+  #         when 401
+  #           UID = 0
+  #           exit()
+  #           return
+  #         when 200
+  #           return
+  #       throw r
+  #       return
+  #     onmessage: (e)=>
+  #       {data} = e
+  #       if not data
+  #         return
+  #       # console.log data
+  #       data = JSON.parse e.data
+  #       [kind, user_id] = data
+  #       data = data.slice(2)
+  #       if user_id != UID
+  #         return
+  #       ES_MAP.get(kind)(
+  #         _W, data, user_id
+  #       )
+  #       return
+  #     onerror: (err) =>
+  #       if not err instanceof ErrorClose
+  #         console.error err
+  #       return
+  #   }
+  #)
+
   # es = new EventSource(
   #   API+'es/'+b64VbyteE(
   #     [
