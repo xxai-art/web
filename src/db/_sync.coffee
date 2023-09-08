@@ -2,7 +2,8 @@
   wac.tax/_/SDK.js
   ./TOOL.coffee > prevIter
   ./COL.coffee > TS
-  ./SYNC_TABLE.coffee:@ > lastId
+  ./SYNC_TABLE.coffee
+  ./lastId.coffee
 
 _sync_ = (uid,R,W,table_pos)=>
   [
@@ -11,6 +12,7 @@ _sync_ = (uid,R,W,table_pos)=>
     update
   ] = SYNC_TABLE[table_pos]
   li = []
+  # 没写入远程的 id 为负数
   for await i from prevIter(
     R[table].index(TS)
     IDBKeyRange.upperBound(0)

@@ -58,11 +58,14 @@ export default conn = (uid, open)=>
       data = new Uint8Array(data)
       if data.length
         msg = unpack data
-        console.log msg
         FUNC[
           msg[0]
         ].apply(WS,msg.slice(1))
       return
+
+    # onerror: (err)=>
+    #   console.error err
+    #   return
 
     onclose: (ev)=>
       if WS # 非主动关闭

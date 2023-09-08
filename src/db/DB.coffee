@@ -76,7 +76,6 @@ onMe (user)=>
     }
   )
 
-  _sync(UID, _R, _W)
 
   for [db, pending] from  [
     [_W,_W_PENDING]
@@ -88,19 +87,10 @@ onMe (user)=>
 
   Ws(
     UID
-    ->
-      synced = new Map (await _R[SYNCED].getAll()).map((i)=>[i.p,i.n])
-      @send(
-        同步
-        vbyteE await Promise.all SYNC_TABLE.map (_,p)=>synced.get(p) or 0
-      )
+    =>
+      _sync(UID, _R, _W)
       return
   )
-  # if ws # 自由当为 leader 的时候才返回 ws
-  #   console.log 'TODO SYNC'
-#   #     ].concat await Promise.all SYNC_TABLE.map (_,p)=>
-#   #       synced.get(p) or 0
-#   #   )
   return
 
 # class ErrorClose extends Error
