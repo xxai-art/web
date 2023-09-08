@@ -1,5 +1,6 @@
 > ~/conf > API
   @w5/vite > u64B64
+  @w5/u8 > u8merge
   msgpackr > unpack pack
   ./WS_FUNC.coffee
   wac.tax/_/leader.js > ON
@@ -19,7 +20,7 @@ export wsClose = =>
   WS?.close()
   return
 
-export default (uid, open)=>
+export default conn = (uid, open)=>
   WS?.close()
   WS = new WebSocket(
     (
@@ -33,14 +34,18 @@ export default (uid, open)=>
     WS = undefined
     return
 
-  WS.send = (args...)=>
-    _send.call WS, pack args
+  WS.send = (action, args...)=>
+    _send.call WS, u8merge(
+      [
+        action
+      ]
+      pack args
+    )
     return
 
   Object.assign(
     WS
     binaryType: 'arraybuffer'
-
     onopen:=>
       while _SEND.length
         WS.send ..._SEND.pop()
@@ -48,14 +53,17 @@ export default (uid, open)=>
       return
 
     onmessage:({data})=>
-      msg = unpack new Uint8Array(data)
-      console.log msg
-      WS_FUNC[
-        msg[0]
-      ].apply(WS,msg.slice(1))
+      data = new Uint8Array(data)
+      if data.length
+        msg = unpack data
+        console.log msg
+        WS_FUNC[
+          msg[0]
+        ].apply(WS,msg.slice(1))
       return
 
-    onclose: =>
+    onclose: (ev)=>
+      console.log ev
       if WS # 非主动关闭
         WS = undefined
         setTimeout(
