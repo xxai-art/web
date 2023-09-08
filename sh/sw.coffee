@@ -29,13 +29,15 @@ _get = (req) =>
     ok = [200,301,304].includes(res.status)
     if ok
       res.ok = ok
-      cache = res.headers.get('cache-control') or ''
-      if cache != 'no-cache'
+
+      rc = new Response(res.clone().body, res)
+
+      cache = res.headers.get('cache-control')
+      if cache and cache != 'no-cache'
         sec = /max-age=(\d+)/.exec(cache)
         if sec
           sec = +sec[1]
           if sec > 0
-            rc = new Response(res.clone().body, res)
             rc.headers.set '-', (now()+sec).toString(36)
 
       # 始终缓存，这样网络故障也可以返回之前的版本
