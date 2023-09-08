@@ -1,18 +1,23 @@
 > ~/conf > API
+  @w5/vite > u64B64
   msgpackr > unpack
   ./WS_FUNC.coffee
+  wac.tax/_/leader.js > ON
 
-export default (url)=>
-  ws = new WebSocket(
++ WS
+
+export default (uid, open)=>
+  WS?.close()
+  WS = new WebSocket(
     (
       if import.meta.env.DEV then 'ws:' else 'wss:'
-    )+url
+    )+API+'ws/'+u64B64(uid)
   )
   Object.assign(
-    ws
+    WS
     binaryType: 'arraybuffer'
-    onopen:(ev)=>
-      console.log 'open',ev
+    onopen:=>
+      open.call(WS)
       return
 
     onerror: (err)=>
