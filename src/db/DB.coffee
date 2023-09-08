@@ -1,8 +1,8 @@
 > wac.tax/_/IDB.js
   @w5/vite > u64B64 vbyteE
   wac.tax/user/User.js > onMe
-  ~/ws/const.coffee:@ > wsClose
-  ~/const/WS.coffee > 同步
+  ~/Ws.coffee:@ > wsClose
+  ~/ws/CONST.coffee > 同步
   ./TABLE.coffee > SYNCED
   ./_sync.coffee:_sync
   ./SYNC_TABLE.coffee
