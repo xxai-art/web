@@ -1,5 +1,6 @@
 > ~/conf > API
   msgpackr > unpack
+  ./WS_FUNC.coffee
 
 export default (url)=>
   ws = new WebSocket(
@@ -20,9 +21,10 @@ export default (url)=>
 
     onmessage:({data})=>
       msg = unpack new Uint8Array(data)
-      console.log 'onmessage',msg
+      WS_FUNC[
+        msg[0]
+      ](...msg.slice(1))
       return
-
 
     onclose: (ev)=>
       console.log 'close',ev

@@ -1,6 +1,5 @@
 > wac.tax/_/IDB.js
   wac.tax/_/leader.js > ON
-  wac.tax/user/User.js > exit
   @w5/vite > b64VbyteE u64B64
   ../conf > API
   wac.tax/user/User.js > onMe
@@ -101,7 +100,7 @@ reconnect = (onopen)=>
   synced = new Map (await _R[SYNCED].getAll()).map((i)=>[i.p,i.n])
 
   Ws(
-    API+'es/'+b64VbyteE(
+    API+'ws/'+b64VbyteE(
       [
        UID
       ].concat await Promise.all SYNC_TABLE.map (_,p)=>
