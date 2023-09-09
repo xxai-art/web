@@ -1,10 +1,10 @@
 > wac.tax/_/IDB.js
-  @w5/vite > u64B64 vbyteE
+  @w5/vite > u64B64 _vbyteE
   wac.tax/user/User.js > onMe
   ~/Ws.coffee:@ > wsClose
   ~/ws/CONST.coffee > 同步
   ./TABLE.coffee > SYNCED
-  ./_sync.coffee:_sync
+  # ./_sync.coffee:_sync
   ./SYNC_TABLE.coffee
   ./COL.coffee > TS
   ./upgrade.coffee
@@ -57,9 +57,9 @@ export W = (args...)=>
 onMe (user)=>
   if _DB
     _db = _DB
-    _sync(UID,_R,_W).finally =>
-      _db.close()
-      return
+    # _sync(UID,_R,_W).finally =>
+    #   _db.close()
+    #   return
 
   UID = user.id or 0
   PRE = {}
@@ -81,22 +81,27 @@ onMe (user)=>
     [_W,_W_PENDING]
     [_R,_R_PENDING]
   ]
-    for [args,next] from pending
+    loop
+      p = pending.pop()
+      if not p
+        break
+      [args,next] = p
       next ...db(...args)
-    pending.splice(0,pending.length)
 
+  synced = _R[SYNCED]
+  to_sync = await synced.getAll()
+  # _run_sync = _sync.bind null,UID,synced,_W
   Ws(
     UID
-    =>
+    ->
       li = []
-      for {p,n} from await _R[SYNCED].getAll()
+      for {p,n} from to_sync
         li.push p,n
-      @send vbyteE li
-      setTimeout(
-        =>
-          _sync(UID, _R, _W)
-        6e3
-      )
+      @send 同步, _vbyteE li
+      # setTimeout(
+      #   _run_sync
+      #   6e3
+      # )
       return
   )
   return

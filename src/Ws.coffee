@@ -25,7 +25,7 @@ export default conn = (uid, open)=>
   WS = new WebSocket(
     (
       if import.meta.env.DEV then 'ws:' else 'wss:'
-    )+API+'ws/'+u64B64(uid)
+    )+API+'-/'+u64B64 uid
   )
   {close,send:_send} = WS
 

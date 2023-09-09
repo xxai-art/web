@@ -3,6 +3,7 @@
   ./TOOL.coffee > prevIter
   ./COL.coffee > TS
   ./SYNC_TABLE.coffee
+  ./TABLE.coffee > SYNCED
   ./lastId.coffee
 
 # 第一次调用始终会同步
@@ -28,7 +29,7 @@ _sync_ = (uid,R,W,table_pos)=>
   if not li.length
     return
 
-  last_id = await lastId(R,table_pos)
+  last_id = await lastId(R[SYNCED],table_pos)
   # r = await SDK[table](
   #   uid
   #   last_id

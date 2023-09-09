@@ -1,5 +1,8 @@
 > ~/db/getOr0.coffee
   ~/db/TABLE.coffee > SYNCED
+  ~/db/DB.coffee > R
 
-export default (R, table_pos)=>
-  getOr0(R[SYNCED],table_pos)
+export default (synced, table_pos)=>
+  getOr0(synced,table_pos)
+
+
