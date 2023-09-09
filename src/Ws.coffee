@@ -1,9 +1,10 @@
 > ~/conf > API
-  @w5/vite > u64B64
+  @w5/vite > u64B64 binU64 b64D
   @w5/u8 > u8merge
   msgpackr > unpack
   ./ws/FUNC.coffee
   wac.tax/_/leader.js > ON
+  wac.tax/user/User.js > exitUid
 
 + WS, TIMEOUT
 
@@ -63,11 +64,14 @@ export default conn = (uid, open)=>
         ].apply(WS,msg.slice(1))
       return
 
-    # onerror: (err)=>
-    #   console.error err
-    #   return
+    onerror: (err)=>
+      console.error err
+      return
 
-    onclose: (ev)=>
+    onclose: ({code, reason})=>
+      if 4401 == code
+        exitUid binU64 b64D(reason)
+        return
       if WS # 非主动关闭
         WS = undefined
         TIMEOUT = setTimeout(

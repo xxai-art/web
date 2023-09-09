@@ -1,5 +1,4 @@
-> wac.tax/user/User.js > exitUid
-  @w5/pair/group
+> @w5/pair/group
   # ~/lib/cidRidLi.coffee
   ~/db/fav/put.coffee:favPut
   # ~/db/seen/put.coffee:seenPut
@@ -21,11 +20,6 @@
 #   return
 
 export default [
-  # 退出登录
-  (uid)->
-    exitUid(uid)
-    @close()
-    return
 
   # 收藏
   (r)=>
