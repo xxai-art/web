@@ -7,6 +7,7 @@
   ~/db/SYNC_TABLE.coffee:@ > P_FAV P_SEEN
   ~/db/lastId.coffee
   ~/db/DB.coffee > W R
+  ./synced.coffee > done:同步完成
 
 # sync = (r,group_n,p, func)=>
 #   table = SYNC_TABLE[p]
@@ -24,10 +25,7 @@ numli = (r)=>
   unpack(r).map Number
 
 export default [
-  # 同步完成
-  =>
-    console.log '同步完成'
-    return
+  同步完成
 
   # 收藏
   (r)=>

@@ -43,6 +43,7 @@ onMount =>
 
       ts = 0
       =>
+        await (await import('~/ws/synced.coffee')).default
         R(FAV) (fav)=>
           li = []
           n = IMG_LI_LIMIT
