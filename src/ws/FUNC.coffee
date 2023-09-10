@@ -20,6 +20,9 @@
 #       return
 #   return
 
+numli = (r)=>
+  unpack(r).map Number
+
 export default [
   # 同步完成
   =>
@@ -28,7 +31,7 @@ export default [
 
   # 收藏
   (r)=>
-    r = unpack r
+    r = numli r
     n = r.pop()
     pid = r.pop()
     R(SYNCED) (synced)=>
@@ -43,7 +46,7 @@ export default [
 
   # 浏览
   (r)=>
-    r = unpack r
+    r = numli r
     # sync(r,3,P_SEEN, seenPut)
     # console.log '!!!',r
     return
