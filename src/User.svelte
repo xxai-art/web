@@ -46,7 +46,9 @@ onMount =>
         R(FAV) (fav)=>
           li = []
           n = IMG_LI_LIMIT
-          for await {cid,rid,aid,ts} from prevIter fav.index(TS),range
+          for await {
+            cid,rid,aid,ts
+          } from prevIter fav.index(TS),range
             if aid
               cr = [cid, rid]
               EXIST.add _vbyteE cr
