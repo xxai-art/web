@@ -11,7 +11,6 @@
 
 + WS, TIMEOUT, UID, UNBIND_ON_ME
 
-
 open = (ws)=>
   R(SYNCED) (synced)=>
     to_sync = await synced.getAll()
@@ -47,11 +46,6 @@ export send = (args...)=>
   else
     _SEND.push args
   return
-
-export wsClose = =>
-  WS?.close()
-  return
-
 
 _conn = =>
   WS?.close()
