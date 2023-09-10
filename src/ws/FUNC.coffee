@@ -25,15 +25,18 @@ export default [
   =>
     console.log '同步完成'
     return
+
   # 收藏
   (r)=>
     r = unpack r
-    nid = r.pop()
+    n = r.pop()
     pid = r.pop()
     R(SYNCED) (synced)=>
       if pid == await lastId(synced, P_FAV)
-        W(FAV) (fav)=>
-          console.log 'todo sync',r
+        W(FAV, SYNCED) (fav, synced)=>
+          for i from group 4,r
+            await favPut fav, ...i
+          await synced.put {p:P_FAV, n}
           return
       return
     return
@@ -44,6 +47,5 @@ export default [
     # sync(r,3,P_SEEN, seenPut)
     # console.log '!!!',r
     return
-
 
 ]
