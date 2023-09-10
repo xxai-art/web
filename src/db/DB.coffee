@@ -1,11 +1,6 @@
 > wac.tax/_/IDB.js
   @w5/vite > u64B64 _vbyteE
   wac.tax/user/User.js > onMe
-  ~/Ws.coffee:@ > wsClose
-  ~/ws/CONST.coffee > 同步
-  ./TABLE.coffee > SYNCED
-  # ./_sync.coffee:_sync
-  ./SYNC_TABLE.coffee
   ./COL.coffee > TS
   ./upgrade.coffee
   ./VER.coffee
@@ -65,7 +60,6 @@ onMe (user)=>
   PRE = {}
 
   if not UID
-    wsClose()
     _DB = _R = _W = undefined
     return
 
@@ -88,22 +82,6 @@ onMe (user)=>
       [args,next] = p
       next ...db(...args)
 
-  synced = _R[SYNCED]
-  to_sync = await synced.getAll()
-  # _run_sync = _sync.bind null,UID,synced,_W
-  Ws(
-    UID
-    ->
-      li = []
-      for {p,n} from to_sync
-        li.push p,n
-      @send 同步, _vbyteE li
-      # setTimeout(
-      #   _run_sync
-      #   6e3
-      # )
-      return
-  )
   return
 
 # class ErrorClose extends Error
@@ -245,19 +223,4 @@ onMe (user)=>
 #
 # _clear = =>
 #   WS_CLOSE?()
-#   return
-#
-# ON.add (leader)=>
-#   if leader
-#     LEADER = 1
-#     if _R
-#       _onLeader()
-#     else
-#       _clear()
-#     # document.title = 'leader'
-#   else
-#     _clear()
-#     LEADER = undefined
-#     PRE = {}
-#     # document.title = ''
 #   return
