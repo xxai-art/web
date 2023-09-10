@@ -8,7 +8,7 @@
 
 href = location.pathname
 document.title = name + suffix()
-#
+
 # onMount =>
 #   [name] = await SDK.meta href.slice(2) # await SDK.meta b64VbyteE CID_USER, ID
 #   return
@@ -19,7 +19,7 @@ document.title = name + suffix()
 Nav
   a(href:) {name}
   .ico
-    a.now.fav(href: title="收藏")
+    a.now.fav(href:)
   R(slot="R")
     a.x(href="/" slot="R")
 </template>
