@@ -51,8 +51,6 @@ export send = (args...)=>
     _SEND.push args
   return
 
-
-
 _conn = =>
   wsClose()
   if not UID
