@@ -1,7 +1,6 @@
 > ~/conf > API WS:WS_URL
   @w5/vite > u64B64 binU64 b64D
   @w5/u8 > u8merge
-  msgpackr > unpack
   ./ws/FUNC.coffee
   wac.tax/_/leader.js > ON
   wac.tax/user/User.js > exitUid
@@ -58,10 +57,10 @@ export default conn = (uid, open)=>
     onmessage:({data})=>
       data = new Uint8Array(data)
       if data.length
-        msg = unpack data
+        msg = data
         FUNC[
           msg[0]
-        ].apply(WS,msg.slice(1))
+        ].call(WS,msg.slice(1))
       return
 
     onerror: (err)=>
@@ -69,8 +68,9 @@ export default conn = (uid, open)=>
       return
 
     onclose: ({code, reason})=>
+      console.log 'close',code,reason
       if 4401 == code
-        exitUid binU64 b64D(reason)
+        exitUid uid
         return
       if WS # 非主动关闭
         WS = undefined

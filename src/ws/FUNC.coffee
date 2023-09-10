@@ -1,4 +1,5 @@
 > @w5/pair/group
+  msgpackr > unpack
   # ~/lib/cidRidLi.coffee
   ~/db/fav/put.coffee:favPut
   # ~/db/seen/put.coffee:seenPut
@@ -20,9 +21,12 @@
 #   return
 
 export default [
-
+  # 同步完成
+  =>
+    return
   # 收藏
   (r)=>
+    r = unpack r
     nid = r.pop()
     pid = r.pop()
     R(SYNCED) (synced)=>
@@ -35,6 +39,7 @@ export default [
 
   # 浏览
   (r)=>
+    r = unpack r
     # sync(r,3,P_SEEN, seenPut)
     # console.log '!!!',r
     return
