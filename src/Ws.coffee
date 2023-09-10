@@ -25,6 +25,10 @@ open = (ws)=>
   # )
   return
 
+wsClose = =>
+  WS?.close()
+  return
+
 ON.add (leader)=>
   if leader
     if not UNBIND_ON_ME
@@ -47,8 +51,10 @@ export send = (args...)=>
     _SEND.push args
   return
 
+
+
 _conn = =>
-  WS?.close()
+  wsClose()
   if not UID
     return
   WS = new WebSocket(
