@@ -1,4 +1,4 @@
-> ~/conf > API
+> ~/conf > API WS:WS_URL
   @w5/vite > u64B64 binU64 b64D
   @w5/u8 > u8merge
   msgpackr > unpack
@@ -26,7 +26,7 @@ export default conn = (uid, open)=>
   WS = new WebSocket(
     (
       if import.meta.env.DEV then 'ws:' else 'wss:'
-    )+API+'-/'+u64B64 uid
+    )+WS_URL+u64B64 uid
   )
   {close,send:_send} = WS
 
