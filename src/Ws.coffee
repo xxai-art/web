@@ -54,10 +54,9 @@ export wsClose = =>
 
 
 _conn = =>
-  if not UID
-    wsClose()
-    return
   WS?.close()
+  if not UID
+    return
   WS = new WebSocket(
     (
       if import.meta.env.DEV then 'ws:' else 'wss:'
