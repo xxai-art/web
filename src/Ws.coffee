@@ -44,12 +44,13 @@ ON.add (leader)=>
 
 _SEND = []
 
-export send = (args...)=>
-  if WS
-    WS.send ...args
-  else
-    _SEND.push args
-  return
+# TODO send
+# export send = (args...)=>
+#   if WS
+#     WS.send ...args
+#   else
+#     _SEND.push args
+#   return
 
 _conn = =>
   wsClose()
