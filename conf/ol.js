@@ -7,4 +7,4 @@ const cloudflare = 'ok0.pw';
 export const 
 	I18N_CDN = () => link(cloudflare) + ver + '/' + lang(),
   RES = link('5ok.pw'),
-  [USER_TAX_CDN,API,SPI,META] = [...'uafm'].map((i)=>link(i+'.'+cloudflare));
+  [WS,USER_TAX_CDN,API,SPI,META] = [...'wuafm'].map((i)=>link(i+'.'+cloudflare));

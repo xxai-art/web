@@ -5,7 +5,8 @@ const cloudflare = '.ok0.pw'
 export const 
 	I18N_CDN = () => "/.18/" + lang(),
 	// API = "https://api.wac.tax/";
-	API = link("localhost"),
+	API = link('localhost'),
+  WS = link('localhost:8022'),
 	// API = link("127.0.0.1:8880"),
   // SPI = link('127.0.0.1:8080'),
   USER_TAX_CDN = link('u'+cloudflare),
