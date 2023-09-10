@@ -23,6 +23,7 @@
 export default [
   # 同步完成
   =>
+    console.log '同步完成'
     return
   # 收藏
   (r)=>
