@@ -2,7 +2,7 @@
   msgpackr > unpack
   # ~/lib/cidRidLi.coffee
   ~/db/fav/put.coffee:favPut
-  # ~/db/seen/put.coffee:seenPut
+  ~/db/seen/put.coffee:seenPut
   ~/db/TABLE.coffee > FAV SEEN SYNCED
   ~/db/SYNC_TABLE.coffee:@ > P_FAV P_SEEN
   ~/db/lastId.coffee
@@ -45,8 +45,16 @@ export default [
   # 浏览
   (r)=>
     r = numli r
-    # sync(r,3,P_SEEN, seenPut)
-    # console.log '!!!',r
+    R(SYNCED) (synced)=>
+      if r.pop() == await lastId(synced, P_SEEN)
+        W(SEEN, SYNCED) (seen, synced)=>
+          r = group 3,r
+          len = r.length
+          for i from r
+            await seenPut seen, ...i
+          await synced.put {p:P_SEEN, n:r[len-1][0]}
+          return
+      return
     return
 
 ]
