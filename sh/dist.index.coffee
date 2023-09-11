@@ -82,7 +82,16 @@ if not prehtm.includes 'document.write'
     n = 0
     loop
       console.log "清理cloudflare缓存 ， 第 #{++n} 次"
-      await cf.POST id+'/purge_cache', files: [url]
+      # Why after purge_cache , the data keep old when with origin https://community.cloudflare.com/t/why-after-purge-cache-the-data-keep-old-when-with-origin/553911/4
+      await cf.POST id+'/purge_cache', files: [
+        url
+        {
+          url
+          headers: {
+            Origin: "https://xxai.art"
+          }
+        }
+      ]
       t = await reqTxt url
       if t == v
         console.log "清理完成 #{url} → #{v}"
