@@ -1,6 +1,5 @@
 > ./SortImg.coffee
   wac.tax/wtax/On.js
-  lodash-es > throttle
   @w5/vite > b64D binSet vbyteD
   ~/db/qLog.coffee
   ~/db/seen.coffee:seenSave
