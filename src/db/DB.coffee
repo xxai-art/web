@@ -37,7 +37,6 @@ export default =>
     _W
   ]
 
-
 export R = (args...)=>
   (next)=>
     _rw(args, next, _R, _R_PENDING)
@@ -49,12 +48,7 @@ export W = (args...)=>
     _rw(args, next, _W, _W_PENDING)
 
 onMe (user)=>
-  if _DB
-    _db = _DB
-    # _sync(UID,_R,_W).finally =>
-    #   _db.close()
-    #   return
-
+  _DB?.close()
   UID = user.id or 0
   PRE = {}
 
