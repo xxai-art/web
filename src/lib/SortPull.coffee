@@ -2,13 +2,10 @@
   wac.tax/wtax/On.js
   lodash-es > throttle
   @w5/vite > b64D binSet vbyteD
-  ~/db/DB.coffee > W
   ~/db/qLog.coffee
+  ~/db/seen.coffee:seenSave
   ~/const/IMG_HEIGHT.coffee
-  ~/db/TABLE.coffee > SEEN
   ~/const/action/SEEN.coffee:ACTION_SEEN
-  ~/db/SYNC_TABLE.coffee > P_SEEN
-  ~/db/sync.coffee
 
 < scroll = 'scroll'
 
@@ -44,20 +41,7 @@ MIN_SEEN_DURATION = 1e4
     =>
       saveView = throttle(
         =>
-          see_li = see.clear()
-          if see_li.length
-            return W(
-              SEEN
-            ) (w)=>
-              ing = []
-              for id from see_li
-                if not await w.get id
-                  ing.push w.put {id,ts:-new Date}
-              await Promise.all ing
-              if ing.length
-                sync(P_SEEN)
-              return
-
+          seenSave see.clear()
           return
         MIN_SEEN_DURATION
       )

@@ -17,7 +17,7 @@
   W(
     FAV
   ) ( fav )=>
-    put(
+    await put(
       fav
       cid
       rid
