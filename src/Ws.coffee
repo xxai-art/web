@@ -10,7 +10,6 @@
   wac.tax/_/channel.js > toAll hook
   ~/const/channel.coffee > MSG_WS
   wac.tax/user/User.js > onMe
-  @w5/time/ms
 
 + WS, TIMEOUT, UID, UNBIND
 
@@ -28,15 +27,12 @@ open = (ws)=>
   # )
   return
 
-_SEND = new Map
-
 _send = send_push = (args...)=>
-  id = ms()
-  _SEND.set id,args
-  toAll kind, id, args
+  toAll MSG_WS, args
   return
 
 export send = (args...)=>
+  console.log 'send',args
   _send ...args
   return
 
@@ -52,8 +48,8 @@ ON_LEADER.add (leader)->
         UID = user.id
         _conn()
         return
-      unbind_hook = hook MSG_WS, (msg...)=>
-        console.log 'hook', msg
+      unbind_hook = hook MSG_WS, (action,msg...)=>
+        console.log 'hook', action, msg
         return
       UNBIND = =>
         unbind()
@@ -99,10 +95,6 @@ _conn = =>
     WS
     binaryType: 'arraybuffer'
     onopen:=>
-      _send = WS.send
-      for [k,v] from _SEND.entries()
-        _send ...v
-        _SEND.delete k
       open(WS)
       return
 
