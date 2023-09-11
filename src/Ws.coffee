@@ -48,8 +48,12 @@ ON_LEADER.add (leader)->
 
 _SEND = []
 
-export send = _send = (args...)=>
+_send = send_push = (args...)=>
   _SEND.push args
+  return
+
+export send = (args...)=>
+  _send ...args
   return
 
 _conn = =>
@@ -64,7 +68,7 @@ _conn = =>
   {close,send:ws_send} = WS
 
   WS.close = =>
-    send = _send
+    _send = send_push
     clearTimeout TIMEOUT
     try
       close.call(WS)
@@ -86,7 +90,7 @@ _conn = =>
     onopen:=>
       while _SEND.length
         WS.send ..._SEND.pop()
-      send = WS.send
+      _send = WS.send
       open(WS)
       return
 
