@@ -35,8 +35,10 @@ export default [
     R(SYNCED) (synced)=>
       if pid == await lastId(synced, P_FAV)
         W(FAV, SYNCED) (fav, synced)=>
+          ing = []
           for i from group 4,r
-            await favPut fav, ...i
+            ing.push favPut fav, ...i
+          await Promise.all ing
           await synced.put {p:P_FAV, n}
           return
       return
