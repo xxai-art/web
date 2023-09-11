@@ -10,6 +10,7 @@
   wac.tax/_/channel.js > toAll hook
   ~/const/channel.coffee > MSG_WS
   wac.tax/user/User.js > onMe
+  ./onMsg.coffee
 
 + WS, TIMEOUT, UID, UNBIND
 
@@ -40,7 +41,9 @@ wsClose = =>
   return
 
 onMsg = (action, msg...)=>
-  console.log 'onMsg', action, msg
+  r = await ON_MSG[action] ...msg
+  if r
+    WS?.send ...r
   return
 
 ON_LEADER.add (leader)->
@@ -61,8 +64,6 @@ ON_LEADER.add (leader)->
     UNBIND = undefined
     wsClose()
   return
-
-
 
 _conn = =>
   wsClose()
