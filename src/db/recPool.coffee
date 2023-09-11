@@ -128,7 +128,6 @@ qLogRecSrc.coffee 会往其中追加
       remove_ts = (li)=>
         W(rp_db) (rp)=>
           for ts from li
-            console.log 'remove ts',ts
             bin = map.get ts
             rp.delete bin
             map.delete ts

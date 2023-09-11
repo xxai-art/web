@@ -47,6 +47,8 @@ meta_li = (sdk_li)=>
   return
 
 < unshift = (sdk_li)=>
+  if not li
+    return
   li.splice(
     0
     0

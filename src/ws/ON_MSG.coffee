@@ -49,7 +49,6 @@ export default [
               await lastId(synced, table_pos)
               table_pos
             )
-            console.log table, li
             resolve [浏览器传服务器, _vbyteE li]
             return
           return
