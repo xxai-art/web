@@ -90,7 +90,8 @@ _conn = =>
       _send = WS.send
       while WS and _SEND.length
         _send ..._SEND.pop()
-      open(WS)
+      if WS
+        open(WS)
       return
 
     onmessage:({data})=>
