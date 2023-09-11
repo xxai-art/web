@@ -38,12 +38,10 @@ ON_LEADER.add (leader)->
         UID = user.id
         _conn()
         return
-  else
-    console.log @#,@.postMessage
-    if UNBIND_ON_ME
-      UNBIND_ON_ME()
-      UNBIND_ON_ME = undefined
-      wsClose()
+  else if UNBIND_ON_ME
+    UNBIND_ON_ME()
+    UNBIND_ON_ME = undefined
+    wsClose()
   return
 
 _SEND = []
