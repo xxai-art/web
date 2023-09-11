@@ -25,12 +25,7 @@ open = (ws)=>
     ws.send 同步, _vbyteE li
     return
 
-  # seen 不需要自动触发，因为页面加载了会触发
   onMsg 同步上传,P_FAV
-  # setTimeout(
-  #   _run_sync
-  #   6e3
-  # )
   return
 
 _send = sendToAll = (args...)=>
@@ -52,7 +47,6 @@ onMsg = (action, msg...)=>
   return
 
 ON_LEADER.add (leader)->
-  console.log 'leader', leader
   if leader
     if not UNBIND
       unbind = onMe (user)=>
