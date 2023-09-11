@@ -13,6 +13,7 @@
   wac.tax/user/User.js > onMe
   ./ws/ON_MSG.coffee
   ~/ws/CHANNEL.coffee > 同步上传
+  ~/ws/synced.coffee:WS_SYNCED > done:wsSyncDone
 
 + WS, TIMEOUT, UID, UNBIND
 
@@ -25,7 +26,7 @@ open = (ws)=>
     ws.send 服务器传浏览器, _vbyteE li
     return
 
-  await (await import('~/ws/synced.coffee')).default
+  await WS_SYNCED
   onMsg 同步上传,P_FAV
   return
 
@@ -47,8 +48,7 @@ onMsg = (action, msg...)=>
     WS?.send ...r
   return
 
-ON_LEADER.add (leader)->
-  console.log leader
+ON_LEADER (leader)=>
   if leader
     if not UNBIND
       unbind = onMe (user)=>
@@ -60,10 +60,12 @@ ON_LEADER.add (leader)->
         unbind()
         unbind_hook()
         return
-  else if UNBIND
-    UNBIND()
-    UNBIND = undefined
-    wsClose()
+  else
+    wsSyncDone()
+    if UNBIND
+      UNBIND()
+      UNBIND = undefined
+      wsClose()
   return
 
 _conn = =>
