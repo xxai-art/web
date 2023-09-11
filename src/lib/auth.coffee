@@ -1,5 +1,4 @@
 > ../conf > USER_TAX_CDN
-  ../i18n.js:
   wac.tax/_/byTag.js > byTag0
   wac.tax/user/i18n/var > ver
   wac.tax/_/Box
