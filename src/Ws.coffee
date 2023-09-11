@@ -27,17 +27,20 @@ open = (ws)=>
   # )
   return
 
-_send = send_push = (args...)=>
-  toAll MSG_WS, args
+_send = sendToAll = (args...)=>
+  toAll MSG_WS, ...args
   return
 
 export send = (args...)=>
-  console.log 'send',args
   _send ...args
   return
 
 wsClose = =>
   WS?.close()
+  return
+
+onMsg = (action, msg...)=>
+  console.log 'onMsg', action, msg
   return
 
 ON_LEADER.add (leader)->
@@ -48,9 +51,7 @@ ON_LEADER.add (leader)->
         UID = user.id
         _conn()
         return
-      unbind_hook = hook MSG_WS, (action,msg...)=>
-        console.log 'hook', action, msg
-        return
+      unbind_hook = hook MSG_WS, onMsg
       UNBIND = =>
         unbind()
         unbind_hook()
@@ -75,7 +76,7 @@ _conn = =>
   {close,send:ws_send} = WS
 
   WS.close = =>
-    _send = send_push
+    _send = sendToAll
     clearTimeout TIMEOUT
     try
       close.call(WS)
@@ -95,6 +96,7 @@ _conn = =>
     WS
     binaryType: 'arraybuffer'
     onopen:=>
+      _send = onMsg
       open(WS)
       return
 
