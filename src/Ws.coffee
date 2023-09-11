@@ -48,6 +48,7 @@ onMsg = (action, msg...)=>
   return
 
 ON_LEADER.add (leader)->
+  console.log leader
   if leader
     if not UNBIND
       unbind = onMe (user)=>
