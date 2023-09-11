@@ -88,7 +88,7 @@ _conn = =>
     binaryType: 'arraybuffer'
     onopen:=>
       _send = WS.send
-      while _SEND.length
+      while WS and _SEND.length
         _send ..._SEND.pop()
       open(WS)
       return
