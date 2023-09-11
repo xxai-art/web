@@ -11,7 +11,6 @@
 
 DIFF_HEIGHT = -IMG_HEIGHT + 50
 
-MIN_SEEN_DURATION = 1e4
 
 < (ul, rowHeight, pull, li, getWidth, refresh)=>
   parentNode = ul.parentNode
@@ -36,20 +35,8 @@ MIN_SEEN_DURATION = 1e4
   see = binSet()
 
   saveView = =>
-
-  setTimeout(
-    =>
-      saveView = throttle(
-        =>
-          seenSave see.clear()
-          return
-        MIN_SEEN_DURATION
-      )
-      if see.size
-        saveView()
-      return
-    MIN_SEEN_DURATION
-  )
+    seenSave see.clear()
+    return
 
   init = (h)=>
     need_n = Math.round(h/rowHeight) + 1
