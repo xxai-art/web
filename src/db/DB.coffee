@@ -1,7 +1,6 @@
 > wac.tax/_/IDB.js
-  @w5/vite > u64B64 _vbyteE
+  @w5/vite > u64B64
   wac.tax/user/User.js > onMe
-  ./COL.coffee > TS
   ./upgrade.coffee
   ./VER.coffee
 
