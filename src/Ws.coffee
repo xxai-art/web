@@ -6,9 +6,11 @@
   wac.tax/user/User.js > exitUid
   ~/db/DB.coffee > R
   ~/db/TABLE.coffee > SYNCED
-  ~/ws/CONST.coffee > 同步
+  ~/ws/SEND.coffee > 同步
   wac.tax/_/channel.js > toAll hook
+  ~/const/channel.coffee > MSG_WS
   wac.tax/user/User.js > onMe
+  @w5/time/ms
 
 + WS, TIMEOUT, UID, UNBIND
 
@@ -26,18 +28,36 @@ open = (ws)=>
   # )
   return
 
+_SEND = new Map
+
+_send = send_push = (args...)=>
+  id = ms()
+  _SEND.set id,args
+  toAll kind, id, args
+  return
+
+export send = (args...)=>
+  _send ...args
+  return
+
 wsClose = =>
   WS?.close()
   return
-
 
 ON_LEADER.add (leader)->
   console.log 'leader', leader
   if leader
     if not UNBIND
-      UNBIND = onMe (user)=>
+      unbind = onMe (user)=>
         UID = user.id
         _conn()
+        return
+      unbind_hook = hook MSG_WS, (msg...)=>
+        console.log 'hook', msg
+        return
+      UNBIND = =>
+        unbind()
+        unbind_hook()
         return
   else if UNBIND
     UNBIND()
@@ -45,15 +65,7 @@ ON_LEADER.add (leader)->
     wsClose()
   return
 
-_SEND = []
 
-_send = send_push = (args...)=>
-  _SEND.push args
-  return
-
-export send = (args...)=>
-  _send ...args
-  return
 
 _conn = =>
   wsClose()
@@ -88,10 +100,10 @@ _conn = =>
     binaryType: 'arraybuffer'
     onopen:=>
       _send = WS.send
-      while WS and _SEND.length
-        _send ..._SEND.pop()
-      if WS
-        open(WS)
+      for [k,v] from _SEND.entries()
+        _send ...v
+        _SEND.delete k
+      open(WS)
       return
 
     onmessage:({data})=>

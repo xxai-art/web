@@ -1,5 +1,5 @@
-> ./_sync.coffee:_sync
-  ./DB.coffee
+> ./Ws.coffee > send
 
 < (table)=>
-  _sync ...DB(), [table]
+  send table
+  return
