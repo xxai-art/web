@@ -1,8 +1,7 @@
 > @w5/vite > _vbyteE
   ./HOOK.coffee > hook
   wac.tax/_/channel.js > toAll hook:channelHook
-
-MSG_FAV = 1024
+  ~/const/channel.coffee > MSG_FAV
 
 CALL = new Set [hook]
 
