@@ -7,10 +7,10 @@
   ~/db/DB.coffee > R
   ~/db/TABLE.coffee > SYNCED
   ~/ws/CONST.coffee > 同步
-  wac.tax/user/User.js > onMe
   wac.tax/_/channel.js > toAll hook
+  wac.tax/user/User.js > onMe
 
-+ WS, TIMEOUT, UID, UNBIND_ON_ME
++ WS, TIMEOUT, UID, UNBIND
 
 open = (ws)=>
   R(SYNCED) (synced)=>
@@ -30,17 +30,18 @@ wsClose = =>
   WS?.close()
   return
 
+
 ON_LEADER.add (leader)->
   console.log 'leader', leader
   if leader
-    if not UNBIND_ON_ME
-      UNBIND_ON_ME = onMe (user)=>
+    if not UNBIND
+      UNBIND = onMe (user)=>
         UID = user.id
         _conn()
         return
-  else if UNBIND_ON_ME
-    UNBIND_ON_ME()
-    UNBIND_ON_ME = undefined
+  else if UNBIND
+    UNBIND()
+    UNBIND = undefined
     wsClose()
   return
 
@@ -86,9 +87,9 @@ _conn = =>
     WS
     binaryType: 'arraybuffer'
     onopen:=>
-      while _SEND.length
-        WS.send ..._SEND.pop()
       _send = WS.send
+      while _SEND.length
+        _send ..._SEND.pop()
       open(WS)
       return
 
