@@ -5,12 +5,14 @@
   wac.tax/_/leader.js > ON:ON_LEADER
   wac.tax/user/User.js > exitUid
   ~/db/DB.coffee > R
+  ~/db/SYNC_TABLE.coffee > P_FAV
   ~/db/TABLE.coffee > SYNCED
   ~/ws/SEND.coffee > 同步
   wac.tax/_/channel.js > toAll hook
   ~/const/channel.coffee > MSG_WS
   wac.tax/user/User.js > onMe
-  ./onMsg.coffee
+  ./ws/ON_MSG.coffee
+  ~/ws/CHANNEL.coffee > 同步上传
 
 + WS, TIMEOUT, UID, UNBIND
 
@@ -22,6 +24,9 @@ open = (ws)=>
       li.push p,n
     ws.send 同步, _vbyteE li
     return
+
+  # seen 不需要自动触发，因为页面加载了会触发
+  onMsg 同步上传,P_FAV
   # setTimeout(
   #   _run_sync
   #   6e3

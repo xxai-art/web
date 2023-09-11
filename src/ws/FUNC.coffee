@@ -4,7 +4,7 @@
   ~/db/fav/put.coffee:favPut
   ~/db/seen/put.coffee:seenPut
   ~/db/TABLE.coffee > FAV SEEN SYNCED
-  ~/db/SYNC_TABLE.coffee:@ > P_FAV P_SEEN
+  ~/db/SYNC_TABLE.coffee > P_FAV P_SEEN
   ~/db/lastId.coffee
   ~/db/DB.coffee > W R
   ./synced.coffee > done:同步完成
