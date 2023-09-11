@@ -35,7 +35,9 @@ export default [
               await lastId(synced, table_pos)
               table_pos
             )
-          result = [浏览器传服务器, encode li]
-        resolve result
+            resolve [浏览器传服务器, encode li]
+            return
+          return
+        resolve()
         return
 ]
