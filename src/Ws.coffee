@@ -7,7 +7,7 @@
   ~/db/DB.coffee > R
   ~/db/SYNC_TABLE.coffee > P_FAV
   ~/db/TABLE.coffee > SYNCED
-  ~/ws/SEND.coffee > 同步
+  ~/ws/SEND.coffee > 服务器传浏览器
   wac.tax/_/channel.js > toAll hook
   ~/const/channel.coffee > MSG_WS
   wac.tax/user/User.js > onMe
@@ -22,7 +22,7 @@ open = (ws)=>
     li = []
     for {p,n} from to_sync
       li.push p,n
-    ws.send 同步, _vbyteE li
+    ws.send 服务器传浏览器, _vbyteE li
     return
 
   onMsg 同步上传,P_FAV

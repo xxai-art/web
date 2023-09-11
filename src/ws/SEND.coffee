@@ -1,3 +1,2 @@
-export 同步 = 0
-export 收藏 = 1
-export 浏览 = 2
+export 服务器传浏览器 = 0
+export 浏览器传服务器 = 1

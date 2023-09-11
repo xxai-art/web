@@ -1,5 +1,6 @@
 > ~/db/SYNC_TABLE.coffee:@ > P_FAV P_SEEN
   ~/db/TOOL.coffee > prevIter
+  ./SEND.coffee > 浏览器传服务器
   ~/db/DB.coffee > R W
   ~/db/COL.coffee > TS
   @w5/vite > _vbyteE vbyteD
@@ -27,7 +28,8 @@ export default [
         li.push ...Object.values i
       if not li.length
         return
-      console.log table, encode li
+      li.push table_pos
+      return [浏览器传服务器, encode li]
       return
     return
 ]
