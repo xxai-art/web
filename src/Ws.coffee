@@ -2,12 +2,13 @@
   @w5/vite > u64B64 binU64 b64D _vbyteE
   @w5/u8 > u8merge
   ./ws/FUNC.coffee
-  wac.tax/_/leader.js > ON
+  wac.tax/_/leader.js > ON:ON_LEADER
   wac.tax/user/User.js > exitUid
   ~/db/DB.coffee > R
   ~/db/TABLE.coffee > SYNCED
   ~/ws/CONST.coffee > 同步
   wac.tax/user/User.js > onMe
+  wac.tax/_/channel.js > toAll hook
 
 + WS, TIMEOUT, UID, UNBIND_ON_ME
 
@@ -29,28 +30,27 @@ wsClose = =>
   WS?.close()
   return
 
-ON.add (leader)=>
+ON_LEADER.add (leader)->
+  console.log 'leader', leader
   if leader
     if not UNBIND_ON_ME
       UNBIND_ON_ME = onMe (user)=>
         UID = user.id
         _conn()
         return
-  else if UNBIND_ON_ME
-    UNBIND_ON_ME()
-    UNBIND_ON_ME = undefined
-    wsClose()
+  else
+    console.log @#,@.postMessage
+    if UNBIND_ON_ME
+      UNBIND_ON_ME()
+      UNBIND_ON_ME = undefined
+      wsClose()
   return
 
 _SEND = []
 
-# TODO send
-# export send = (args...)=>
-#   if WS
-#     WS.send ...args
-#   else
-#     _SEND.push args
-#   return
+export send = _send = (args...)=>
+  _SEND.push args
+  return
 
 _conn = =>
   wsClose()
@@ -61,9 +61,10 @@ _conn = =>
       if import.meta.env.DEV then 'ws:' else 'wss:'
     )+WS_URL+u64B64 UID
   )
-  {close,send:_send} = WS
+  {close,send:ws_send} = WS
 
   WS.close = =>
+    send = _send
     clearTimeout TIMEOUT
     try
       close.call(WS)
@@ -71,7 +72,7 @@ _conn = =>
     return
 
   WS.send = (action, bin)=>
-    _send.call WS, u8merge(
+    ws_send.call WS, u8merge(
       [
         action
       ]
@@ -85,6 +86,7 @@ _conn = =>
     onopen:=>
       while _SEND.length
         WS.send ..._SEND.pop()
+      send = WS.send
       open(WS)
       return
 

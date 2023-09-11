@@ -11,11 +11,6 @@
 
 
 _sync_ = (uid,R,W,table_pos)=>
-  # [
-  #   table
-  #   encode
-  #   update
-  # ] =
   table = SYNC_TABLE[table_pos]
   li = []
   # 没写入远程的 id 为负数
@@ -30,6 +25,8 @@ _sync_ = (uid,R,W,table_pos)=>
     return
 
   last_id = await lastId(R[SYNCED],table_pos)
+
+  console.log uid, last_id, table, li
   # r = await SDK[table](
   #   uid
   #   last_id
@@ -59,7 +56,7 @@ _sync = (uid,R,W,table_pos)=>
   promise
 
 
-< (uid, R, W, to_sync=[0...SYNC_TABLE.length])=>
+< (uid, R, W, to_sync)=>
   Promise.all to_sync.map (table_pos)=>
     _sync(uid, R, W, table_pos)
 
