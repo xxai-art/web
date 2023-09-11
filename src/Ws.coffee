@@ -25,6 +25,7 @@ open = (ws)=>
     ws.send 服务器传浏览器, _vbyteE li
     return
 
+  await (await import('~/ws/synced.coffee')).default
   onMsg 同步上传,P_FAV
   return
 
