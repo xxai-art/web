@@ -106,6 +106,7 @@ qLogRecSrc.coffee 会往其中追加
       if level != map_level
         map.clear()
         gli = []
+        tsli = []
         await new Promise (resolve)=>
           R(rp_db, REC+level) (rp, r)=>
             for await {id,ts} from prevIter rp.index(TS)
@@ -140,23 +141,22 @@ qLogRecSrc.coffee 会往其中追加
         ts_remove = new Set
         for ts from sampling(tsli, remove_ts)
           bin = map.get ts
-          if not bin # 可能是切换了安全级别
-            continue
-          crl = vbyteD bin
-          for cr,p in pair crl
-            b = _vbyteE cr
-            if (not await seen.get b) and not_exist(b)
-              existMap.set b, ts
-              r.push cr
-              break
-          new_bin =  crl.slice(2*(p+1))
-          if new_bin.length
-            new_bin = _vbyteE new_bin
-            map.set ts,new_bin
-          else
-            map.delete ts
-            ts_remove.add ts
-          update ts, bin, new_bin
+          if bin # 可能是切换了安全级别
+            crl = vbyteD bin
+            for cr,p in pair crl
+              b = _vbyteE cr
+              if (not await seen.get b) and not_exist(b)
+                existMap.set b, ts
+                r.push cr
+                break
+            new_bin =  crl.slice(2*(p+1))
+            if new_bin.length
+              new_bin = _vbyteE new_bin
+              map.set ts,new_bin
+            else
+              map.delete ts
+              ts_remove.add ts
+            update ts, bin, new_bin
 
         if ts_remove.size
           tsli = tsli.filter (i)=>not ts_remove.has i
