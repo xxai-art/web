@@ -24,12 +24,8 @@ export recSrc = (rc, [action,o...])=> # rec src
       bin = _vbyteE [cid, rid]
       if action == FAV_RM
         EXIST.delete bin
-        to_log = to_log.filter(
-          (b)=>not u8eq(bin,b)
-        )
       else if not EXIST.has bin
         EXIST.add bin
-        to_log.push bin
         poolRetop bin
         # TODO 先插入 直接上级的个数，然后插入上级的上级，最多插入5个
         # bin = new Uint8Array [2, 135, 162, 26]
