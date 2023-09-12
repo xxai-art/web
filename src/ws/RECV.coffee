@@ -92,7 +92,7 @@ export default [
             id = _vbyteE i
             if not await rc.get([id,p])
               rc.put {id,p}
-              to_add.push i
+              to_add.push ...i
           if to_add.length
             id = _vbyteE to_add
             await rp.put {id, ts}

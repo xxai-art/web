@@ -28,8 +28,9 @@ qLogRecSrc.coffee 会往其中追加
   poolAdd
   poolRec
 ] = do =>
-  + map_level,tsli,gli
+  + map_level,gli
 
+  tsli = []
   map = new Map
   existSet = binSet()
   existMap = binMap()
@@ -104,7 +105,6 @@ qLogRecSrc.coffee 会往其中追加
       rp_db = REC_POOL+level
       if level != map_level
         map.clear()
-        tsli = []
         gli = []
         await new Promise (resolve)=>
           R(rp_db, REC+level) (rp, r)=>
