@@ -74,10 +74,12 @@ export default (max=99)=>
             await log.delete i
           if max == 0
             sync(max*2)
-          resolve(用户行为日志, pack([level, li]))
+          resolve [
+            用户行为日志, pack([level, li])
+          ]
           return
         return
       return
     return
-  return
+  return ing
 
