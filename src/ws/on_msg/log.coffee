@@ -19,6 +19,7 @@ merge = (action,t,o)=>
 + ing
 
 export default (max=99)=>
+  # return
   await ing
   ing = new Promise (resolve)=>
     R(LOG, REC_CHAIN) (log, rc)=>
