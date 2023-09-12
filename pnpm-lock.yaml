@@ -11,9 +11,6 @@ dependencies:
   '@w5/fall':
     specifier: ^0.0.5
     version: 0.0.5
-  '@w5/fetch-event-source':
-    specifier: ^2.0.5
-    version: 2.0.5
   '@w5/fset':
     specifier: ^0.0.2
     version: 0.0.2
@@ -2139,10 +2136,6 @@ packages:
 
   /@w5/fall@0.0.5:
     resolution: {integrity: sha512-ndYBfkTx3fQvjPncOGlY95ccTZms1pFoKxos4JPXYH6hfrDZOctYcnhf67+8kvaqqWQy9yuKIQhclLnkKQC6SQ==}
-    dev: false
-
-  /@w5/fetch-event-source@2.0.5:
-    resolution: {integrity: sha512-b/OVCDc87veAD40+mVsWXsjjEVyLaW6f0t6z9b8EuGcKh1O/BPA5FMQ/QZQ9SC0e/KZwGzTC+rj7SVJaws/cQQ==}
     dev: false
 
   /@w5/fset@0.0.2:

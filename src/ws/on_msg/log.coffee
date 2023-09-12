@@ -1,4 +1,5 @@
 > @w5/vite > _vbyteE vbyteD
+  @w5/utf8/utf8e.js
   ~/const/action/SEEN.coffee
   ~/db/DB.coffee > W R
   ~/db/TABLE.coffee > LOG REC_CHAIN
@@ -57,6 +58,7 @@ export default (max=99)=>
         for i from li
           len = i.length
           p = 0
+          i[0] = utf8e i[0]
           while ++p < len
             # [操作, 对象id ...] => z85 编码
             # console.log '>>>',i[p]
@@ -74,6 +76,7 @@ export default (max=99)=>
             await log.delete i
           if max == 0
             sync(max*2)
+
           resolve [
             用户行为日志
             [
