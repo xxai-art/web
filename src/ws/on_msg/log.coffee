@@ -63,8 +63,6 @@ export default (max=99)=>
             # [操作, 对象id ...] => z85 编码
             # console.log '>>>',i[p]
             i[p] = _vbyteE i[p]
-        level = Level()
-        # console.log level, li
         # SDK.log(
         #   level
         #   ...li
@@ -77,6 +75,7 @@ export default (max=99)=>
           if max == 0
             sync(max*2)
 
+          level = Level()
           resolve [
             用户行为日志
             [
