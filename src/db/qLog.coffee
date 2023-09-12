@@ -3,6 +3,7 @@
   @w5/vite > _vbyteE
   ~/ws/CHANNEL.coffee > 用户行为日志
   ~/Ws.coffee > send
+  ./TABLE.coffee > LOG
 
 # > ./DB.coffee > W R
   # ~/var/Level.coffee
