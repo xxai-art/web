@@ -12,17 +12,17 @@
 DIFF_HEIGHT = -IMG_HEIGHT + 50
 
 
-< (ul, rowHeight, pull, li, getWidth, refresh)=>
+< (ul, rowHeight, pull, img_li, getWidth, refresh)=>
   parentNode = ul.parentNode
   minH = =>
     parentNode.scrollTop + parentNode.offsetHeight
 
-  if li
-    len = li.length
-    li.splice(0,len)
-    refresh(li)
+  if img_li
+    len = img_li.length
+    img_li.splice(0,len)
+    refresh(img_li)
   else
-    li = []
+    img_li = []
 
   sort = (t)=>
     SortImg(innerWidth, t, getWidth)
@@ -35,10 +35,10 @@ DIFF_HEIGHT = -IMG_HEIGHT + 50
   see = binSet()
 
   saveView = =>
-    li = see.clear()
-    for i from li
+    _ = see.clear()
+    for i from _
       seen.add i
-    seenSave li
+    seenSave _
     return
 
   init = (h)=>
@@ -62,19 +62,19 @@ DIFF_HEIGHT = -IMG_HEIGHT + 50
           break
       saveView()
 
-    li.splice li.length,0,...buf.slice(0, need_n).flat()
+    img_li.splice img_li.length,0,...buf.slice(0, need_n).flat()
     buf = buf.slice(need_n)
 
     if not buf.length
       unbind?()
       unbind = undefined
 
-    refresh li
+    refresh img_li
     return
 
   promise = do =>
     await init minH()
-    if not li.length
+    if not img_li.length
       return
 
     _on = {}
@@ -139,8 +139,8 @@ DIFF_HEIGHT = -IMG_HEIGHT + 50
       return
     => # resort
       pre = [0,0]
-      buf = sort(li.concat buf.flat())
-      li = []
+      buf = sort(img_li.concat buf.flat())
+      img_li = []
       init minH()
       return
   ]
