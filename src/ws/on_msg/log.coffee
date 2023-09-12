@@ -75,7 +75,9 @@ export default (max=99)=>
           if max == 0
             sync(max*2)
           resolve [
-            用户行为日志, pack([level, li])
+            用户行为日志
+            level
+            pack li
           ]
           return
         return

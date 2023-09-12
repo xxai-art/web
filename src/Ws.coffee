@@ -87,12 +87,12 @@ _conn = =>
     WS = undefined
     return
 
-  WS.send = (action, bin)=>
+  WS.send = (action, args...)=>
     ws_send.call WS, u8merge(
       [
         action
       ]
-      bin
+      ...args
     )
     return
 
