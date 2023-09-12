@@ -1,14 +1,17 @@
 > @w5/pair/group
+  @w5/pair
+  @w5/time/ms
+  @w5/vite > _vbyteE
   msgpackr > unpack
   # ~/lib/cidRidLi.coffee
   ~/db/fav/put.coffee:favPut
   ~/db/seen/put.coffee:seenPut
-  ~/db/TABLE.coffee > FAV SEEN SYNCED
+  ~/db/TABLE.coffee > FAV SEEN SYNCED REC_POOL REC_CHAIN
   ~/db/SYNC_TABLE.coffee > P_FAV P_SEEN
   ~/db/lastId.coffee
   ~/db/DB.coffee > W R
   ./synced.coffee > done:同步完成
-
+  ~/db/recPool.coffee > poolAdd
 # sync = (r,group_n,p, func)=>
 #   table = SYNC_TABLE[p]
 #   r = r.map Number
@@ -58,6 +61,43 @@ export default [
     return
 
   (r) => # 推荐
-    console.log '推荐',r
+    {length:len} = r
+    level = r[--len]
+    R(SEEN) (seen)=>
+      li = []
+      for [cid, rec_li_li] from unpack r.slice(0,len)
+        for rec_li from rec_li_li
+          click_rid = rec_li.pop()
+          crl = []
+          pos = 0
+          while pos < rec_li.length
+            cid = rec_li[pos++]
+            n = rec_li[pos++]
+            end = 1 + pos + n
+            for rid from rec_li.slice(pos,end)
+              bin = _vbyteE [cid,rid]
+              if not await seen.get bin
+                crl.push cid,rid
+            pos = end
+          if crl.length
+            li.push [
+              _vbyteE [cid, click_rid]
+              crl
+            ]
+      W(REC_POOL+level, REC_CHAIN) (rp,rc)=>
+        ts = ms()
+        for [p, crl] from li
+          to_add = []
+          for i from pair crl
+            id = _vbyteE i
+            if not await rc.get([id,p])
+              rc.put {id,p}
+              to_add.push i
+          if to_add.length
+            id = _vbyteE to_add
+            await rp.put {id, ts}
+            poolAdd ts, id
+            ++ts
+        return
     return
 ]

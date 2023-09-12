@@ -9,7 +9,7 @@
   ~/const/action/CLICK.coffee
   ~/const/action/FAV.coffee
   ~/const/action/FAV_RM.coffee
-  ./recPool.coffee > poolAdd poolRetop
+  ./recPool.coffee > poolRetop
 
 iter = (db, bin)=>
  end = new Uint8Array(bin.length + 1)
