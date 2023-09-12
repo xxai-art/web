@@ -2,7 +2,7 @@
   ~/const/action/SEEN.coffee
   ~/db/DB.coffee > W R
   ~/db/TABLE.coffee > LOG REC_CHAIN
-  ~/db/qLogRecSrc.coffee
+  ~/db/qLogRecSrc.coffee > recSrc
   ~/var/Level.coffee
 
 merge = (action,t,o)=>
@@ -26,12 +26,12 @@ export default (max=99)=>
       ts_li = []
       + pre, t
 
-      [rec_src,  rec_save] = qLogRecSrc()
+      # [rec_src,  rec_save] = qLogRecSrc()
       while c and (--max > 0)
         {o, ts} = c.value
         ts_li.push ts
         key = o[0]
-        o = await rec_src rc, vbyteD o[1]
+        o = await recSrc rc, vbyteD o[1]
         action = o[0]
         #o = z85VbyteE vbyteD o[1]
 
