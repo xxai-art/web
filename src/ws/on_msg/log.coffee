@@ -4,6 +4,8 @@
   ~/db/TABLE.coffee > LOG REC_CHAIN
   ~/db/qLogRecSrc.coffee > recSrc
   ~/var/Level.coffee
+  msgpackr > pack
+  ../SEND.coffee > 用户行为日志
 
 merge = (action,t,o)=>
   for i in t.slice(1)
@@ -57,10 +59,10 @@ export default (max=99)=>
           p = 0
           while ++p < len
             # [操作, 对象id ...] => z85 编码
-            console.log '>>>',i[p]
+            # console.log '>>>',i[p]
             i[p] = _vbyteE i[p]
         level = Level()
-        console.log level, li
+        # console.log level, li
         # SDK.log(
         #   level
         #   ...li
@@ -72,7 +74,7 @@ export default (max=99)=>
             await log.delete i
           if max == 0
             sync(max*2)
-          resolve()
+          resolve(用户行为日志, pack([level, li]))
           return
         return
       return
