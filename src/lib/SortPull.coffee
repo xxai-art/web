@@ -109,10 +109,12 @@ DIFF_HEIGHT = -IMG_HEIGHT + 50
               if diff > end
                 break
               if diff > DIFF_HEIGHT
-                cid_rid = b64D i.childNodes[0].pathname.slice(2)
-                if not (see.has(cid_rid) or seen.has(cid_rid))
-                  view_li.push ...vbyteD(cid_rid)
-                  see.add cid_rid
+                elem = i.childNodes[0]
+                if elem
+                  cid_rid = b64D elem.pathname.slice(2)
+                  if not (see.has(cid_rid) or seen.has(cid_rid))
+                    view_li.push ...vbyteD(cid_rid)
+                    see.add cid_rid
             if view_li.length
               qLog ACTION_SEEN, ...view_li
               saveView()
