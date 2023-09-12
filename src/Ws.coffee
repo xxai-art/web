@@ -1,7 +1,7 @@
 > ~/conf > API WS:WS_URL
   @w5/vite > u64B64 binU64 b64D _vbyteE
   @w5/u8 > u8merge
-  ./ws/FUNC.coffee
+  ./ws/RECV.coffee
   wac.tax/_/leader.js > ON:ON_LEADER
   wac.tax/user/User.js > exitUid
   ~/db/DB.coffee > R
@@ -108,7 +108,7 @@ _conn = =>
       data = new Uint8Array(data)
       if data.length
         msg = data
-        FUNC[
+        RECV[
           msg[0]
         ].call(WS,msg.slice(1))
       return

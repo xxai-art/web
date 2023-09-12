@@ -27,8 +27,7 @@ numli = (r)=>
 export default [
   同步完成
 
-  # 收藏
-  (r)=>
+  (r)=> # 收藏
     r = numli r
     n = r.pop()
     pid = r.pop()
@@ -44,8 +43,7 @@ export default [
       return
     return
 
-  # 浏览
-  (r)=>
+  (r)=> # 浏览
     r = numli r
     R(SYNCED) (synced)=>
       if r.pop() == await lastId(synced, P_SEEN)
@@ -59,4 +57,7 @@ export default [
       return
     return
 
+  (r) => # 推荐
+    console.log '推荐',r
+    return
 ]
