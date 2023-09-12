@@ -35,7 +35,10 @@ DIFF_HEIGHT = -IMG_HEIGHT + 50
   see = binSet()
 
   saveView = =>
-    seenSave see.clear()
+    li = see.clear()
+    for i from li
+      seen.add i
+    seenSave li
     return
 
   init = (h)=>
