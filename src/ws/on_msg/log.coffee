@@ -74,6 +74,7 @@ export default (max=99)=>
             await log.delete i
           if max == 0
             sync(max*2)
+          console.log 'resolve', 用户行为日志, pack([level, li])
           resolve [
             用户行为日志, pack([level, li])
           ]
