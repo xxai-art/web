@@ -76,7 +76,9 @@ export default (max=99)=>
             sync(max*2)
           resolve [
             用户行为日志
-            level
+            [
+              level
+            ]
             pack li
           ]
           return
