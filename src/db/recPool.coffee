@@ -140,6 +140,8 @@ qLogRecSrc.coffee 会往其中追加
         ts_remove = new Set
         for ts from sampling(tsli, remove_ts)
           bin = map.get ts
+          if not bin # 可能是切换了安全级别
+            continue
           crl = vbyteD bin
           for cr,p in pair crl
             b = _vbyteE cr
