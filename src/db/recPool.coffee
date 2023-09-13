@@ -55,8 +55,14 @@ qLogRecSrc.coffee 会往其中追加
       return
     return
 
-  gli_next = =>
-    return_id = gli.pop()
+  全局推荐 = (seen)=>
+    loop
+      return_id = gli.pop()
+      if not return_id
+        break
+      if not await seen.get return_id
+        break
+
     rec_db = REC+map_level
     if return_id
       W(rec_db) (db)=>
@@ -162,7 +168,7 @@ qLogRecSrc.coffee 会往其中追加
           tsli = tsli.filter (i)=>not ts_remove.has i
 
         loop
-          b = await gli_next()
+          b = await 全局推荐(seen)
           if not_exist(b)
             existSet.add b
             r.push vbyteD b
