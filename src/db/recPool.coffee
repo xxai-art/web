@@ -60,7 +60,7 @@ qLogRecSrc.coffee 会往其中追加
       return_id = gli.pop()
       if not return_id
         break
-      if not await seen.get return_id
+      if not await seen.get return_id # 第一次加载可能还没同步好seen
         break
 
     rec_db = REC+map_level
