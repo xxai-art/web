@@ -12,6 +12,7 @@
   ./lib/topfix.coffee
   ./nav/User.svelte:Nav
   ./const/IMG_LI_LIMIT.coffee
+  ~/ws/synced.coffee
   wac.tax/user/User.js
   @w5/fall
 
@@ -43,7 +44,8 @@ onMount =>
 
       ts = 0
       =>
-        await (await import('~/ws/synced.coffee')).default
+        await synced
+        # await (await import('~/ws/synced.coffee')).default
         R(FAV) (fav)=>
           li = []
           n = IMG_LI_LIMIT

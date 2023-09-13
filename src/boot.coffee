@@ -1,8 +1,8 @@
 > wac.tax/user/User.js
   ./Index.svelte
-  ~/Ws.coffee:
   ./i18n.js:
   wac.tax:
+  ~/Ws.coffee:
 
 await User()
 

@@ -7,6 +7,7 @@
   ~/const/IMG_HEIGHT.coffee
   @w5/u8 > u8eq
   @w5/hashval
+  ~/ws/synced.coffee
   @w5/hashval/hashset
   svelte > tick onMount
   @w5/fset/call
@@ -132,7 +133,7 @@ onMount =>
       submitByHash()
     return
   _input().value = hashval()
-  tick().then =>
+  synced.then =>
     submit()
     return
   On(

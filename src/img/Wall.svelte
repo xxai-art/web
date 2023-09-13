@@ -17,12 +17,11 @@ onMount =>
   {q} = SDK
   + ctrl
 
-  fall(
+  fall( # return fcall result for unbind
     topfix nav, b
     # 向 search 这个集合添加 后面的函数，会在 nav/Wall.svelte 中调用
     fset search, (args...)=>
       LI.pull =>
-
         ctrl?.abort()
         ctrl = new AbortController()
 
@@ -47,8 +46,7 @@ onMount =>
           has_more
         ]
       return
-    )
-  # return for unbind
+  )
 
 </script>
 
