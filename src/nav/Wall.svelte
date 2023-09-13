@@ -133,6 +133,7 @@ onMount =>
       submitByHash()
     return
   _input().value = hashval()
+
   synced.then =>
     submit()
     return
