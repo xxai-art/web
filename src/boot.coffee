@@ -2,6 +2,7 @@
   ./Index.svelte
   ~/Ws.coffee:
   ./i18n.js:
+  wac.tax:
 
 await User()
 

@@ -9,7 +9,6 @@
   wac.tax/user/Sign.auth:SignAuth
   wac.tax/user/WAY > waySet
   wac.tax/user/WAY/MAIL
-  wac.tax:
 
 waySet(MAIL)
 
