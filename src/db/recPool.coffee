@@ -34,6 +34,8 @@ qLogRecSrc.coffee 会往其中追加
   map = new Map
   existSet = binSet()
   existMap = binMap()
+  not_exist = (b)=>
+    not (existSet.has(b) or existMap.has(b))
 
   add = (ts, bin_li)=>
     tsli.unshift ts
@@ -55,54 +57,63 @@ qLogRecSrc.coffee 会往其中追加
       return
     return
 
-  全局推荐 = (seen)=>
-    loop
-      return_id = gli.pop()
-      if not (return_id and await seen.get return_id) # 第一次加载可能还没同步好seen
+  全局推荐 = (seen, limit)=>
+    return_li = []
+    n = 0
+    while n < limit
+      id = gli.pop()
+      if not id
         break
+      if not_exist(id) and not await seen.get id # 第一次加载可能还没同步好seen
+        return_li.push id
+        ++n
 
     rec_db = REC+map_level
-    if return_id
+    if n
       W(rec_db) (db)=>
-        db.delete return_id
+        for i from return_li
+          db.delete i
         return
-    else
-      while not return_id
-        await new Promise (resolve)=>
-          R(KV) (kv)=>
-            now = Number.parseInt(+new Date/36e5)
-            pre_time_offset = await kv.get(REC_OFFSET_TIME)
+    while n < limit
+      await new Promise (resolve)=>
+        R(KV) (kv)=>
+          now = Number.parseInt(+new Date/36e5)
 
-            if pre_time_offset
-              [pre_time, offset] = vbyteD pre_time_offset.v
-              if pre_time - now > 24
-                offset = 0
-            else
+          # 记录时间 和 offset
+          pre_time_offset = await kv.get(REC_OFFSET_TIME)
+
+          if pre_time_offset
+            [pre_time, offset] = vbyteD pre_time_offset.v
+            if pre_time - now > 24
               offset = 0
+          else
+            offset = 0
 
-            # TODO 换成 cloudflare + fly + CDN 缓存1小时
-            li = pair await q '',z85VbyteE [map_level, offset]
-            R(SEEN) (seen)=>
-              for i from li
-                bin = _vbyteE i
-                if not await seen.get bin
-                  gli.push bin
+          # TODO 换成 cloudflare + fly + CDN 缓存1小时
+          li = pair await q '',z85VbyteE [map_level, offset]
+          R(SEEN) (seen)=>
+            for i from li
+              bin = _vbyteE i
+              if not_exist(bin) and not await seen.get bin
+                if n < limit
+                  ++n
+                  push_li = return_li
+                else
+                  push_li = gli
+                push_li.push bin
 
-              return_id = gli.pop()
-
-              W(KV, rec_db) (kv, rec)=>
-                await kv.put {
-                  k:REC_OFFSET_TIME
-                  v:_vbyteE [now, offset+li.length]
-                }
-                for id from gli
-                  rec.put {id}
-                resolve()
-                return
+            W(KV, rec_db) (kv, rec)=>
+              await kv.put {
+                k:REC_OFFSET_TIME
+                v:_vbyteE [now, offset+li.length]
+              }
+              for id from gli
+                rec.put {id}
+              resolve()
               return
             return
           return
-    return return_id
+    return return_li
 
   recer = (level)=>
     new Promise (resolve)=>
@@ -139,8 +150,6 @@ qLogRecSrc.coffee 会往其中追加
         return
 
       R(SEEN) (seen)=>
-        not_exist = (b)=>
-          not (existSet.has(b) or existMap.has(b))
         r = []
         ts_remove = new Set
         for ts from sampling(tsli, remove_ts)
@@ -165,13 +174,9 @@ qLogRecSrc.coffee 会往其中追加
         if ts_remove.size
           tsli = tsli.filter (i)=>not ts_remove.has i
 
-        loop
-          b = await 全局推荐(seen)
-          if not_exist(b)
-            existSet.add b
-            r.push vbyteD b
-            if r.length > 42
-              break
+        for b from await 全局推荐(seen, 42-r.length)
+          existSet.add b
+          r.push vbyteD b
         resolve(r)
         return
       return

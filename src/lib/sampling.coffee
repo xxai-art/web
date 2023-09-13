@@ -45,3 +45,5 @@ chatgpt编码器提示词： https://chat.openai.com/share/daa45d11-63bb-48a9-8b
   if 终 < 列.length
     删 列.slice(终)
   return 返
+
+# console.log main([1,2,3,4,5,6,7,8,9,10,11,12],=>)
