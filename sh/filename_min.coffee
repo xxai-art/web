@@ -84,7 +84,10 @@ for i from to_replace
     createReadStream fp
   )
   table = tableByExt fp
-  id = (await DB(table).where({val}))[0]?.id or 0
+  if fp.endsWith '.js' # js 有循环引用的问题，重传解决更好
+    id = 0
+  else
+    id = (await DB(table).where({val}))[0]?.id or 0
   if not id
     [id] = await DB(table).insert({val})
     key = encode id
