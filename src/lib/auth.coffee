@@ -31,7 +31,7 @@ AuthAgree =>
   )
   [md, marked] = await Promise.all([
     utf8d await req(USER_TAX_CDN + "user/#{ver}/law." + lang())
-    import("//cdn.staticfile.org/marked/5.0.0/lib/marked.esm.min.js")
+    import("//cdn.staticfile.org/marked/9.0.0/lib/marked.esm.min.js")
   ])
   dialog.lastChild.innerHTML = marked.parse(md)
   dialog.style = "width:85vw;max-width:750px"
