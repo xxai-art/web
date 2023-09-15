@@ -1,6 +1,5 @@
 > wac.tax/_/SDK > init
   ./i18n.js:
-  wac.tax:
   ./conf > API USER_TAX_CDN
   ./lib/reqMsgpack.coffee:
   ./lib/title.coffee
