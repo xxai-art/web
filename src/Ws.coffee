@@ -60,6 +60,10 @@ ON_LEADER (leader)=>
         unbind()
         unbind_hook()
         return
+    setTimeout(
+      wsSyncDone
+      3e3
+    )
   else
     wsSyncDone()
     if UNBIND
