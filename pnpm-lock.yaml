@@ -55,9 +55,6 @@ devDependencies:
   '@w5/coffee_plus':
     specifier: ^0.0.17
     version: 0.0.17
-  '@w5/doge':
-    specifier: ^0.0.1
-    version: 0.0.1
   '@w5/i18n':
     specifier: ^0.0.92
     version: 0.0.92
@@ -67,15 +64,9 @@ devDependencies:
   '@w5/loader':
     specifier: ^0.0.3
     version: 0.0.3
-  '@w5/ossput':
-    specifier: ^0.0.20
-    version: 0.0.20
   '@w5/read':
     specifier: ^0.0.1
     version: 0.0.1
-  '@w5/req':
-    specifier: ^0.0.13
-    version: 0.0.13
   '@w5/uridir':
     specifier: ^0.0.1
     version: 0.0.1
@@ -92,8 +83,8 @@ devDependencies:
     specifier: ^0.0.1
     version: 0.0.1
   '@w5/xxai-dist':
-    specifier: ^0.0.14
-    version: 0.0.14
+    specifier: ^0.0.18
+    version: 0.0.18
   '@w5/yml':
     specifier: ^0.0.2
     version: 0.0.2
@@ -121,18 +112,9 @@ devDependencies:
   eslint-plugin-svelte3:
     specifier: ^4.0.0
     version: 4.0.0(eslint@8.45.0)(svelte@4.2.0)
-  knex:
-    specifier: ^2.5.1
-    version: 2.5.1(better-sqlite3@8.6.0)
-  lightningcss:
-    specifier: ^1.21.8
-    version: 1.21.8
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
-  mime-types:
-    specifier: ^2.1.35
-    version: 2.1.35
   msgpackr:
     specifier: ^1.9.9
     version: 1.9.9
@@ -142,9 +124,6 @@ devDependencies:
   pug:
     specifier: ^3.0.2
     version: 3.0.2
-  radix-64:
-    specifier: ^1.0.4
-    version: 1.0.4
   stylus:
     specifier: ^0.60.0
     version: 0.60.0
@@ -2113,12 +2092,6 @@ packages:
       yargs: 17.7.2
     dev: true
 
-  /@w5/doge@0.0.1:
-    resolution: {integrity: sha512-Y9ybbdvjQ7Z9tU2SOb2tSGrNtRQJ9Z2k7/enC/K4Zk4/eExTJqDrpfgjjNZXWDkPsWaHiVYGUl7ObboMU/RGPw==}
-    dependencies:
-      '@w5/utf8': 0.0.1
-    dev: true
-
   /@w5/escape@0.0.1:
     resolution: {integrity: sha512-O3KDNuNNmVK8HeshFcwwRl5YfJystQJtT5vkLPO8irZLPZUa1Az2m056cQAzu2JrJdF1AYelDJhToeOawVwTzQ==}
     dependencies:
@@ -2220,8 +2193,8 @@ packages:
     dependencies:
       mime-types: 2.1.35
 
-  /@w5/ossput@0.0.20:
-    resolution: {integrity: sha512-DMPRGchifzOa+aMZXv2p7pwKtCKtFNM939zsu5N3UvK39PxK4zenjCG/RRO9nG8wiFC/2hAAzmKdyzXoSewz8w==}
+  /@w5/ossput@0.0.22:
+    resolution: {integrity: sha512-/mfn8PN67VsfFBwRPEz2tArcsbc95H8XbotKBku0y7s/LoDn6MyoYpBZslImalZT1G2DHMWuFLSEs/aJSWG54w==}
     dependencies:
       '@aws-sdk/abort-controller': 3.370.0
       '@aws-sdk/client-s3': 3.400.0
@@ -2398,10 +2371,6 @@ packages:
     resolution: {integrity: sha512-5ZNTzgVhQHvfI1apigB10XTPjTg5KgMRxdRzda3nUrRTVvzOW1b5fVkFBwv6iqDurNJIe2jiGL97Ge1445p9/g==}
     dev: true
 
-  /@w5/utf8@0.0.1:
-    resolution: {integrity: sha512-kJCKQ1zIx1M8NUqDRyLqD6W99ssShYv1twAyWNeZfcJ2/zxVpnRLX3GAtyU6rkmNUnj42aT9paAT4nKHY6hsdw==}
-    dev: true
-
   /@w5/utf8@0.0.3:
     resolution: {integrity: sha512-FYkLRJ++nxAVLAzsD953X/Yc7ln7QQeUD2UsbbmtEUDYQYK2kvA7vqqKgwjuMQFUqwJdYdcHx7qtP7IgMUdHsw==}
     dev: true
@@ -2448,19 +2417,20 @@ packages:
     resolution: {integrity: sha512-VyQXX2C3yRqfS7D5B+yCcsR1tvzZ1DzPLi5kugBOe/EeL+LOD3ftFamfik7wQr2TG7XQ7VF0snUpqVLaytwfOA==}
     dev: true
 
-  /@w5/xxai-dist@0.0.14:
-    resolution: {integrity: sha512-6IfZ0Rf5x3eO4SNrM32EcyZGj2Z92OrWgHqdYGFadNsnkoR4Xz2qlgzIyQyc4s1T+6vK+lpoNfGogLg2p2YqQA==}
+  /@w5/xxai-dist@0.0.18:
+    resolution: {integrity: sha512-c7wigWJR07euBoV7MN3z1yBh2ApwYgKXxu3IGof1r2y6D5qSzAoLAd8zJ+x4OAaip1du+4Y3qFYZ9rN86gmUAg==}
     hasBin: true
     dependencies:
       '@w5/blake3': 0.0.10
       '@w5/cf': 0.0.2
       '@w5/coffee_plus': 0.0.17
       '@w5/mime': 0.0.1
-      '@w5/ossput': 0.0.20
+      '@w5/ossput': 0.0.22
       '@w5/pool': 0.0.6
       '@w5/read': 0.0.1
       '@w5/req': 0.0.13
       '@w5/sleep': 0.0.1
+      '@w5/u8': 0.0.3
       '@w5/uridir': 0.0.1
       '@w5/utf8': 0.0.3
       '@w5/write': 0.0.1
