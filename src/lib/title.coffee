@@ -2,7 +2,6 @@
 
 import onMount, { I18N } from "~/i18n/onMount.js"
 
-export TITLE = 'xxAI.Art'
 
 DEFAULT_TITLE = TITLE
 
@@ -13,8 +12,16 @@ onMount =>
   DEFAULT_TITLE = t
   return
 
+setTitle = (title)=>
+  DEFAULT_TITLE = title
+  setTitle = =>
+    document.title = title or DEFAULT_TITLE
+    return
+  setTitle title
+  return
+
 export default (tip)=>
-  document.title = tip or DEFAULT_TITLE
+  setTitle tip
   return
 
 export suffix = =>

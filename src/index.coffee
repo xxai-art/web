@@ -4,9 +4,9 @@
   ./lib/reqMsgpack.coffee:
   ./lib/title.coffee
 
-init API, USER_TAX_CDN
+title 'xxAI.Art'
 
-title()
+init API, USER_TAX_CDN
 
 # 这样可以避免一些奇怪的错误
 import('./boot.coffee')
