@@ -9,7 +9,7 @@
   base-x
   ./mime
   ./mJs
-  ./env > DIST ROOT PWD
+  ./env > DIST ROOT
   @w5/ossput:put
   ./uploadDb > DB tableByExt
   @w5/write

@@ -75,8 +75,8 @@ fetch: (event) =>
 
   if ['GET', 'OPTIONS'].indexOf(method) < 0
     return
-  if req.headers.get('accept').includes 'stream'
-    return
+  # if req.headers.get('accept').includes 'stream'
+  #   return
   {host} = url = new URL(url)
 
   {pathname} = url
