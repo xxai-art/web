@@ -84,7 +84,7 @@ devDependencies:
     version: 0.0.3
   '@w5/vite-conf':
     specifier: ^0.0.3
-    version: 0.0.3(pug@3.0.2)(stylus@0.60.0)(terser@5.19.4)
+    version: 0.0.3(pug@3.0.2)(stylus@0.60.0)
   '@w5/walk':
     specifier: ^0.0.1
     version: 0.0.1
@@ -92,8 +92,8 @@ devDependencies:
     specifier: ^0.0.1
     version: 0.0.1
   '@w5/xxai-dist':
-    specifier: ^0.0.13
-    version: 0.0.13
+    specifier: ^0.0.14
+    version: 0.0.14
   '@w5/yml':
     specifier: ^0.0.2
     version: 0.0.2
@@ -115,18 +115,12 @@ devDependencies:
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
-  esbuild:
-    specifier: ^0.19.3
-    version: 0.19.3
   eslint-plugin-coffee:
     specifier: ^0.1.15
     version: 0.1.15(eslint-plugin-react-hooks@4.6.0)(eslint@8.45.0)
   eslint-plugin-svelte3:
     specifier: ^4.0.0
     version: 4.0.0(eslint@8.45.0)(svelte@4.2.0)
-  html-minifier-terser:
-    specifier: ^7.2.0
-    version: 7.2.0
   knex:
     specifier: ^2.5.1
     version: 2.5.1(better-sqlite3@8.6.0)
@@ -160,15 +154,12 @@ devDependencies:
   svgo:
     specifier: ^3.0.2
     version: 3.0.2
-  terser:
-    specifier: ^5.19.4
-    version: 5.19.4
   typed.js:
     specifier: ^2.0.132
     version: 2.0.132
   vite:
     specifier: ^4.4.9
-    version: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)(terser@5.19.4)
+    version: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)
   wac.tax:
     specifier: link:../ui
     version: link:../ui
@@ -1998,7 +1989,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.6(svelte@4.2.0)(vite@4.4.9)
       debug: 4.3.4
       svelte: 4.2.0
-      vite: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)(terser@5.19.4)
+      vite: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2017,7 +2008,7 @@ packages:
       magic-string: 0.30.3
       svelte: 4.2.0
       svelte-hmr: 0.15.3(svelte@4.2.0)
-      vite: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)(terser@5.19.4)
+      vite: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
@@ -2415,7 +2406,7 @@ packages:
     resolution: {integrity: sha512-FYkLRJ++nxAVLAzsD953X/Yc7ln7QQeUD2UsbbmtEUDYQYK2kvA7vqqKgwjuMQFUqwJdYdcHx7qtP7IgMUdHsw==}
     dev: true
 
-  /@w5/vite-conf@0.0.3(pug@3.0.2)(stylus@0.60.0)(terser@5.19.4):
+  /@w5/vite-conf@0.0.3(pug@3.0.2)(stylus@0.60.0):
     resolution: {integrity: sha512-xvqR2AnLlPEM1N812StTuUw705QHMNCgtNzyMnncSsIbSV9YlMoEVrseyv3DrY+oz+5dVXnQiuhNvq8EKXZGUQ==}
     dependencies:
       '@sveltejs/vite-plugin-svelte': 2.4.6(svelte@4.2.0)(vite@4.4.9)
@@ -2425,7 +2416,7 @@ packages:
       lightningcss: 1.21.8
       lodash-es: 4.17.21
       svelte: 4.2.0
-      vite: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)(terser@5.19.4)
+      vite: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/node'
@@ -2457,8 +2448,8 @@ packages:
     resolution: {integrity: sha512-VyQXX2C3yRqfS7D5B+yCcsR1tvzZ1DzPLi5kugBOe/EeL+LOD3ftFamfik7wQr2TG7XQ7VF0snUpqVLaytwfOA==}
     dev: true
 
-  /@w5/xxai-dist@0.0.13:
-    resolution: {integrity: sha512-c3y+7+FGSmD1r0vwGs9zbb2Zh0691VCRM3m2ZxUAGgM9khMhIy1idSC00Xmy79pXhSxrP2CcdR+wdyciC6/9xQ==}
+  /@w5/xxai-dist@0.0.14:
+    resolution: {integrity: sha512-6IfZ0Rf5x3eO4SNrM32EcyZGj2Z92OrWgHqdYGFadNsnkoR4Xz2qlgzIyQyc4s1T+6vK+lpoNfGogLg2p2YqQA==}
     hasBin: true
     dependencies:
       '@w5/blake3': 0.0.10
@@ -6371,7 +6362,7 @@ packages:
     hasBin: true
     dev: true
 
-  /vite@4.4.9(lightningcss@1.21.8)(stylus@0.60.0)(terser@5.19.4):
+  /vite@4.4.9(lightningcss@1.21.8)(stylus@0.60.0):
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -6404,7 +6395,6 @@ packages:
       postcss: 8.4.27
       rollup: 3.28.0
       stylus: 0.60.0
-      terser: 5.19.4
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -6417,7 +6407,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)(terser@5.19.4)
+      vite: 4.4.9(lightningcss@1.21.8)(stylus@0.60.0)
     dev: true
 
   /void-elements@3.1.0:
