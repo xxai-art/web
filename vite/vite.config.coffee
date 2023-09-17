@@ -30,11 +30,12 @@ writeFileSync(
   pug.compileFile(join SRC, 'index.pug')({
   })
 )
-host = '0.0.0.0' or env.VITE_HOST
-port = 5555 or env.VITE_PORT
+{env} = process
+host = env.VITE_HOST or '0.0.0.0'
+port = env.VITE_PORT or port
 
 
-PRODUCTION = process.env.NODE_ENV == 'production'
+PRODUCTION = env.NODE_ENV == 'production'
 TARGET = ["esnext"]
 
 config = {
@@ -123,11 +124,11 @@ config = merge config, await do =>
     FILENAME = '[name].[hash].[ext]'
     JSNAME = '[name].[hash].js'
 
-    if process.env.DEBUG
+    if env.DEBUG
       base = '/'
       minify = false
     else
-      base = '//ok0.pw'
+      base = env.CDN or '/'
       minify = true
 
     return {
