@@ -6,10 +6,7 @@ set -ex
 
 source env.sh
 ./i18n.upload.coffee
-
 git add -u && git commit -m'i18n' || true
 
 cd ..
 bun x xxai-dist
-cd $DIR
-./dist.public.coffee

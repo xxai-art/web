@@ -68,8 +68,8 @@ devDependencies:
     specifier: ^0.0.3
     version: 0.0.3
   '@w5/ossput':
-    specifier: ^0.0.19
-    version: 0.0.19
+    specifier: ^0.0.20
+    version: 0.0.20
   '@w5/read':
     specifier: ^0.0.1
     version: 0.0.1
@@ -92,8 +92,8 @@ devDependencies:
     specifier: ^0.0.1
     version: 0.0.1
   '@w5/xxai-dist':
-    specifier: ^0.0.12
-    version: 0.0.12
+    specifier: ^0.0.13
+    version: 0.0.13
   '@w5/yml':
     specifier: ^0.0.2
     version: 0.0.2
@@ -2229,8 +2229,8 @@ packages:
     dependencies:
       mime-types: 2.1.35
 
-  /@w5/ossput@0.0.19:
-    resolution: {integrity: sha512-1YxaJCXiAks7EB0HecQQ8EUlE4cl0IRuhyfhwq+rEfPhiyqFvCUqFLGYjwxVguoNKhWTvd+1uh9KDtkuLosI2A==}
+  /@w5/ossput@0.0.20:
+    resolution: {integrity: sha512-DMPRGchifzOa+aMZXv2p7pwKtCKtFNM939zsu5N3UvK39PxK4zenjCG/RRO9nG8wiFC/2hAAzmKdyzXoSewz8w==}
     dependencies:
       '@aws-sdk/abort-controller': 3.370.0
       '@aws-sdk/client-s3': 3.400.0
@@ -2457,15 +2457,15 @@ packages:
     resolution: {integrity: sha512-VyQXX2C3yRqfS7D5B+yCcsR1tvzZ1DzPLi5kugBOe/EeL+LOD3ftFamfik7wQr2TG7XQ7VF0snUpqVLaytwfOA==}
     dev: true
 
-  /@w5/xxai-dist@0.0.12:
-    resolution: {integrity: sha512-2KKdRb+GdWNDua8dDlvBTkJdn5xQXkAgXtfl3/MlBJbHUnkz7GoyIqc8WUtQXrJdn06nCJMVnYJDXQQj38MzfQ==}
+  /@w5/xxai-dist@0.0.13:
+    resolution: {integrity: sha512-c3y+7+FGSmD1r0vwGs9zbb2Zh0691VCRM3m2ZxUAGgM9khMhIy1idSC00Xmy79pXhSxrP2CcdR+wdyciC6/9xQ==}
     hasBin: true
     dependencies:
       '@w5/blake3': 0.0.10
       '@w5/cf': 0.0.2
       '@w5/coffee_plus': 0.0.17
       '@w5/mime': 0.0.1
-      '@w5/ossput': 0.0.19
+      '@w5/ossput': 0.0.20
       '@w5/pool': 0.0.6
       '@w5/read': 0.0.1
       '@w5/req': 0.0.13
