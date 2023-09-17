@@ -8,7 +8,7 @@
   @w5/blake3/stream.mjs
   path > join
   fs > createReadStream
-  ./mime
+  @w5/mime
   ./env > DIST
 
 {env} = process

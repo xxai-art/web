@@ -89,8 +89,8 @@ devDependencies:
     specifier: ^0.0.1
     version: 0.0.1
   '@w5/xxai-dist':
-    specifier: ^0.0.7
-    version: 0.0.7
+    specifier: ^0.0.8
+    version: 0.0.8
   '@w5/yml':
     specifier: ^0.0.2
     version: 0.0.2
@@ -2455,8 +2455,8 @@ packages:
     resolution: {integrity: sha512-VyQXX2C3yRqfS7D5B+yCcsR1tvzZ1DzPLi5kugBOe/EeL+LOD3ftFamfik7wQr2TG7XQ7VF0snUpqVLaytwfOA==}
     dev: true
 
-  /@w5/xxai-dist@0.0.7:
-    resolution: {integrity: sha512-eVQuAcwRobILVHV4g2Sn861B+6/vEhTEit+UedagzYtB1p5HMqEl4mZH455mZWkNb0Cfs4gpLhLKZOm/5jpdyw==}
+  /@w5/xxai-dist@0.0.8:
+    resolution: {integrity: sha512-cvWbTNNDSKsPIz1cPvMjWcbZi1wCdPBAo93FUMe4PZpFwlY6bjoxZc0N3tqyLGr52FToTXeebjSxmk2bLfsGEg==}
     hasBin: true
     dependencies:
       '@w5/blake3': 0.0.10

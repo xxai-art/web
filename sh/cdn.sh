@@ -14,7 +14,9 @@ de i18n.upload.coffee
 
 git add -u && git commit -m'i18n' || true
 
-de filename_min.coffee
+cd ..
+bun x xxai-dist
+cd sh
 
 de dist.index.coffee
 de dist.public.coffee
