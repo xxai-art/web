@@ -92,8 +92,8 @@ devDependencies:
     specifier: ^0.0.1
     version: 0.0.1
   '@w5/xxai-dist':
-    specifier: ^0.0.10
-    version: 0.0.10
+    specifier: ^0.0.11
+    version: 0.0.11
   '@w5/yml':
     specifier: ^0.0.2
     version: 0.0.2
@@ -2457,20 +2457,26 @@ packages:
     resolution: {integrity: sha512-VyQXX2C3yRqfS7D5B+yCcsR1tvzZ1DzPLi5kugBOe/EeL+LOD3ftFamfik7wQr2TG7XQ7VF0snUpqVLaytwfOA==}
     dev: true
 
-  /@w5/xxai-dist@0.0.10:
-    resolution: {integrity: sha512-3zy9o2asC3QeJoZRBKhQ4+6iGF+TTJ5vKQAkdFpk6Ii11khsz4hEcOvqZrPlqRpDlF6YOSQCupuO+Jda74qzHw==}
+  /@w5/xxai-dist@0.0.11:
+    resolution: {integrity: sha512-naIHe1LIZpvNG0WvrgTlDuXcS91m41gvCLu7WmsFE2MWG0S6ry2NUEithCYwT+2BQ4HDXwkoluErzjohnYhguw==}
     hasBin: true
     dependencies:
       '@w5/blake3': 0.0.10
+      '@w5/cf': 0.0.2
+      '@w5/coffee_plus': 0.0.17
       '@w5/mime': 0.0.1
       '@w5/ossput': 0.0.19
       '@w5/pool': 0.0.6
       '@w5/read': 0.0.1
+      '@w5/req': 0.0.13
+      '@w5/sleep': 0.0.1
       '@w5/uridir': 0.0.1
       '@w5/utf8': 0.0.3
       '@w5/write': 0.0.1
       base-x: 4.0.0
       better-sqlite3: 8.6.0
+      esbuild: 0.19.3
+      html-minifier-terser: 7.2.0
       knex: 2.5.1(better-sqlite3@8.6.0)
     transitivePeerDependencies:
       - '@aws-sdk/signature-v4-crt'
