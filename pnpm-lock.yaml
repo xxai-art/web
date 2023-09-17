@@ -20,6 +20,9 @@ dependencies:
   '@w5/link':
     specifier: ^0.0.1
     version: 0.0.1
+  '@w5/mime':
+    specifier: ^0.0.1
+    version: 0.0.1
   '@w5/pair':
     specifier: ^0.0.2
     version: 0.0.2
@@ -2225,7 +2228,6 @@ packages:
     resolution: {integrity: sha512-YjG7ZKlkXJp19bbKIIjVi8EFnYQVo4ChgTFxQU9/jTSK6YAT2gjhLimm98NGFtoMoZf2gSmA58R1DsiSCxCsJQ==}
     dependencies:
       mime-types: 2.1.35
-    dev: true
 
   /@w5/ossput@0.0.19:
     resolution: {integrity: sha512-1YxaJCXiAks7EB0HecQQ8EUlE4cl0IRuhyfhwq+rEfPhiyqFvCUqFLGYjwxVguoNKhWTvd+1uh9KDtkuLosI2A==}
@@ -4933,14 +4935,12 @@ packages:
   /mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
     engines: {node: '>= 0.6'}
-    dev: true
 
   /mime-types@2.1.35:
     resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
     engines: {node: '>= 0.6'}
     dependencies:
       mime-db: 1.52.0
-    dev: true
 
   /mimic-response@2.1.0:
     resolution: {integrity: sha512-wXqjST+SLt7R009ySCglWBCFpjUygmCIfD790/kVbiGmUgfYGuB14PiTd5DwVxSV4NcYHjzMkoj5LjQZwTQLEA==}
