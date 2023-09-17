@@ -9,7 +9,8 @@ source env.sh
 
 git add -u && git commit -m'i18n' || true
 
+cd ..
 bun x xxai-dist
-
+cd $DIR
 ./dist.index.coffee
 ./dist.public.coffee
