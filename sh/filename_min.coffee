@@ -119,23 +119,25 @@ upload = (table, id, fp)=>
   await unlink fp
   return
 
-NOT_UPLOAD = new Set(
-  (await DB(table).where({uploaded:false}).select('id')).map(
-    ({id})=>id
+if env.OSSPUT_BUCKET
+
+  NOT_UPLOAD = new Set(
+    (await DB(table).where({uploaded:false}).select('id')).map(
+      ({id})=>id
+    )
   )
-)
 
-pool = Pool 64
-for i,p in to_replace
-  fp = join DIST, i
-  id = ID[p]
-  table = tableByExt i
+  pool = Pool 64
+  for i,p in to_replace
+    fp = join DIST, i
+    id = ID[p]
+    table = tableByExt i
 
-  if NOT_UPLOAD.has id
-    await pool upload, table, id, fp
-  else
-    await unlink fp
-await pool.done
+    if NOT_UPLOAD.has id
+      await pool upload, table, id, fp
+    else
+      await unlink fp
+  await pool.done
 
 process.exit()
 
