@@ -70,4 +70,4 @@ if do_write
     """
   )
 
-console.log 'ver', decodeToInt(ver)
+console.log 'i18n ver', decodeToInt(ver)
