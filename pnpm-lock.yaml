@@ -124,6 +124,9 @@ devDependencies:
   pug:
     specifier: ^3.0.2
     version: 3.0.2
+  radix-64:
+    specifier: ^1.0.4
+    version: 1.0.4
   stylus:
     specifier: ^0.60.0
     version: 0.60.0
