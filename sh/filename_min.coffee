@@ -1,9 +1,11 @@
 #!/usr/bin/env coffee
 
 > @w5/uridir
+  @w5/utf8/utf8e.js
   fs > createReadStream
-  fs/promises > rename writeFile readFile opendir unlink
+  fs/promises > rename writeFile readFile opendir unlink readdir
   path > join dirname
+  @w5/blake3 > blake3Hash
   @w5/blake3/stream.mjs
   @w5/pool > Pool
   base-x
@@ -14,7 +16,9 @@
   @w5/write
   @w5/read
 
-fp = join DIST,'m.js'
+m_js_name = 'm.js'
+
+fp = join DIST,m_js_name
 
 m_js = read(fp)
 
@@ -25,10 +29,32 @@ if m_js.indexOf(end_css) > 0
   # begin = m_js.indexOf('(()=>import("./boot') + 12
   # end = m_js.indexOf('"',begin+1)
   # m_js = m_js.slice(0,end+4)+m_js.slice(end*2+4-begin)
-  write(
-    fp
-    'await navigator.serviceWorker.register("/s.js");'+m_js
+
+  m_js = 'await navigator.serviceWorker.register("/s.js");'+m_js
+  out_name = Buffer.from(blake3Hash(utf8e(m_js))).toString('base64url') + '.js'
+  out = join(
+    DIST
+    out_name
   )
+  write(
+    out
+    m_js
+  )
+  await unlink fp
+
+  # 替换所有的 m.js 引用，避免引用上一个版本的文件
+  for i from await readdir(DIST)
+    if i.endsWith '.js'
+      if i == out_name
+        continue
+      js_fp = join DIST,i
+      js = read js_fp
+      js_new = js.replaceAll('"./'+m_js_name+'"','./'+out_name)
+      if js!=js_new
+        write(
+          js_fp
+          js_new
+        )
 
 BFILE = BaseX '!$-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
 
@@ -84,11 +110,7 @@ for i from to_replace
     createReadStream fp
   )
   table = tableByExt fp
-  if fp.endsWith '.js' # js 有循环引用的问题，重传解决更好
-    await DB(table).where({val}).delete()
-    id = 0
-  else
-    id = (await DB(table).where({val}))[0]?.id or 0
+  id = (await DB(table).where({val}))[0]?.id or 0
   if not id
     [id] = await DB(table).insert({val})
     key = encode id
