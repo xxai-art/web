@@ -15,7 +15,6 @@ if ! command -v sponge &>/dev/null; then
   esac
 fi
 
-./init.sh
 ./svg-compress.sh
 cd ..
 ./i18n.sh
@@ -38,6 +37,6 @@ rm sw.js
 
 cd ..
 
-bunx vite build
+bun x vite build
 
 cd dist
