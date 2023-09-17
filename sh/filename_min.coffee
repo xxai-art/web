@@ -1,64 +1,21 @@
 #!/usr/bin/env coffee
 
 > @w5/uridir
-  @w5/utf8/utf8e.js
   fs > createReadStream
-  fs/promises > rename writeFile readFile opendir unlink readdir
+  fs/promises > writeFile opendir unlink
   path > join dirname
-  @w5/blake3 > blake3Hash
   @w5/blake3/stream.mjs
   @w5/pool > Pool
   base-x
   ./mime
+  ./mJs
   ./env > DIST ROOT PWD
   @w5/ossput:put
   ./uploadDb > DB tableByExt
   @w5/write
   @w5/read
 
-m_js_name = 'm.js'
-
-fp = join DIST,m_js_name
-
-m_js = read(fp)
-
-end_css = '.endsWith(".css")'
-if m_js.indexOf(end_css) > 0
-  m_js = m_js.replace(end_css,'.endsWith(".")')
-  # 修复重复导入
-  # begin = m_js.indexOf('(()=>import("./boot') + 12
-  # end = m_js.indexOf('"',begin+1)
-  # m_js = m_js.slice(0,end+4)+m_js.slice(end*2+4-begin)
-
-  m_js = 'await navigator.serviceWorker.register("/s.js");'+m_js
-  out_name = Buffer.from(blake3Hash(utf8e(m_js))).toString('base64url') + '.js'
-  out = join(
-    DIST
-    out_name
-  )
-  write(
-    out
-    m_js
-  )
-  await unlink fp
-
-  # 替换所有的 m.js 引用，避免引用上一个版本的文件
-  for i from await readdir(DIST)
-    if i == out_name
-      continue
-    pos = i.lastIndexOf('.')
-    if pos < 0
-      continue
-    ext = i.slice(pos+1)
-    if ['htm','js'].includes(ext)
-      js_fp = join DIST,i
-      js = read js_fp
-      js_new = js.replaceAll('"./'+m_js_name+'"','"./'+out_name+'"')
-      if js!=js_new
-        write(
-          js_fp
-          js_new
-        )
+await mJs()
 
 BFILE = BaseX '!$-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
 
@@ -99,7 +56,7 @@ for await fp from await opendir DIST
   if ['htm','html','css','js'].includes(ext)
     css_js.set(
       fp
-      await readFile(join(DIST,fp),'utf8')
+      read(join(DIST,fp))
     )
   if not ['s.js','index.html','index.htm'].includes(fp)
     to_replace.push fp
