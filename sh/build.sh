@@ -3,7 +3,7 @@
 DIR=$(dirname $(realpath "$0"))
 cd $DIR
 set -ex
-
+source env.sh
 if ! command -v sponge &>/dev/null; then
   case $(uname -s) in
   Linux*)
