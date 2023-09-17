@@ -64,6 +64,9 @@ devDependencies:
   '@w5/loader':
     specifier: ^0.0.3
     version: 0.0.3
+  '@w5/ossput':
+    specifier: ^0.0.22
+    version: 0.0.22
   '@w5/read':
     specifier: ^0.0.1
     version: 0.0.1
