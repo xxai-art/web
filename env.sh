@@ -3,11 +3,11 @@
 CDN=//ok0.pw
 VITE_PORT=3333
 
-export OSSPUT_BUCKET=xxai-cdn
+export OSSPUT_BUCKET=xxai-blog-cdn
 export BACKBLAZE_url=https://f004.backblazeb2.com/file/$OSSPUT_BUCKET
 export CDN="//ok0.pw/"
 
-export SITE_OSSPUT_BUCKET=xxai-web
+export SITE_OSSPUT_BUCKET=xxai-blog-web
 export SITE_BACKBLAZE_url=https://f004.backblazeb2.com/file/$SITE_OSSPUT_BUCKET
 export SITE=xxai.art
 export BACKBLAZE_accessKeyId=
