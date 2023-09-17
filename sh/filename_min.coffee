@@ -105,7 +105,6 @@ for [k,v] from css_js.entries()
 
 pool = Pool 99
 
-
 upload = (table, id, fp)=>
   key = encode(id)
   if table == 'css'
