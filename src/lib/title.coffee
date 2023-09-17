@@ -2,8 +2,7 @@
 
 import onMount, { I18N } from "~/i18n/onMount.js"
 
-
-DEFAULT_TITLE = TITLE
++ DEFAULT_TITLE, TITLE
 
 onMount =>
   t = TITLE + ' · ' + I18N[SLOGAN]
@@ -13,7 +12,7 @@ onMount =>
   return
 
 setTitle = (title)=>
-  DEFAULT_TITLE = title
+  TITLE = DEFAULT_TITLE = title
   setTitle = =>
     document.title = title or DEFAULT_TITLE
     return
@@ -25,4 +24,4 @@ export default (tip)=>
   return
 
 export suffix = =>
-  ' - '+TITLE
+  ' · '+TITLE
