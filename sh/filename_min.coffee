@@ -44,12 +44,16 @@ if m_js.indexOf(end_css) > 0
 
   # 替换所有的 m.js 引用，避免引用上一个版本的文件
   for i from await readdir(DIST)
-    if i.endsWith '.js'
-      if i == out_name
-        continue
+    if i == out_name
+      continue
+    pos = i.lastIndexOf('.')
+    if pos < 0
+      continue
+    ext = i.slice(pos+1)
+    if ['htm','js'].includes(ext)
       js_fp = join DIST,i
       js = read js_fp
-      js_new = js.replaceAll('"./'+m_js_name+'"','./'+out_name)
+      js_new = js.replaceAll('"./'+m_js_name+'"','"./'+out_name+'"')
       if js!=js_new
         write(
           js_fp
