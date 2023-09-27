@@ -1,7 +1,6 @@
 <script lang="coffee">
 > ./img/NoUser.svelte
   ./AuthInput.svelte
-  ~/lib/title.coffee:@ > TITLE
   @w5/sleep
 
 + b
